@@ -1,0 +1,407 @@
+JavaScript to program the behavior of web pages
+
+
+on click function:
+
+<button id="button" type="button" 
+onclick="document.getElemetById('demo'),innerHTML=Date()">
+<p id="demo"></p>
+-----------
+
+on click function call:
+
+<button id="type" type="button" onclick ="myfunction()">click</button>
+
+function myfunction()
+{
+document.getElementById("demo").innerHTML="HI";
+}
+-------------
+To check number or not:
+
+if(isNaN(x)||x<1)
+-----------------
+Array:
+
+[1,2,3,4]
+
+object literals:
+{first:"www",second:"ddd"}
+------------
+Variables:
+
+var length;
+
+length = 6;
+----------
+<script>
+var cars = ["Saab","Volvo","BMW"];
+
+document.getElementById("demo").innerHTML = cars[0];
+</script>
+--------------
+var cars = new Array("Saab", "Volvo", "BMW");
+document.getElementById("demo").innerHTML = cars[0];
+-----------
+<script>
+var person = {
+    firstName : "John",
+    lastName  : "Doe",
+    age       : 50,
+    eyeColor  : "blue"
+};
+
+document.getElementById("demo").innerHTML =
+person['firstName'] + " is " + person.age + " years old.";
+</script>
+---------------
+The typeof Operator
+You can use the JavaScript typeof operator to find the type of a JavaScript variable.
+
+Example
+
+typeof "John"                 // Returns string 
+
+-------
+<script>
+var person = {
+    firstName: "John",
+    lastName : "Doe",
+    id       : 5566,
+    fullName : function() {
+       return this.firstName + " " + this.lastName;
+    }
+};
+
+document.getElementById("demo").innerHTML = person.fullName();
+</script>
+------------
+
+
+concatenation:   +
+
+break:  <br>
+
+
+=================
+LENGTH:
+
+<script>
+var txt="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+document.getElementById("demo").innerHTML = txt.length;
+</script>
+--------------
+indexOf:
+
+<script>
+function myFunction() {
+    var str = document.getElementById("p1").innerHTML;
+    var pos = str.indexOf("locate");
+    document.getElementById("demo").innerHTML = pos;
+}
+</script>
+---------
+lastIndexOf
+<script>
+function myFunction() {
+    var str = document.getElementById("p1").innerHTML;
+    var pos = str.lastIndexOf("locate");
+    document.getElementById("demo").innerHTML = pos;
+}
+
+---------------
+search:
+
+<script>
+function myFunction() {
+    var str = document.getElementById("p1").innerHTML;
+    var pos = str.search("zlocates");
+    document.getElementById("demo").innerHTML = pos;
+}
+</script>
+-------------
+Extracting String Parts
+There are 3 methods for extracting a part of a string:
+
+slice(start, end)
+substring(start, end)
+substr(start, length)
+
+--------------------
+replace:
+<script>
+function myFunction() {
+    var str = document.getElementById("demo").innerHTML; 
+    var txt = str.replace("Microsoft","W3Schools");
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>
+------------------
+concat()
+
+<script>
+var text1 = "Hello";
+var text2 = "World!"
+document.getElementById("demo").innerHTML = text1.concat(" ",text2);
+</script>
+-----------------
+Extracting String Characters
+There are 2 safe methods for extracting string characters:
+
+charAt(position)
+charCodeAt(position)
+-----------------
+SPLIT:
+
+<script>
+function myFunction() {
+    var str = "a,b,c,d,e,f";
+    var arr = str.split(",");
+    document.getElementById("demo").innerHTML = arr[0];
+}
+</script>
+------------------------------
+<script>
+var str = "Hello";
+var arr = str.split("");
+document.getElementById("demo1").innerHTML = arr[0];
+var text = "";
+var i;
+for (i = 0; i < arr.length; i++) {
+    text += arr[i] + "<br>"
+}
+document.getElementById("demo").innerHTML = text;
+</script>
+----------------------------
+<script>
+function myFunction() {
+    var myNumber = 2; 
+    var txt = "";
+    while (myNumber != Infinity) {
+        myNumber = myNumber * myNumber;
+        txt = txt + myNumber + "<br>";
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+</script>
+--------------------
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits[fruits.length] = "Kiwi";
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+------------------------
+<script>
+function myFunction() {
+    var index;
+    var text = "<ol>";
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    for (index = 0; index < fruits.length; index++) {
+        text += "<li>" + fruits[index] + "</li>";
+    }
+    text += "</ol>";
+    document.getElementById("demo").innerHTML = text;
+}
+</script>
+---------------------
+Declaring Array:
+These two different statements both create a new empty array named points:
+
+var points = new Array();         // Bad
+var points = [];  //good
+----------------------
+
+TO FIND VARIABLE IS ARRAY:
+
+1.typeof
+2.isarray
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = isArray(fruits);
+
+function isArray(myArray) {
+    return myArray.constructor.toString().indexOf("Array") > -1;
+}
+</script>
+----------------
+valueOf() method returns an array as a comma separated string.
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.valueOf();
+</script>
+
+//Banana,Orange,Apple,Mango
+---
+toString() method returns an array as a comma separated string.</p>
+
+<p id="demo"></p>
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString();
+</script>
+-------------------
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.join("  ");
+</script>
+--------------
+
+Popping and Pushing
+
+1. pop() method removes the last element from an array:
+
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits.pop()
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+
+--------------
+The push() method adds a new element to an array (at the end):
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits.push("Kiwi")
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+------------------
+The shift method removes (shifts) the first element of an array.
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits.shift();
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+----------------
+
+The unshift method adds new elements to the beginning of an array.
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits.unshift("Lemon");
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+
+-------------
+Changing Elements
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+
+function myFunction() {
+    fruits[0] = "Kiwi";
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+------------------
+The splice() method adds new elements to an array
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+function myFunction() {
+    fruits.splice(2, 0, "Lemon", "Kiwi");
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+
+-----------------
+The splice() methods can be used to remove array elements.</p>
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+function myFunction() {
+    fruits.splice(0, 1);
+    document.getElementById("demo").innerHTML = fruits;
+}
+</script>
+--------------
+concat() method creates a new array by concatenating two arrays
+
+<script>
+function myFunction() {
+    var myGirls = ["Cecilie", "Lone"];
+    var myBoys = ["Emil", "Tobias", "Linus"];
+    var myChildren = myGirls.concat(myBoys);
+    document.getElementById("demo").innerHTML = myChildren;
+}
+</script>
+----------------
+condition::::::::
+<script>
+function myFunction() {
+    var age,voteable;
+    age = document.getElementById("age").value;
+    voteable = (age < 18) ? "Too young":"Old enough";
+    document.getElementById("demo").innerHTML = voteable + " to vote.";
+}
+</script>
+-------------
+<script>
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try { 
+        if(x == "")  throw "is Empty";
+        if(isNaN(x)) throw "not a number";
+        if(x > 10)   throw "too high";
+        if(x < 5)    throw "too low";
+    }
+    catch(err) {
+        message.innerHTML = "Input " + err;
+    }
+finally {
+        document.getElementById("demo").value = "";
+    }
+}
+</script>
+--------------
+----------------------------------------------------------------
+
+                                     JQUERY
+
+
+Google CDN:
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+---------------------
+
+Microsoft CDN:
+
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js"></script>
+</head>
+
+==============================

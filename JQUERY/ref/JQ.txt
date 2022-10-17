@@ -1,0 +1,129 @@
+JQUERY:::
+
+parents and closest()
+no conflict.
+bubbling
+delegate, bind
+bind and live and on
+method chaining
+inArray
+-----
+Instance Methods
+
+BIND(),CALL(),APPLY()
+
+---------------------
+attr() and prop()
+
+<input id="demo" type="text" value="soundar" />
+VALUE CHANGED AS: <input id="demo" type="text" value="rajan" />
+
+$("#demo").attr("value");   // returns soundar
+$("#demo").prop("value");   // returns rajan
+
+for a checkbox (jquery 1.6+)
+<input id="check1" checked="checked" type="checkbox" />
+.attr('checked') //returns  checked
+.prop('checked') //returns  true
+.is(':checked') //returns true
+
+Attributes carry additional information about an HTML element and come in name=”value” pairs. 
+Property is a representation of an attribute in the HTML DOM tree.
+
+The Prop() method returns a Boolean value for checked, selected, disabled, readOnly and 
+so on while attr returns a defined string. 
+______________________
+disable a field:
+<input type="txt" id="xxx">
+$('#txt').prop('disabled',true)
+______________________
+$.each,grep
+$.parseJSON,$.getJSON,JSON.parse,$.map
+json.stringify = convert object to string
+JSON.parse = convert string to object.
+-----
+$.each:function to run for each matched element.
+$("li").each(function(){
+        alert($(this).text())
+    });
+______________________
+grep:Finds the elements of an array which satisfy a filter function. The original array is not affected.
+arr = jQuery.grep(arr, function( n, i ) {
+  return ( n !== 5 && i > 4 );
+});
+______________________
+$.parseJSON = JSON.parse : convert text into a JavaScript object:
+obj = JSON.parse('{ "name":"John", "age":30, "city":"New York"}');
+______________________
+getJSON() - method is used to get JSON data using an AJAX HTTP GET request.
+$.getJSON( "ajax/test.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val + "</li>" );
+  });
+  });
+______________________
+map: designed to both iterate and create a new resulting array.
+
+arr = jQuery.map( arr, function( n, i ) {
+  return ( n.toUpperCase() + i );
+});
+------------
+remove() and empty()
+•	empty() will remove all the contents of the selection.
+•	remove() will remove the selection and its contents.
+Consider:
+<div>
+    <p><strong>foo</strong></p>
+</div>
+
+$('p').empty();  // --> "<div><p></p></div>"
+
+// whereas,
+$('p').remove(); // --> "<div></div>"
+-------------
+AJAX methods
+$.get()
+$.getJSON()
+$.ajax()
+-------------
+DOM manipulation methods you have used in Jquery
+.addClass()
+.after()
+.append()
+.before()
+.remove()
+----------
+ANcestors:
+parent()
+parents()
+parentsUntil()
+
+Descendants:
+children()
+find()
+
+Siblings:
+siblings()
+next()
+nextAll()
+nextUntil()
+prev()
+prevAll()
+prevUntil()
+
+Filtering:
+first(), last(), eq(), filter() and not()
+-------
+closest()
+Begins with the current element
+Travels up the DOM tree and returns the first (single) ancestor that matches the passed expression
+The returned jQuery object contains zero or one element
+
+parents()
+Begins with the parent element
+Travels up the DOM tree and returns all ancestors that matches the passed expression
+The returned jQuery object contains zero or more than one element
+-----
+contents() method returns all direct children, including text and comment nodes, of the selected element.
+

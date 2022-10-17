@@ -1,0 +1,117 @@
+COMPONENTS:
+
+main way to build and specify elements and logic on the page
+
+angular app is tree of angular components.
+
+Decoratos allow us to mark a class as an angular component and provide metadata
+that determines how the component should be processed, instantiated and used at runtime.
+
+import {Component} from '@angular/core';
+@Component({
+selector: 'select',
+template:'<div>Hello {{name}}.<button (click) = "say()">ss</button>'
+})
+
+export class MyCoponent{
+    constructor(){
+	this.name = 'max'
+    }
+    say(){
+	console.log(this.name);
+    }
+
+
+}
+
+SERVICES:
+
+Services are used for reusable data services to share between
+components throughtout an app.
+services are invariably asynchronous.we can return data as
+promise or an observable using RxJS.
+--------------------------
+https://coursetro.com/posts/code/20/Angular-2-Services-Tutorial---Understanding-&-Creating-Them
+
+SERVICE:
+
+An Angular 2 service is simply a javascript function, along with its associated properties and methods, 
+that can be included (via dependency injection) into Angular 2 components.
+
+There are 2 ways to create an Angular 2 service; the manual method, and then through the Angular CLI (Command Line Interface).
+
+Step 1: Create the Service File.
+name.service.ts
+
+Step 2: Import the Injectable Member
+import { Injectable } from '@angular/core';
+
+Step 3: Add the Injectable Decorator.
+@Injectable()
+
+Step 4: Export the Services Class.
+export class ExampleService {
+   someMethod() {
+        return 'Hey!';
+    }
+	}
+	
+::::::::::::::Creating a Service with the Angular-CLI
+
+ng generate service myservicename
+
+This will generate a myservicename.service.ts file within the app folder that contains the scaffolding from steps 1-4 above.
+
+:::::::::::::::Importing the Service to your Components
+
+You can either import your service directly within the components, or you can import them to the app.module.ts file, which will give all of your components access to that service. We'll show you both ways.
+
+FULLCODE:
+
+example.service.ts:::::::::
+
+import { Injectable } from '@angular/core';
+@Injectable()
+export class ExampleService {
+    someMethod() {
+        return 'Hey!';
+    }
+}
+app.component.ts::::::::::::
+
+import { Component } from '@angular/core';
+import { ExampleService } from './example.service';
+@Component({
+    selector: 'my-app',
+    template: '<h1>{{ title }}</h1>',
+    providers: [ExampleService]
+})
+export class AppComponent { 
+title: string;
+constructor(private _exampleService: ExampleService) {
+}
+ngOnInit() {
+        this.title = this._exampleService.someMethod();
+    }
+}
+
+--------
+Including the Service in app.module.ts:::::::::::::
+
+// other imports in app.module.ts
+import { ExampleService } from './example.service';
+
+@NgModule({
+  //other metadata properties
+  providers: [ExampleService]
+})
+_________________________________________________________________________________________________________________________________
+
+sandboxing = multiple instances of a service at the same level of the component hierarchy
+
+The @Optional decorator tells Angular to continue when it can't find the dependency. 
+Angular sets the injection parameter to null instead.
+
+The @Host decorator stops the upward search at the host component.
+
+A provider is a recipe for delivering a service associated with a token.

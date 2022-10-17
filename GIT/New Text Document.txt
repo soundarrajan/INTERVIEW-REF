@@ -1,0 +1,7 @@
+publish to git hub:
+
+login to git.
+create a repository.
+git remote add origin https://github.com/soundarrajan/REPONAME.git
+git remote -v
+push to

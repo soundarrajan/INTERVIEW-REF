@@ -1,0 +1,31 @@
+HTML5 api
+localstorage vs cookies.
+is session storage is retained if page refresh.  - yes
+application cache.
+fallback
+benefits of semantics elements.
+SEO in Developer point of view.
+meta tags.
+
+css3 new features.
+box model
+bg origin and bg clip
+content box and padding box
+Center a div in a page
+display: flex
+~,+
+adjacent sibling in css.
+
+design patterns in JS
+Promises vs callback function
+callback function
+
+Ajax method
+disadvantages of closure.
+super object.
+
+array methods
+memory management in JS.
+Hoisting.
+
+SASS

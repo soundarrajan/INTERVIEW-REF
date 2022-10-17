@@ -1,0 +1,794 @@
+https://medium.com/front-end-hacking/angular-2-component-lifecycle-hooks-fa5a84b4b64d
+
+Life Cycle Hooks:
+1. life cycle of angular2:::
+
+ngOnChanges - called when an input binding value changes
+ngOnInit - after the first ngOnChanges
+ngDoCheck - after every run of change detection
+ngAfterContentInit - after component content initialized
+ngAfterContentChecked - after every check of component content
+ngAfterViewInit - after component's view(s) are initialized
+ngAfterViewChecked - after every check of a component's view(s)
+ngOnDestroy - just before the component is destroyed
+------
+https://embed.plnkr.co/ZqfVSF
+ngOnChanges::::::::::::::
+Respond when Angular (re)sets data-bound input properties. The method receives a "SimpleChanges" object of current and previous property values.
+"SimpleChanges" as an argument that gives new and previous value of input values after changes.
+Called before ngOnInit() and whenever one or more data-bound input properties change.
+
+ngOnChanges(changes: SimpleChanges) {
+    if(changes.myNum && !changes.myNum.isFirstChange()) {
+      // exteranl API call or more preprocessing...
+      console.log('ssssssssssss');
+    }
+    
+    for (let propName in changes) {
+      let change = changes[propName];
+      console.dir(change);
+      if(change.isFirstChange()) {
+        console.log(`first change: ${propName}`);
+      } else {
+        console.log(`prev: ${change.previousValue}, cur: ${change.currentValue}`);
+      }
+    }
+  }
+--------------------------------------------------------------------------------------------------------------------------
+ngOninit::::::::
+//called after the constructor and called  after the first ngOnChanges()
+//Use the constructor to initialize class members and for dependency injection. 
+Use ngOnInit for initialization work. 
+
+Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
+Called once, after the first ngOnChanges().
+
+Use the constructor to initialize class members and for dependency injection. Use ngOnInit for initialization work.
+
+export class Users implements OnInit{
+
+    user_list: Array<any>;
+
+    constructor(private _userService: UserService){
+    };
+
+    ngOnInit(){
+        this.getUsers();
+    };
+
+    getUsers(){
+        this._userService.getUsersFromService().subscribe(users =>  this.user_list = users);
+        this.user_list.toUpperCase();
+    };
+
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+ngDoCheck:
+Detect and act upon changes that Angular can't or won't detect on its own.
+Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+
+like:
+chnages in object,array,setTimeout etc.
+
+let obj = {
+  iChange: 'hiii'
+}
+If you use obj.iChange inside your template, angular will not detect it if this value changes, 
+because the reference of obj itself doesn't change. You need to implement an ngDoCheck to check if the value has changed, 
+and call a detectChanges on your component's changeDetector.
+
+@Component({
+   selector: 'test-do-check',
+   template: `
+      <div [innerHtml]="obj.changer"></div>
+   `, 
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class TestDoCheckComponent implements DoCheck, OnInit {
+public obj: any = {
+       changer: 1
+    };
+private _oldValue: number = 1;
+constructor(private _changeRef: ChangeDetectorRef){}
+ngOnInit() {
+       setInterval(() => {
+           this.obj.changer += 1;
+       }, 1000);
+    }
+ngDoCheck() {
+       if(this._oldValue !== this.obj.changer) {
+           this._oldValue = this.obj.changer;
+
+           //disable this line to see the counter not moving
+           this._changeRef.detectChanges();
+       }
+    }}
+-----------------------------------------------------------------------------------------------
+_______________________
+ngAfterContentInit()	- content projection value is initialized.
+
+Respond after Angular projects external content into the component's view.
+Called once after the first ngDoCheck().
+A component-only hook.
+------
+ngAfterContentChecked()	
+
+Respond after Angular checks the content projected into the component.
+Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+A component-only hook.
+
+--------
+ngAfterViewInit()	
+
+Respond after Angular initializes the component's views and child views.
+Called once after the first ngAfterContentChecked().
+A component-only hook.
+----------
+ngAfterViewChecked()	
+
+Respond after Angular checks the component's views and child views.
+Called after the ngAfterViewInit and every subsequent ngAfterContentChecked().
+A component-only hook.
+-----------------
+ngOnDestroy:
+It is called for cleanup logic when a component, directive, pipe or service is destroyed
+
+1. Stop interval timers. 
+2. Unsubscribe Observables. 
+3. Detach event handlers. 
+4. Free resources that will not be garbage collected automatically. 
+5. Unregister all callbacks. 
+_________________________________________________________________________________________________
+Directive vs. Component:
+
+components are used to create UI widgets.
+directives are used to add behaviour to existing DOM elements.
+
+components are used to split app into smaller parts.
+directives are used to design resusable components.
+
+only one component is used per DOM elements.
+More than one directive are used per DOM element.
+
+DIRECTIVE:
+
+<button logOnClick>log</button><br>
+
+@Directive({
+  
+selector: "[logOnClick]"
+  
+})
+
+class MyDirective {
+  @HostListener('click', ['$event'])
+  onClicks(event) {
+    console.log(event);
+  }
+}
+_________________________________________________________________________________________________
+DATA-BINDING::::::::::::
+
+PROPERTY DIRECTIVE:
+
+https://lishman.io/angular-2-property-binding
+https://www.codementor.io/adekunleoyaniyi/interpolation-vs-property-binding-in-angular2-eu1tzbyn4
+
+Interpolation Vs Property Binding:::
+
+Data binding help us coordinate communication between a component and its view template. 
+Data binding consist of One-Way Data-Binding and Two-Way Data-Binding:
+
+one-way data binding: INTERPOLATION AND PROPERTY Binding
+two-way dat binding: ngModel
+
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'my-app',
+    template: `
+                <h1>{{ fullName }}</h1>           //interpolation
+				<h1 [innerHtml]='fullName'></h1>  //property binding
+				
+				<img src='{{imagePath}}'/>        //interpolation
+				<img [src]='imagePath'/>
+				
+				<img src=' https://angular.io/{{imagePath}}'/>
+				<button [disabled]='isDisabled'>Try Me</button>
+				
+				<button bind-disabled='isDisabled'>Try Me</button>
+              `
+})
+export class AppComponent {
+    fullName: string = 'Martin Luther King Jr';
+	imagePath: string = 'https://angular.io/assets/images/;
+	isDisabled: boolean = true;
+}
+-------
+PROPERTY BINDING:
+Property binding is performed as one-way from data source to view target.
+
+COMPONENT PROPERTY BINDING:works within component element to bind parent component property into child component property
+	<my-msg  prefixMsg= "Website name is " [siteName] = "website.name"> </my-msg> 
+	1. Using bracket []
+		<my-msg [siteName] = "website.name"> </my-msg>  
+	2. Using bind- 
+		<my-msg bind-siteName = "website.name"> </my-msg>  
+	3. Using Interpolation 
+		<my-msg siteName = "{{website.name}}"> </my-msg>  
+ELEMENT PROPERTY BINDING:works within HTML element and it binds a component property to a DOM property. 
+	<a [href]="website.url" [textContent]="website.name"> </a> 
+DIRCTIVE PROPERTY BINDING:works within HTML element with angular directives such as NgClass and NgStyle. 
+	<p [ngClass]="'one two'"> Angular 2 Property Binding Example </p> 
+	
+	
+	Property binding target will use the below syntax. 
+1. Bracket [] 
+2. bind- prefix 
+3. Interpolation {{expression}} 
+
+Logo: <img [src]="website.logo"/>
+<br/>Logo: <img bind-src="website.logo"/>
+<br/>Logo: <img src="{{website.logo}}"/>
+-----
+EVENT BINDING: send information from the view, to the component class. Such information usually involves a click, hover or typing.
+
+<img [src]="imageUrl" (click)='myMethod()'>
+<img [src]="imageUrl" on-click='myMethod()'>
+
+imageUrl = 'https://angular.io/resources/images/logos/angular2/angular.png';
+
+myMethod() {
+   console.log('Hey!');
+}
+---
+====event.component.ts
+import {Component} from '@angular/core';
+@Component({
+    selector: 'event-test',
+    templateUrl: 'app/event.component.html'
+})
+export class EventComponent {
+        isValid = true;
+	msg1 = 'Hello World';	
+	msg2 = '';
+	msg3 = '';
+	setMsg(data:string) {
+	    this.msg1 = data;
+	}
+	changeText(mytext:string) {
+	    this.msg3 = mytext;
+        }	
+}   
+=====event.component.html
+<b>Input Event Binding </b><br/><br/>
+<input [value]="msg1" (input)="msg1=$event.target.value">
+
+<input [value]="msg1" (input)="setMsg($event.target.value)">
+<input on-change="changeText($event.target.value)">
+{{msg1}}
+
+<br/><br/><b>Click Event Binding </b><br/><br/>
+<button (click)="isValid=true">True</button>
+<button (click)="isValid=false">False</button>
+<p *ngIf="isValid">
+	Data is valid.
+</p>
+<p *ngIf="!isValid">
+	Data is not valid.
+</p>
+_______________________
+
+---------------------------------------
+Interpolation - use curly braces and template expressions to output data on the page.
+Event Binding - handle DOM events using parentheses and template statements.
+Two-way Binding - combine property and event binding to create two-way binding with ngModel.
+Input Binding - bind to <input> fields such as text, textarea, checkbox, radio and select.
+	<input #textbox type="text" [(ngModel)]="textValue" required>
+	<input #cb1 type="checkbox" value="one" (change)="logCheckbox(cb1)">
+	<select #select [(ngModel)]="current" (change)="logDropdown(select.value)">
+Built-in Directives - see how to use built-in directives ngIf, ngSwitch, ngFor, ngClass and ngStyle.
+Component Input Output - use @Input and @Output to pass data in to and out of a component.
+Angular Router - Use the Angular router to navigate between components when the user clicks a link.
+Nested Child Routes - An example of how child routes allow navigation between multiple views when a user clicks a link in a sub-menu.
+------------------------
+https://lishman.io/angular-2-built-in-directives
+(STRUCTURAL DIRECTIVE)Built-in Directives - ngIf, ngSwitch, ngFor, ngClass and ngStyle.
+
+1. ngIf - adds and removes elements in the DOM based on the results of an expression.
+2. ngSwitch displays one element (and its children) from a set of possible options, based on some condition.
+3. ngFor is a repeater directive which outputs a list of elements by iterating over an array.
+4. ngClass adds and removes CSS classes on an element. [ngClass]="'first second'"  [ngClass]="['first', 'second']"
+5. ngStyle sets CSS styles on an HTML element conditionally. 
+[ngStyle]="{'background-color':'green'}"
+_________________________________________________________________________________________________
+why angular2 is better:::
+Angular1:
+	Controller based UI.
+	architecture of Angular v1 is based on MVC
+Angular2:
+	component based UI:helps a developer to divide the applications in terms of components
+	improve the flexibility and reusability.
+	architecture of Angular v2 is based on service/controller.
+	SEO Friendly
+---
+how ngmodel and ngbind works internally:::
+interpolation - {{}}
+one way binding (unidirectional) - <h1 [innerText]="employee.name"></h1>
+two-way binding  - <input [(ngModel)]="employee.name"/>
+event binding
+
+ Angular Change Detection works by checking if the value of template expressions have changed. 
+ This is done for all components.
+ 
+ {{ expression }} - render the bound value from component's template and it converts this expression into a string.
+  converts the expression results to strings, and links them with neighboring literal strings.
+------
+viewchild and contentchild
+Viewchild - Any component, directive, or element which is part of a template is ViewChild and 
+Contentchild - any component or element which is projected in the template is ContentChild.
+
+Any directive, component, and element which is part of component template is accessed as ViewChild.
+Whereas, any element or component which is projected inside <ng-content> is accessed as ContentChild.
+
+QueryList - object that stores a list of items
+----
+at when we create a component and module
+Components—directives with a template.
+module - module is a mechanism to group components, directives, pipes and services.
+3 properties: imports, declarations and bootstrap.
+----
+how we overwrite the existing default module(app.module)
+>>>in main.ts
+-----
+ngif and ngfor
+ngif - conditional rendering(conditionally adds or removes content from the DOM)
+ngfor - iterates over collection of data.
+<ul>
+    <li *ngFor="let hero of heroes">
+      {{ hero }}
+    </li>
+  </ul>
+-----
+achieve grid in angular2(custom filter and sorting)
+-----
+structure of component and module
+security issue in angular2
+Auth Guard - CanActivate,CanActivateChild,CanDeactivate,CanLoad,Resolve
+Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route.
+
+A CanActivate guard is useful when we want to check on something before a component gets used.
+
+This is extremely useful for scenarios like:
+
+checking if a user is authenticated
+checking if a user has permission
+-----
+forchild and forroot:
+forRoot creates a module that contains all the directives, the given routes, and the router service itself.
+forChild creates a module that contains all the directives and the given routes, but does not include the router service.
+----
+bootstraping
+------
+promise and observable:
+promise:
+	returns a single value
+	not cancellable
+	more readable code with try/catch and async/await
+observable
+	works with multiple values over time
+	cancellable
+	supports map, filter, reduce and similar operators
+---------------
+Set base href dynamically
+
+app.module.ts::::
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    routing],
+  bootstrap: [AppComponent],
+  providers: [
+    appRoutingProviders,
+    { provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' },
+  ]
+})
+-------------------------------------
+package.json:::
+contains the list of packages for the app. 
+The pakage.json file contains the project or application dependencies in "dependencies" property. 
+
+tsconfig.json:
+ browser is only capable of executing JavaScript, 
+ so the TypeScript needs to be transpiled into JavaScript with the tsc compiler and this requires some configurations.
+
+main.ts file:::
+entry point of your application 
+compiles the application with just-in-time and bootstarps the application's root module .
+
+angular.cli.json
+Angular CLI is a Command Line Interface (CLI) to automate your development workflow.
+contains index file,main,style and environment.
+
+ngmodule::
+organize an application
+ takes a metadata object that tells Angular how to compile and launch the application.
+ declare a component.
+ import other modules.
+ provides services.
+ 
+ Directives: Directives allow you to attach behavior to elements in the DOM..
+ Structural Directives and Attribute Directives:
+	Structural directives—change the DOM layout by adding and removing DOM elements. - ngif,ngfor.
+	Attribute directives—change the appearance or behavior of an element, component, or another directive.
+ @directive,hostlistener
+ -----------------------------
+ angular 1 vs 2 vs 4.
+ angular1
+	based on model-view-controller (MVC) design
+	JavaScript.
+	
+ angular2/angular
+	controllers and $scope were replaced by components and directives.
+	TypeScript-ES6
+ 
+ angular4
+	separate Animation Package
+	ngif with else
+------------------------------
+
+
+_________________________________________________________________________________________________
+*test http request and response.
+USING  = MockBackend - test code that makes Http requests by using a MockBackend.
+backend.connections.subscribe(connection => {
+    connection.mockRespond(new Response(<ResponseOptions>{
+      body: JSON.stringify(response)
+    }));
+  });
+----
+*observable in ang
+.for event system and the HTTP service
+.multiple values of data can be emitted over time
+.dealing with data by using array-like operations to parse, modify and maintain data
+.subscribe() will trigger it’s own independent execution 
+.use map(),filter().
+------
+*pipes.
+A pipe takes in data as input and transforms it to a desired output
+{{ birthday | date }}
+---
+*external style sheet in ang
+.angular.json
+.styleUrls: [
+        'http://example.com/external.css',
+        'app/local.css'
+    ], 
+    encapsulation: ViewEncapsulation.None, 
+.styles: [`
+    .card {
+      height: 70px;
+      width: 100px;
+    }
+  `],
+ .template: `
+    <style>
+    h1 {
+      color: purple;
+    }
+    </style>
+    <h1>Styling Angular Components</h1>
+    `
+---
+**cli
+Angular CLI is a tool to initialize, develop, scaffold and maintain Angular applications
+ng new
+ng serve
+ng generate
+ng generate component [name]
+---
+properties in angular2(component,directive)
+---
+lifecycle hooks
+---
+Services:
+.included (via dependency injection)
+providers: [ExampleService]
+
+Services are used for reusable data services to share between
+components throughtout an app.
+services are invariably asynchronous.we can return data as
+promise or an observable using RxJS.
+
+FULLCODE:
+
+example.service.ts:::::::::
+
+import { Injectable } from '@angular/core';
+@Injectable()
+export class ExampleService {
+    someMethod() {
+        return 'Hey!';
+    }
+}
+app.component.ts::::::::::::
+
+import { Component } from '@angular/core';
+import { ExampleService } from './example.service';
+@Component({
+    selector: 'my-app',
+    template: '<h1>{{ title }}</h1>',
+    providers: [ExampleService]
+})
+export class AppComponent { 
+title: string;
+constructor(private _exampleService: ExampleService) {
+}
+ngOnInit() {
+        this.title = this._exampleService.someMethod();
+    }
+}
+
+--------
+Including the Service in app.module.ts:::::::::::::
+
+// other imports in app.module.ts
+import { ExampleService } from './example.service';
+
+@NgModule({
+  //other metadata properties
+  providers: [ExampleService]
+})
+--------------aspire
+*Ngmodel ngclass
+[ngStyle]="{ 'color': getRandomColor()}"
+[style.color]="'orange'"
+[className]="'blue'"
+
+<div [ngStyle]="{'color': 'blue', 'font-size': '24px', 'font-weight': 'bold'}">
+<div [ngClass]="['bold-text', 'green']">
+----
+Y typescript
+TypeScript is a superset of JavaScript which primarily provides optional static typing, classes and interfaces.
+
+Class and Module Support
+Static Type-checking
+ES6 Feature Support
+Clear Library API Definition
+Build-in Support for JavaScript Packaging
+Syntax Similarity to Our Backend Languages (Java, Scala)
+Superset of JavaScript
+----
+*Js in ang
+
+declare var drawGauge: any; //drawGauge() is a function inside d3gauge.js
+import '../../../../js/d3gauge.js';
+
+2.index.html
+<script src="./assets/testjs.js"></script>
+declare var test: any;
+3.angular-cli.json:
+"scripts": [
+  "../node_modules/jquery/dist/jquery.js"
+]
+-----
+*Decorator
+Decorators are functions, and there are four things (class, parameter, method and property) 
+---
+Annotations create an "annotations" array. Decorators are functions.
+Google's Traceur compiler uses annotations.
+MicroSoft's TypeScript compiler uses decorators.
+
+Decoratos allow us to mark a class as an angular component and provide metadata
+that determines how the component should be processed, instantiated and used at runtime.
+---
+
+Property binding or interpolation
+
+<p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
+<p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
+
+<app-hero-detail prefix="You are my" [hero]="currentHero"></app-hero-detail>
+
+Attribute binding:::::
+
+<tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
+
+class binding:::::
+
+<div [class.special]="isSpecial">The class binding is special</div>
+
+style binding:::
+<button [style.color]="isSpecial ? 'red': 'green'">Red</button>
+
+<button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
+<button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
+
+-----------------------------------------------
+event binding:
+
+<button (click)="onSave()">Save</button>
+-----------------------------------------------------------------------------------------------------------
+REFERENCE VARIABLE:::
+
+<input #phone placeholder="phone number">
+
+<!-- lots of other elements -->
+
+<!-- phone refers to the input element; pass its `value` to an event handler -->
+<button (click)="callPhone(phone.value)">Call</button>
+-----------------------------------------
+Declaring Input and Output properties:::: communication between components
+
+@Input is used to define an input property to achieve component property binding. 
+@Output is used to define output property to achieve custom event binding.
+
+Input properties usually receive data values. 
+Output properties expose event producers, such as EventEmitter objects.
+
+The terms input and output reflect the perspective of the target directive.
+
+__________________________________________________________________________________________________________________________________________________
+
+
+Event binding:
+
+<button (click)="onClickMe()">Click me!</button>
+
+
+>>>>GET USER INPUT>>>
+1. template: `
+  <input (keyup)="onKey($event)">
+  <p>{{values}}</p>
+`
+
+export class KeyUpComponent_v1 {
+  values = '';
+
+  onKey(event: any) { // without type info
+    this.values += event.target.value + ' | ';
+  }
+}
+
+2. Get user input from a template reference variable
+
+@Component({
+  selector: 'app-loop-back',
+  template: `
+    <input #box (keyup)="0">
+    <p>{{box.value}}</p>
+  `
+})
+export class LoopbackComponent { }
+
+______
+
+@Component({
+  selector: 'app-key-up2',
+  template: `
+    <input #box (keyup)="onKey(box.value)">
+    <p>{{values}}</p>
+  `
+})
+export class KeyUpComponent_v2 {
+  values = '';
+  onKey(value: string) {
+    this.values += value + ' | ';
+  }
+}
+__________________________________________________________________________________________________________________________________________________
+Using ngModel in a form gives you more than just two-way data binding. 
+It also tells you if the user touched the control, if the value changed, or if the value became invalid.
+
+The control has been visited.	ng-touched	ng-untouched
+The control's value has changed.	ng-dirty	ng-pristine
+The control's value is valid.	ng-valid	ng-invalid
+
+<input type="text" class="form-control" id="name"
+  required
+  [(ngModel)]="model.name" name="name"
+  #spy>
+<br>TODO: remove this: {{spy.className}}
+____________________________________________
+ngif and ngshow:
+ng-if will add or remove Element from DOM based on condition,(REMOVES ELEMENT IN DOM)
+ng-show or ng-hide will only show or hide that element from DOM if condition is satified.(display:none)
+------------------
+ng if else:
+
+**example 1 ngIf**
+
+   <div *ngIf="condition">..</div>
+   <div template="ngIf condition">..</div>
+
+**example 1.i ngIf**
+   <ng-template [ngIf]="condition"><div>..</div></ng-template>
+
+**example 2 else block**
+
+   <div *ngIf="condition; else elseBlock">....</div>
+   <ng-template #elseBlock>....</ng-template>
+
+**example 3 then and else block** 
+
+   <div *ngIf="condition; then thenBlock else elseBlock"></div>
+   <ng-template #thenBlock>......</ng-template>
+   <ng-template #elseBlock>......</ng-template>
+ --------
+ Dependency Injection:
+
+It's a coding pattern in which a class receives its dependencies from 
+external sources rather than creating them itself.
+
+Dependency Injection (DI) is a way to create objects that depend upon other objects.
+ A Dependency Injection system supplies the dependent objects 
+(called the dependencies) when it creates an instance of an object.
+
+
+
+@Injectable()decorator is only required for a service class that has its own 
+dependencies.
+
+All injected service dependencies are singletons meaning that, 
+for a given dependency injector, there is only one instance of service.
+
+
+The @Optional decorator tells Angular to continue when it can't 
+find the dependency. Angular sets the injection parameter to null instead.
+
+The @Host decorator stops the upward search at the host component.
+-----------
+template driven and reactive forns.
+
+Template Driven Forms:::
+
+.use ngModel
+.validation
+using ngmodel -
+touched or untouched
+valid or invalid
+pristine or dirty
+<form #f="ngForm" (ngSubmit)="onSubmitTemplateBased()">
+        <p>
+            <label>First Name:</label>
+            <input type="text"  
+                [(ngModel)]="user.firstName" required>
+        </p>
+
+Reactive Forms (or Model Driven):::
+import a different module into our application:
+    import {ReactiveFormsModule} from "@angular/forms";
+	
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>
+            <label>First Name:</label>
+            <input type="text" formControlName="firstName">
+			
+-------------------------------------------
+COMMUNICATION BETWEEN COMPONENTS:
+
+EXPORT - IMPORT
+INPUT-Output
+ViewChild
+Service - dependency injection
+CONTENTCHILD
+---------------------------------------------
+form validation and login logout:
+https://scotch.io/tutorials/angular-2-form-validation
+--------------
+https://angularfirebase.com/lessons/sharing-data-between-angular-components-four-methods/#Parent-to-Child-Sharing-Data-via-Input
+--------------------------
+constructor vs ngonint
+subject and behaviour subject
+callbacks
+asynjs - ajax,webworkers,promise,callbacks
+
+end - end process anfular - process
+jit and eot
+component communication
+

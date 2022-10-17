@@ -1,0 +1,117 @@
+why node?
+
+liberate js from browser, programmers use computers hardware like filesystem
+
+-----
+REPL - read evaluation print loops
+-------
+To change js file to  support es6
+
+//jshint esversion:6
+-------
+node index.js
+----------
+To create package.json 
+
+npm init
+
+folloe the steps and enter details of project
+_________________________________________________________
+Express - nodejs's framework
+
+npm install express
+-------------------------
+to load automatically:
+
+npm install -g nodemon
+
+nodemon index.js
+
+if error:
+
+npm i pstree.remy@1.1.0 -D
+-----------------------------
+To get value from form:
+
+npm install body-parser
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
+                                (extended:true - to allow nested object)
+app.post('/',(req,res) => {
+ //res.send("success");
+ //console.log(req.body);
+ var num1 = Number(req.body.num1);
+ var num2 = Number(req.body.num2);
+ var result = num1 + num2;
+ res.send(""+result);
+--------------------------------
+Modules in Node:
+(Import and export between files);
+
+way1:
+script1::::::
+const c = require('./script2.js');
+const a = 2 + c.number;
+console.log(a);
+
+script2::::
+const c = 10;
+module.exports = {
+   number: c
+};
+-----
+way2:
+
+script1::::::
+import {c} from './script2.js';
+const a = 2 + c;
+console.log(a);
+
+script2::::
+export const c = 10;
+
+if error: 2 solution.
+
+1. rename file extension .js to .mjs
+-
+2. create package.json by npm init.
+add "type":"module"
+----------------
+way 3:
+
+let a;
+if(1==1){
+const {aa} = await import ('.script2.js');
+a = aa;
+}
+
+console.log(a);
+-------------------------------------------------------------------------------
+express middleware function:
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use((req,res,next)=>{
+console.log("ooo");
+next();
+})
+app.get('/',(request,response) =>{
+    //console.log('response');
+    response.send('hiio');
+})
+
+app.listen(3000);
+-----------------------------
+import html file:
+
+app.get('/',(req,res) =>{
+  //res.send('hiiii');
+  //console.log(__dirname);
+  res.sendFile(__dirname+"/htmlfile.html")
+});
+
+---
+app.use(express,static(__dirname + '/public'))

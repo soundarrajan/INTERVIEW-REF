@@ -1,0 +1,175 @@
+APPS:
+
+1. Weather App:
+https://www.quora.com/What-is-a-good-idea-for-a-beginners-project-using-AngularJS
+______________________________________________________________________________________________
+https://stackoverflow.com/questions/34583073/angular-2-errors-and-typescript-how-to-debug
+
+http://www.discoversdk.com/blog/debugging-angular-2-applications-using-chrome-devtools-and-augury
+
+-----------------------------------------------------------------------------------------------
+API:
+
+
+
+----------------------------------------------------------------------------------------------
+https://medium.com/front-end-hacking/angular-2-component-lifecycle-hooks-fa5a84b4b64d
+
+Life Cycle Hooks:
+
+ngOnChanges:
+Respond when Angular (re)sets data-bound input properties. The method receives a "SimpleChanges" object of current and previous property values.
+"SimpleChanges" as an argument that gives new and previous value of input values after changes.
+Called before ngOnInit() and whenever one or more data-bound input properties change.
+
+ngOnChanges(changes: SimpleChanges) {
+    if(changes.myNum && !changes.myNum.isFirstChange()) {
+      // exteranl API call or more preprocessing...
+      console.log('ssssssssssss');
+    }
+    
+    for (let propName in changes) {
+      let change = changes[propName];
+      console.dir(change);
+      if(change.isFirstChange()) {
+        console.log(`first change: ${propName}`);
+      } else {
+        console.log(`prev: ${change.previousValue}, cur: ${change.currentValue}`);
+      }
+    }
+  }
+  
+--------------------------------------------------------------------------------------------------------------------------
+ngOninit:
+Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
+Called once, after the first ngOnChanges().
+
+Use the constructor to initialize class members and for dependency injection. Use ngOnInit for initialization work.
+
+--------------------------------------------------------------------------------------------------------------------------
+ngDoCheck:
+Detect and act upon changes that Angular can't or won't detect on its own.
+Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+
+ngDoCheck gets called to check the changes in the directives in addition to the default algorithm. 
+The default change detection algorithm looks for differences by comparing bound-property values by 
+reference across change detection runs.
+_____________
+ngOnChanges() (OnChanges) is called when a value bound to an input has changed so you can run custom code when an input has changed.
+
+ngDoCheck() (DoCheck) is called when change detection runs so you can implement your custom change detection action.
+
+Angular uses zone.js and patches all kinds of async apis addEventListener, setTimeout, ... Every time an event handler or some 
+other async code is completed or when change detection is invoked explicitely by some code, Angular2 runs change detection. 
+This is when ngDoCheck is called. ngOnChanges is only called when change detection detects a change that requires an input to be updated.
+
+so every time you run a setTimeout ( or any other async function), when it's finished, ngDoCheck will be called.
+
+ngOnChanges() (OnChanges): to detect changes for variables passed by value
+
+ngDoCheck() (DoCheck) : to detect changes for variable passed by reference such as arrays, which are not detected by ngOnChanges() as the old value and the new value have the same reference
+-------------------------------------------------------------------------------------------------------------------------
+ngOnDestroy:
+
+ngOnDestroy callback is typically used for any custom cleanup that needs to occur when the instance is destroyed.
+
+It is called for cleanup logic when a component, directive, pipe or service is destroyed. ngOnDestroy() is called just before component/directive is about to be destroyed by Angular. It can be used for following purposes. 
+1. Stop interval timers. 
+2. Unsubscribe Observables. 
+3. Detach event handlers. 
+4. Free resources that will not be garbage collected automatically. 
+5. Unregister all callbacks. 
+
+_______________________
+ngAfterContentInit()	
+
+Respond after Angular projects external content into the component's view.
+Called once after the first ngDoCheck().
+A component-only hook.
+------
+ngAfterContentChecked()	
+
+Respond after Angular checks the content projected into the component.
+Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+A component-only hook.
+
+--------
+ngAfterViewInit()	
+
+Respond after Angular initializes the component's views and child views.
+Called once after the first ngAfterContentChecked().
+A component-only hook.
+----------
+ngAfterViewChecked()	
+
+Respond after Angular checks the component's views and child views.
+Called after the ngAfterViewInit and every subsequent ngAfterContentChecked().
+A component-only hook.
+_____________________________________________________________________________________________________________________
+https://www.concretepage.com/angular-2/angular-2-4-contentchild-and-contentchildren-example
+
+ACCESS CHILD COMPONENT VARIABLE FROM PARENT COMPONENT:@ViewChild:::::::::
+
+PARENT.TS:
+
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { ChildComponent } from '../child/child.component';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+  
+})
+export class HomeComponent implements OnInit {
+  @ViewChild(ChildComponent) private childComponent:ChildComponent;
+  sharedVarParent11 ='helloww';
+  
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+-------
+PARENT.HTML:
+
+{{childComponent.sharedChildVar}}
+_____________________________________________________________________________________________________________________
+
+Directive vs. Component:
+
+components are used to create UI widgets.
+directives are used to add behaviour to existing DOM elements.
+
+components are used to split app into smaller parts.
+directives are used to design resusable components.
+
+only one component is used per DOM elements.
+More than one directive are used per DOM element.
+
+DIRECTIVE:
+
+<button logOnClick>log</button><br>
+
+@Directive({
+  
+selector: "[logOnClick]"
+  
+})
+
+class MyDirective {
+  @HostListener('click', ['$event'])
+  onClicks(event) {
+    console.log(event);
+  }
+}
+--------------------
+PROPERTY DIRECTIVE:
+
+https://lishman.io/angular-2-property-binding
+-----------------------------------
+CHILDREN ROUTING:
+
+https://lishman.io/angular-2-router
+---------------------------------------

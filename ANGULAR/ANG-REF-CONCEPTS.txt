@@ -1,0 +1,302 @@
+1. input and output:
+
+parent - child:
+<input type="text" #ptext (keyup)="0"/>
+<child [parentData] = "ptext.value"></child>
+
+child:
+child.ts:
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css'],
+  inputs: ['parentData'],
+  outputs:['childEvent']
+})
+public parentData: string;
+
+child.html:
+{{parentData}}
+
+#ptext - template reference variable
+-------
+child-parent:
+
+child.html:
+<input type="text" #childtext (keyup)="onChanger(childtext.value)"/>
+
+chil.ts:
+childEvent = new EventEmitter<string>();
+onChanger(value:string){
+    this.childEvent.emit(value);
+  }
+parent.html:
+  <app-child (childEvent)="childData=$event"></aa-child>
+_______________
+2. ROUTING:
+
+app.html:
+<nav>
+<a routerLink="/home" routerLinkActive="active">home</a>
+<a routerLink="/about" routerLinkActive="active">about</a>
+</nav>
+<router-outlet></router-outlet>
+
+app-routing.module.ts::
+import { ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+
+const appRoutes: Routes = [
+  {path:'', redirectTo:'/home', pathMatch:'full'},
+  {path: 'home', component:HomeComponent},
+  {path:'about', loadChildren: './lazy/lazy.module#LazyModule'}
+  
+];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+@NgModule({
+  /*imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true}
+    )
+  ],
+  exports:[RouterModule],*/
+  declarations: []
+})
+_______________
+3. Directive & Hostlistener:
+host element emits the specified event
+
+HostListener('click') myClick(){ } is exactly the same as (click)="myClick()"
+
+<button logOnClick>log</button><br>
+
+@Directive({
+  selector: "[logOnClick]",
+  /*host : {
+    '(click)': 'onClick()',
+  }*/
+})
+
+@HostListener('click', ['$event'])
+  onClickss(event) {
+    console.log(event+"event1111");
+  }
+--
+import {Directive, ElementRef,HostListener,Renderer} from '@angular/core';
+@Directive({
+  selector: '[boldHover]',
+  /*host:{
+    '(mouseenter)':'onMouseEnter()',
+    '(mouseleave)':'onMouseLeave()'
+  }*/
+
+})
+
+constructor(private appservice:AppServiceService,private element:ElementRef,private renderer:Renderer) { 
+    //this.element = element.nativeElement;
+  }
+
+@HostListener('mouseenter') onMouseEnter() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'bold';
+  //this.renderer.setElementStyle(this.element.nativeElement, 'font-weight', 'normal');
+}
+@HostListener('mouseleave') onMouseLeave() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'normal';
+}
+_______________
+4. parent - child:
+
+parent to child:
+
+parent.html:
+<input  [ngClass]="['style1', 'style2']" [(ngModel)]="sharedVarParent1" name="sharedVarParent1">{{sharedVarParent1}}
+<app-child [sharedVarParent]="sharedVarParent11" [(parentSharedVar)]="sharedVarParent1"></app-child>
+
+child.ts:
+@Input() parentSharedVar: string;
+
+child.html:
+{{parentSharedVar}}
+-----
+child to parent::
+
+child.html:
+<input [(ngModel)]="childVars" name="childVars" (ngModelChange)="change()">
+
+child.ts:
+@Output() onChanges = new EventEmitter();
+  childVars: string;
+    change() {
+        this.onChanges.emit({value: this.childVars});
+    }
+
+home.html::
+{{sharedVarc}}
+<app-child (onChanges)="sharedVarc = $event.value"></app-child>
+_______________
+
+5. @ViewChild - (child to parent)
+
+Home.ts:::
+ @ViewChild(ChildComponent) private childComponent:ChildComponent;
+ 
+ Home.html::
+ {{childComponent.sharedChildVar}}
+ 
+ _______________
+ 
+ 6.@ContentChild
+ 
+ @ContentChild gives first element matching the selector from the content DOM. 
+ @ContentChildren gives all elements of content DOM as QueryList.
+ 
+ They are used to fetch single child element or all child elements from content DOM
+ 
+ 
+ HOME.HTML:
+ <app-child >
+  <app-about></app-about>
+</app-child>
+
+CHILD.TS:
+@ContentChild(AboutComponent) private contentChild:AboutComponent;
+
+CHILD.HTML:
+{{contentChild.aboutVariable}}
+----
+@ContentChildren(BookDirective) topBooks: QueryList<BookDirective>
+@ContentChildren is used to get QueryList of elements or directives from the content DOM.
+@ContentChildren(BookDirective, {descendants: true}) allBooks: QueryList<BookDirective>
+	
+	descendants: This is Boolean value. When it is true then direct children and other descendants will also be included. 
+	If the value is false then only direct children will be included. descendants is used as follows.
+
+@ContentChild and @ContentChildren are set before ngAfterContentInit() is called.
+_______________
+npm install rxjs-compat
+You need to import the map operator by write this:
+import 'rxjs/add/operator/map';
+
+7. service (OBSERVABLES)
+
+SERVICE.JS
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+
+@Injectable()
+export class AppServiceService {
+  
+  // Url to API
+  private postUrl = 'https://jsonplaceholder.typicode.com/posts';
+  constructor(private http: Http) { }
+  
+  
+
+  // Method retrieve all the posts
+  getPosts(): Observable<any[]> {
+    return this.http.get(this.postUrl)
+        .map(response => response.json())
+        .catch((err)=> err)
+        //.subscribe(result => this.result =result.json());
+        //.subscribe(result => this.result = result);
+        //.catch(this.handleError);
+  }
+
+  // This method parses the data to JSON
+  
+  
+}
+------
+<button (click)="getPosts()">click</button>
+HOME.TS
+import {AppServiceService} from '../service/app-service.service';
+getPosts() {
+    this.appservice.getPosts()
+        .subscribe(
+            (posts) =>{ this.posts = posts;
+              //console.log(this.posts);
+            //error => this.errorMessage = error
+  });
+        
+}
+
+_______________
+getPosts(){
+        return this.http.get('https://jsonplaceholder.typicode.com/posts')
+        .map(res => res.json());
+        //.pipe(map((response: any) => response.json()));
+    }
+---
+this.postsService.getPosts().subscribe(posts => {
+                this.posts = posts;
+        });
+---
+<div *ngFor="let post of posts">
+<h3>{{post.title}}</h3>
+<p>{{post.body}}</p>
+</div>
+_______________________________
+___________________________________________________________________________________________________________________
+
+FORM VALIDATION: REACTIVE
+
+html:
+<form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+    <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['firstName'].valid && complexForm.controls['firstName'].touched}">
+      <label>First Name:</label>
+      <input class="form-control" type="text" placeholder="John" [formControl]="complexForm.controls['firstName']">
+      <!-- The hasError method will tell us if a particular error exists -->
+      <div *ngIf="complexForm.controls['firstName'].hasError('required') && complexForm.controls['firstName'].touched" class="alert alert-danger">You must include a first name.</div>
+    </div>
+	<div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!complexForm.valid">Submit</button>
+    </div>
+
+</form>
+
+ts:
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+@Component({
+  selector: 'app-reactive-form',
+  templateUrl: './reactive-form.component.html',
+  styleUrls: ['./reactive-form.component.css']
+})
+export class ReactiveFormComponent implements OnInit {
+  complexForm : FormGroup;
+  constructor(fb: FormBuilder){
+    this.complexForm = fb.group({
+      // To add a validator, we must first convert the string value into an array. 
+	  The first item in the array is the default value if any, then the next item in the array is the validator. 
+	  Here we are adding a required validator meaning that the firstName attribute must have a value in it.
+      'firstName' : [null, Validators.required],
+      // We can use more than one validator per field. If we want to use more than one validator we have to wrap our array of validators with a Validators.compose function. Here we are using a required, minimum length and maximum length validator.
+      'lastName': [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])],
+      'gender' : [null, Validators.required],
+      'hiking' : false,
+      'running' :false,
+      'swimming' :false
+    })
+  }
+
+  ngOnInit() {
+  }
+
+  submitForm(value: any):void{
+    console.log('Reactive Form Data: ')
+    console.log(value);
+  }
+
+}
+
+app.module:
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+----------------------
+https://www.concretepage.com/angular-2/angular-2-radio-button-and-checkbox-example
+
+

@@ -1,0 +1,330 @@
+﻿Remove the duplicate elements in array:
+1. var arr =[1,2,3,1,4,5];
+
+/*uniqueArray = arr.filter(function(item, pos) {
+    return arr.indexOf(item) == pos;
+})
+*/
+
+var arr = [1,2,3,1,2];
+
+function ss() {
+    
+var a = [];
+    
+for ( i = 0; i < arr.length; i++ ) {
+        
+var current = arr[i];
+
+//console.log(arr.indexOf(current));
+        
+if (a.indexOf(current) < 0) 
+a.push(current);
+    
+}
+    
+return a;
+
+}
+
+ss();
+--------------
+2. [...array]  - spread opeartor:
+allows an expression to be expanded in places where multiple arguments are expected.
+
+EX:
+array = [1,2,3];
+
+function ss(a,b,c){
+
+console.log(c);
+
+}
+
+
+ss(...array);
+
+
+REST OPERATOR::
+function sumAll(...args) { 
+  var ss = typeof args;
+console.log(ss);
+}
+sumAll(1, 2, 3);
+----------------------------------------------
+3. meta viewport
+
+*Scaled down the entire web page to fit the screen(Responsive).
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+-----------------
+4. directives angular js
+
+5. o/p of below: 
+var obj1 = {same:"same"}; var obj2 = {same:"same"};
+console.log(obj1.same === obj2.same);
+Because both the value and data types are same.
+------------------
+6. two types directives in angular js
+7. partials in ang js.
+8. ie support of html5(htmlshiv shim)
+9, webstorage
+10. max storage limit in localstorage.
+three dimensional arrays
+var myarray=[[["ss","sss"], "LA", "Seattle"], "China", "Japan"];
+
+myarray[0][0][0];
+
+------------
+load:::
+$( "#new-projects" ).load( "/resources/load.html #projects li" );
+---------------
+ajax request and response
+
+            $.ajax({                     //Process the form using $.ajax()
+            type      : 'POST',          //Method type
+            url       : 'process.php',   //Your form processing file URL
+            data      : postForm,        //Forms name
+            dataType  : 'json',
+            success   : function(data) {
+                            if (!data.success) { //If fails
+                                if (data.errors.name) { //Returned if any error from process.php
+                                    $('.throw_error').fadeIn(1000).html(data.errors.name); //Throw relevant error
+                                }
+                            }
+                            else {
+                                    $('#success').fadeIn(1000).append('<p>' + data.posted + '</p>'); //If successful, than throw a success message
+                                }
+                            }
+        });
+
+dataType - (xml, json, script, or html))
+----------
+$.get("content.html", function(data, textStatus)
+        {
+                alert("Done, with the following status: " + textStatus + ". Here is the response: " + data);
+        });
+---------------
+$.post("test_post.php",
+        {
+                name: "John Doe",
+                age: "42"
+        },
+        function(data, textStatus)
+        {
+                alert("Response from server: " + data);
+        });
+-----------
+----------------------------------------------------
+preventDefault,stoppropagation, stopImmediatepropagation
+width auto, 100%
+position relative, absolute,fixed
+html5 APIs
+webworkers
+z-index
+display inline, block, inline-block
+hide last li in css
+achieve tabs using js
+call, apply
+promises in ang js
+closures
+prorotype in js
+parents and closest()
+grid in bootstrap
+no conflict
+meta viewport
+responsive and adaptive
+settimeout and setinterval
+--------------
+:
+
+checkbox check or not
+
+if($('#cc').is(":checked")){
+
+console.log('yes');
+
+}else{
+
+console.log('no');
+}
+__
+if($('#cc').prop("checked")){
+
+console.log('yes');
+
+}else{
+
+console.log('no');
+}
+
+-----------------------------
+Pass and Set dropdown value:
+
+function drop(x){
+
+$('#drop').val(x);
+
+}
+
+drop('c');
+_______________________
+extract value from text box on button click and pass to next page:
+
+<input type="text" id="xx">
+<button id="yy">submit</button>
+$('#yy').on('click',function(){
+//alert('sss');
+var thiss = $(this).prev();
+var value = thiss.val();
+//alert(value);
+localStorage.setItem("storageName",value);
+});
+_______________________
+page redirect:
+
+window.location.replace("http://stackoverflow.com");
+window.location.href = "http://stackoverflow.com";
+$(location).attr('href', 'http://www.sitefinity.com');
+______________________
+extrtact value from data-id attribute:
+
+<input id="demo" type="text" value="soundar" data-id="values" data-id-name="values"/>
+1. $('#demo').attr('data-id');
+2. $('#demo').data('id');
+3. $('#demo').data('idName');
+______________________
+attr() and prop()
+
+<input id="demo" type="text" value="soundar" />
+VALUE CHANGED AS: <input id="demo" type="text" value="rajan" />
+
+$("#demo").attr("value");   // returns soundar
+$("#demo").prop("value");   // returns rajan
+
+for a checkbox (jquery 1.6+)
+<input id="check1" checked="checked" type="checkbox" />
+.attr('checked') //returns  checked
+.prop('checked') //returns  true
+.is(':checked') //returns true
+
+Attributes carry additional information about an HTML element and come in name=”value” pairs. 
+Property is a representation of an attribute in the HTML DOM tree.
+
+Attributes: get initial value at page loads.
+Property: get value of current state
+
+The Prop() method returns a Boolean value for checked, selected, disabled, readOnly and 
+so on while attr() returns a defined string. 
+______________________
+disable a field:
+<input type="txt" id="xxx">
+$('#txt').prop('disabled',true)
+________________________________________________________________________
+GREP vs FILTER:
+
+**to apply a filter to an array
+
+** Finds the elements of an array which satisfy a filter function. The original array is not affected.
+
+*They both function in similar ways however they differ in their usages.
+*The filter function is intended to be used with html elements, 
+and that is why it is a chainable function that returns a jQuery object and 
+it accepts filters like ":even", ":odd" or ":visible" etc. You can't do that with the grep function.
+
+var arrs = [1,2,3,4];
+
+arrss = arrs.filter(function( a ) {
+  
+return a !== 3;
+
+});
+___
+var arrs = [1,2,3,4];
+
+arrss = $.grep(arrs,function( a ) {
+  
+return a !== 3;
+
+});
+
+
+GREP:
+
+jQuery.grep( array, function [, invert ] )
+If "invert" is false - default action
+true = reverse action
+
+var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+arr = jQuery.grep(arr, function( n, i ) {
+  return ( n !== 5 && i > 4 );
+});
+
+$.grep( [ 0, 1, 2 ], function( n, i ) {
+  return n > 0;
+});
+$.grep( [ 0, 1, 2 ], function( n, i ) {
+    return n > 0;
+}, true );
+-------
+FILTER:.filter( selector )
+
+ Reduce the set of matched elements to those that match the selector or pass the function's test.
+$( "li" ).filter( ":even" ).css( "background-color", "red" );
+
+$( "div" )
+  .css( "background", "#b4b0da" )
+  .filter(function( index ) {
+    return index === 1 || $( this ).attr( "id" ) === "fourth";
+  })
+    .css( "border", "3px double red" );
+________________________________________
+map vs each:
+
+.map() is designed to both iterate and create a new resulting array.
+
+.each() is designed to be an iterator (no new array created).
+
+
+
+
+var arr = [1,2,34];
+
+$.each(arr, function (a,obj) { 
+
+return a+1; 
+
+});
+
+RESULT: [1, 2, 34]
+
+
+iterate and returns original array.
+---------
+var arr = [1,2,34];
+
+$.map(arr, function (a,obj) { 
+
+return a+1; 
+
+});
+
+RESULT: [2, 3, 35]
+___________________________________________
+$.each(array, function(index, value) {
+
+});
+arrs.filter(function( value,index ) {
+  
+//return a !== 3;
+
+});
+--
+$.map(array, function(value, index) {
+
+});
+$.grep(array, function(value, index) {
+
+});
+___________________________________________
+
+

@@ -1,0 +1,61 @@
+URL:
+https://www.concretepage.com/angular-2/angular-2-event-binding-example
+https://www.concretepage.com/angular-2/angular-2-two-way-data-binding-ngmodel-example
+
+https://blog.codewithdan.com/2017/02/08/10-angular-and-typescript-projects-to-take-you-from-zero-to-hero/______________________________________________________________________________________________
+https://stackoverflow.com/questions/34583073/angular-2-errors-and-typescript-how-to-debug
+
+http://www.discoversdk.com/blog/debugging-angular-2-applications-using-chrome-devtools-and-augury
+
+[11/2, 9:44 PM] Asrar: https://code.tutsplus.com/tutorials/28-html5-features-tips-and-techniques-you-must-know--net-13520
+[11/2, 9:44 PM] Asrar: https://m.youtube.com/playlist?list=PLvZkOAgBYrsS_ugyamsNpCgLSmtIXZGiz
+[11/2, 9:44 PM] Asrar: https://m.youtube.com/playlist?list=PLIGDNOJWiL18IgDrDzKw4xJYYtHg2FOuO
+
+http://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html
+ 
+http://teropa.info/blog/2015/06/09/transclusion.html
+[11/2, 9:45 PM] Asrar: Interceptor - http://www.webdeveasy.com/interceptors-in-angularjs-and-useful-examples/
+ 
+https://docs.angularjs.org/api
+--------
+http://codetrick.net/p/H1i3kW4MA/Angular-Material-2-Tutorial-Building-Your-App-High-Quality-UI/
+https://codek.tv/v/0kmdjqgO9IY/learn-angularjs-step-by-step-training-video/
+
+
+https://github.com/curran
+http://curran.github.io/screencasts/introToAngular/exampleViewer/#/
+https://www.youtube.com/watch?v=TRrL5j3MIvo&feature=youtu.be
+
+pendrive
+
+javabrins
+
+mail - asrar
+
+
+http://javascriptissexy.com/javascript-variable-scope-and-hoisting-explained/
+
+
+http://www.techbeamers.com/top-web-developer-interview-questions/
+==============
+Please find the below links for Angular Js and other useful  tools for javascript
+
+http://www.revillweb.com/tutorials/angularjs-in-30-minutes-angularjs-tutorial/
+---------------------------------------------------
+https://twitter.com/jeffrey_way/status/488803799721836546
+https://laracasts.com/lessons/laravel-and-angular -- 
+---------------------------------------------------
+Fundamentals
+https://developers.google.com/web/fundamentals/
+---------------------------------------------------
+http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app
+---------------------------------------------------
+Sample projects done using Angular JS
+https://builtwith.angularjs.org/
+---------------------------------------------------
+
+
+For detailed one, this one is OK, but please go thro' above tutorial
+http://tutorials.jenkov.com/angularjs/index.html
+------------------------------------------------------------------
+kuvenkat

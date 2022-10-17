@@ -1,0 +1,77 @@
+npm install rxjs-compat
+You need to import the map operator by write this:
+
+import 'rxjs/add/operator/map';
+--------------------------
+app.module:::
+mport { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+imports: [
+    HttpModule,
+    HttpClientModule
+  ],
+.....
+service.ts::::
+
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+@Injectable()
+export class AppServiceService {
+  
+  // Url to API
+  private postUrl = 'https://jsonplaceholder.typicode.com/posts';
+  constructor(private http: Http) { }
+  
+  someMethod() {
+    return 'Hey!';
+  }
+
+  // Method retrieve all the posts
+  getPosts(): Observable<any[]> {
+    return this.http.get(this.postUrl)
+        .map(response => response.json())
+        .catch((err)=> err)
+        //.subscribe(result => this.result =result.json());
+        //.subscribe(result => this.result = result);
+        //.catch(this.handleError);
+  }
+
+  // This method parses the data to JSON
+  
+}
+______________________
+import { Component, OnInit } from '@angular/core';
+import {AppServiceService} from '../service/app-service.service';
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+  text:string;
+  posts: any[];
+  errorMessage: string;
+  
+  constructor(private appservice:AppServiceService) { }
+
+  ngOnInit() {
+    this.text = this.appservice.someMethod();
+    this.getPosts();
+  }
+
+  getPosts() {
+    this.appservice.getPosts()
+        .subscribe(
+            (posts) =>{ this.posts = posts;
+              //console.log(this.posts);
+            //error => this.errorMessage = error
+  });
+        
+}
+
+}
+____________________

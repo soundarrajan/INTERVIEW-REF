@@ -1,0 +1,36 @@
+html2 new features and elements.
+webworkers
+application cache
+div vs span
+webstorages.
+box model in css
+closure
+prototype
+bind and live and on
+in which version live is deprecated. = 1.7
+prevent default and stop propagation
+what is CDN?
+what is doctype? without doctype how the page behaves.
+meta viewport?
+relative vs absolute
+pseudo-classes
+new features in css3.
+media query breakpoints.
+how the browser understand the media query breakpoints.
+animations in css
+jquery selectors
+js datatypes
+find type of variable.
+typeof(undefined)
+typeof(null)
+tyof(object)
+string function in js
+join(),valueof()
+converting string to array and viceversa
+hoisting
+method chaining
+dot model,model box in bootstrap
+data binding in angular
+.min version of jquery library file
+html5 form elements and validations
+software life cycles

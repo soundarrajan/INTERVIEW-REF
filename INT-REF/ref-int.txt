@@ -1,0 +1,152 @@
+ericsson:
+
+1. find highest occurance number in array:
+
+array = [1,2,2,3,3,3]; //3
+
+var arr = [9,2, 2, 2, 2, 4, 5, 5, 5, 9];
+
+function foo(arr) {
+    var a = [], b = [], prev;
+    //document.write(arr.sort());
+    arr.sort();
+    for ( var i = 0; i < arr.length; i++ ) {
+    alert(prev);
+        if ( arr[i] !== prev ) {
+            a.push(arr[i]);
+            b.push(1);
+        } else {
+            b[b.length-1]++;
+        }
+        prev = arr[i];
+    }
+    
+    return [a, b];
+}
+
+var result = foo(arr);
+document.write('[' + result[0] + ']<br>[' + result[1] + ']') 
+---
+function mostFrequent(array){
+debugger;
+  var result = array[0];
+  var tmp = 0;
+  for(var i = 0; i < array.length; i++){
+    var count = 0;
+    for(var j = 0; j < array.length; j++){
+      if(array[i]===array[j]){
+        count++;
+      }
+    }
+    if(count > tmp){
+      tmp = count;
+      result = array[i];
+    }
+  }
+//debugger;
+  return result;
+}
+
+console.log(mostFrequent([9,2, 2, 2, 2, 4, 5, 5, 5, 9]));
+-------------
+var arr = [10,11,12,10,11,3,10,12,14,10,11];
+arr.sort(function(a,b){
+return a-b;
+})
+var max=0,result,freq = 0;
+(function(){
+debugger;
+    for(var i=0; i < arr.length; i++){
+        if(arr[i]===arr[i+1]){
+            freq++;
+        }
+        else {
+            freq=0;
+        }
+        if(freq>max){
+            result = arr[i];
+            max = freq;
+        }
+    }
+    return result;
+}());
+_______________
+2. find second minimum value in array
+
+var points = [40, 100, 1, 5, 25, 10];
+
+points.sort(function(a,b){
+return a-b // ascending
+})
+
+/*points.sort(function(a,b){
+return b-a;
+})*/
+
+points[1];
+__________________________
+_________________________________________________________________________________
+1. approaches in html reduce http request
+   combine files(css,js), async js, image spirites
+2. new input elements
+   tel,email,url,color,range
+3. new attributes
+   autocomplete,autofocus,min,max,formmethod,palceholder
+4. flex
+   used to create flexible responsive layout struture without using float and position.
+5. traverse in jquery
+   ancestor - parent,parents,parentsUntil
+   decedants - childen,find
+   sibling - sibling,prev prevAll preUntil,next nextAll nextUntil
+6. promises
+http://exploringjs.com/es6/ch_promises.html
+Executing asynchronous functions in parallel.
+7. position
+8. display
+9. boxmodel
+10. less
+11. preventdefault,stoppropagation
+12. BIND(),CALL(),APPLY()
+-------------------------------------------------------------
+TCL:
+
+semantic and non semantic elements
+block and inline elements
+display inline and block
+inline with display block
+undefined and null
+0.1+'abc'
+'0.1'+abc
+0.1+undefined
+0.1+null
+0.1+0.1
+constructor
+prduce obj as output in constructor.
+closure
+prototype
+observable in ang
+component and directive
+pipes
+external style sheet in ang
+json file in ang
+cli
+css3 properties
+promises and observable.
+bind
+properties in angular2(component,directive)
+lifecycle hooks
+-------
+hcl:
+shadow dom
+at when we use closure
+promise and observable
+life cycle of angular2
+why angular2 is better
+how ngmodel and ngbind works.
+test http request and response.
+viewchild and contentchild
+at when we create a component and module
+how we overwrite the existing default module(app.module)
+ngif and ngfor
+acheive grid in angular2(custom filter and sorting)
+structure of component and module

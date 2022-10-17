@@ -1,0 +1,36 @@
+QA:
+
+1.  how to communicate between controllers(real time application example, why not rootscope ,what is the best way for security purpose) - https://egghead.io/lessons/angularjs-sharing-data-between-controllers#/tab-code
+2.  what is directives explain? - http://www.w3schools.com/angular/angular_directives.asp
+3.  post-link ,pre-link in directives - https://www.undefinednull.com/2014/07/07/practical-guide-to-prelink-postlink-and-controller-methods-of-angular-directives/
+4   difference between ng-if and ng-show - http://stackoverflow.com/questions/19177732/what-is-the-difference-between-ng-if-and-ng-show-ng-hide 
+5.  what is restrict in custom directive explain briefly - http://www.w3schools.com/angular/tryit.asp?filename=try_ng_directive_restrictions
+6.  why we are using different type of providers? if same work can be done by service, fractory and all then what is the reason ? 
+7.  How to made rest calls - http://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript-button-handler
+8.  Login security in angularJS
+9.  isolated scope concept (@,=,&) - https://weblogs.asp.net/dwahlin/creating-custom-angularjs-directives-part-2-isolate-scope
+10. transclude and replace in directives - http://teropa.info/blog/2015/06/09/transclusion.html
+11. two way binding and its life cycle - http://www.angularjshub.com/examples/basics/twowaydatabinding/
+12. how to render list in views(html) via angularJS --(ng-options)
+13. $compiler in angularJS - http://jsfiddle.net/arunpjohny/udmcv/
+14, types of provider in angularJS(number and explain) refer link(https://gist.github.com/demisx/9605099)
+15. routing ,difference between ng and ui routing
+16. Broadcast and emit - http://stackoverflow.com/questions/26752030/rootscope-broadcast-vs-scope-emit
+17. what is $watch explain and how it is different from ng-change ,when to use what. - https://www.sitepoint.com/understanding-angulars-apply-digest/
+18. what is DDO in directives
+19. Advantages and disavnatages of AngularJS – Single page application,Routing concept,broadcast emit
+Disadvantages – UnSecured
+20. communication in directive and controller
+21. core features of angularJS
+22. Providers are what types of class (singleton class)
+23. Difference between factory, service and providers – Factory will return as a object
+Service – Using ‘This’ we can use the methods
+24. what is the debugging tools used for angularJS
+25. How can we destroy singleton object
+26. How many types of scopes are there in directives
+27. life cycle of scope
+28 .What is protptypes? - http://www.w3schools.com/js/js_object_prototypes.asp
+29.Responsive web design Vs Adaptive web design? - https://www.uxpin.com/studio/blog/responsive-vs-adaptive-design-whats-best-choice-designers/
+---------
+ 
+ 

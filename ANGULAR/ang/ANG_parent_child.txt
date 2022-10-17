@@ -1,0 +1,66 @@
+PARENT => CHILD = Input
+CHILD => PARENT = OUTPUT
+
+
+_____________________________
+PARENT::
+
+HTML::::::
+
+<input [(ngModel)]="sharedVarParent1" name="sharedVarParent1">{{sharedVarParent1}}
+
+{{sharedVar}}
+---
+<app-child [(parentSharedVar)]="sharedVarParent1" (onChanges)="sharedVar = $event.value"></app-child>
+
+_____________________________
+TS:;;;;;;;;
+
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  //directives: [ChildComponent]
+})
+export class AppComponent {
+  sharedVarParent ='hello';
+  constructor() { console.clear(); }
+}
+
+-------------------------------------------------------------------
+
+CHILD:
+
+HTML:
+<p>
+  child works!
+  </p>
+  <input [(ngModel)]="childVars" name="childVars" (ngModelChange)="change()">{{childVars}}<br>
+  {{parentSharedVar}}
+
+
+TS:
+
+//import { Component, OnInit } from '@angular/core';
+import {Component, OnInit ,EventEmitter, Input, Output} from '@angular/core';
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnInit {
+  @Input() parentSharedVar: string;
+  @Output() onChanges = new EventEmitter();
+  childVars: string;
+    change() {
+        this.onChanges.emit({value: this.childVars});
+    }
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

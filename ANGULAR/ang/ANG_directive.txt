@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import {Directive, ElementRef,HostListener,Renderer} from '@angular/core';
+import {AppServiceService} from '../service/app-service.service';
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+
+@Directive({
+  selector: '[boldHover]',
+  /*host:{
+    '(mouseenter)':'onMouseEnter()',
+    '(mouseleave)':'onMouseLeave()'
+  }*/
+
+})
+export class HomeComponent implements OnInit {
+	text:string;
+  posts: any[];
+  errorMessage: string;
+  
+  constructor(private appservice:AppServiceService,private element:ElementRef,private renderer:Renderer) { 
+    
+  }
+
+  ngOnInit() {
+    this.text = this.appservice.someMethod();
+    //this.getPosts();
+    //this.element.nativeElement.style.color = 'blue';
+  }
+
+  getPosts() {
+    this.appservice.getPosts()
+        .subscribe(
+            (posts) =>{ this.posts = posts;
+              //console.log(this.posts);
+            //error => this.errorMessage = error
+  });
+        
+}
+
+@HostListener('mouseenter') onMouseEnter() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'bold';
+  //this.renderer.setElementStyle(this.element.nativeElement, 'font-weight', 'normal');
+}
+@HostListener('mouseleave') onMouseLeave() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'normal';
+}
+
+}

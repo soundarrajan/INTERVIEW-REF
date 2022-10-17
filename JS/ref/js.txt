@@ -1,0 +1,428 @@
+ss4-fe - au 11
+gem -oc11-ap-1-14
+ra-ma-14-nov-14
+c-ma15-16
+--
+bot
+ang
+--
+var json = $.parseJSON(j);
+$(json).each(function(i,val){
+$.each(val,function(k,v){
+console.log();
+});
+});
+
+
+$.getJSON(url,function(json){
+  $.each(json.list,function(index,value){
+    console.log(value);
+  });
+});
+
+jsonObject = JSON.parse(jsonString);
+jQuery.parseJSON( jsonString );
+--------------------------
+var string = '[{"title":"Title1"},{"title":"Title2"}]';
+var json = $.parseJSON(string);
+$(json).each(function(i,val){
+//$.each(val,function(k,v){
+console.log(i);
+//});
+});
+
+--------------------------
+$.getJSON('url', function (data) {
+            
+            // do all this on success       
+           // var items = [],
+             //   $ul;
+            
+            $.each(data, function (key, val) {
+                //iterate through the returned data and build a list
+                items.push('<li id="' + key + '"><span class="name">' + val.entityname + '</span><br><span class="addr">' + val.principaladdress1 + '</span> <span class="city">' + val.principalcity + '</span></li>');
+            });
+----------------------------------------------------------------------------
+var anyObj = {"1":"aa","2":"bb"};
+//var obj = JSON.parse(anyObj[2]);
+//console.log(typeof(anyObj));
+//console.log(typeof(anyObj[1]));
+var str = JSON.stringify(anyObj);
+var obj = JSON.parse(str);
+console.log(typeof(str));
+console.log(typeof(obj));
+/*$.getJSON(anyObj,function(json){
+  $.each(json.list,function(index,value){
+    console.log(value);
+  });
+});*/
+
+json.stringify = convert object to string
+JSON.parse = convert string to object.
+
+-----------------------------------------------------------------------------------------
+function classA(){
+    
+this.propA = "somevalue of A";
+ 
+}
+
+ 
+function classB(){
+        
+this.propB = "somevalue of B";
+ 
+}
+
+ 
+classB.prototype = new classA;
+
+var classes=new classB();
+
+
+console.log(classes.propA);
+-----------
+var anyObj = {"1":'have a confident',"2":"bb"};
+
+var json = $.parseJSON(anyObj);
+
+//$(json).each(function(i,val){
+
+$.each(anyObj,function(k,v){
+
+console.log(v);
+
+//});
+
+});
+------------------
+var items = [11,2,32,4];
+
+$.each(items, function(i,obj) {
+  console.log(obj);
+});
+console.log("--------------");
+var newItems = $.map(items, function(obj) {
+console.log(obj);
+});
+----------------------------------------------------
+
+var arr = [1,2,34];
+
+$.each(arr, function (a,obj) { 
+
+return a+1; 
+
+});
+
+RESULT: [1, 2, 34]
+
+
+iterate and returns original array.
+---------
+var arr = [1,2,34];
+
+$.map(arr, function (a,obj) { 
+
+return a+1; 
+
+});
+
+[2, 3, 35]
+
+iterate and returns new array.
+----------------
+var arr = [{"1":"a","2":"s","3":"c"},{"11":"aa","22":"ss","33":"cc"}];
+
+/*$.map(arr, function (a) {
+return a+1;
+});*/
+
+console.log(arr[0]);
+------------
+for(var k in obj) {
+   console.log(obj[k].tags[k]);
+}
+------------------
+==========================================================
+http://themarklee.com/2014/04/03/pulling-json-data-open-data-api/
+===========================================================
+cookie:
+$.cookie("test","ssss");
+$.cookie("test");
+-------
+============================================================
+preventDefault() - prevents default action
+stopPropagation() - prevents bubbling
+stopImmediatePropagation() - prevents every events
+return false; - prevent degault action and bubbling.
+
+stopImmediatePropagation() - prevent execute the event after the stopImmediatePropagation() call.
+off()- prevent all previous event.
+
+===========================================================
+function add(value1) {
+  
+function doAdd(value2) {
+    
+return value1 + value2;
+  
+};
+  
+return doAdd(1);
+
+}
+add(10);
+
+result==>11
+=============================================================
+function f1(x) {
+//function f2(x) {
+this.f2 = function(){
+  console.log(x);
+}
+//return f2(x);
+}
+var f = new f1(4);
+f.f2();
+===========================
+function showName(firstName) {
+?function makeFullName(lastName) {            
+?return firstName+lastName;        
+};
+return makeFullName(1);
+}
+?showName(2);
+----------------------------
+$('selector').on({
+    mouseenter: function() {},
+    mouseleave: function() {},
+    mousedown:  function() {},
+    mouseup:    function() {}
+});
+==============================
+$(document).on('mouseenter', 'selector1', function(){})
+           .on('mouseleave', 'selector2', function(){})
+           // this comment breaks the chain
+           .on('mousedown',  'selector3', function(){})
+           .on('mouseup',    'selector4', function(){});
+==============================
+var stringxx="sound/ar";
+
+var ss = stringxx.replace(/[^a-zA-Z ]/g, "");
+
+
+var ss = stringxx.split("").reverse().join("");
+
+console.log(ss);
+
+
+=============================
+call() and apply()
+
+call() - invoke the function with arguments as an listed(argument list).
+apply() - invoke the function with arguments as an ARRAY.
+
+function theFunction(name, profession) {
+    console.log("My name is " + name + " and I am a " + profession + ".");
+}
+theFunction("John", "fireman");
+theFunction.apply(undefined, ["Susan", "school teacher"]);
+theFunction.call(undefined, "Claude", "mathematician");
+____________________
+var say = function(greeting){
+alert(greeting + ', ' + this.name);
+};
+
+ say.call(person1, 'Hello');
+ say.call(person2, 'Goodbye');
+-----
+var person1 = {name: 'Marvin', age: 42, size: '2xM'};
+
+var update = function(name){
+
+//this.name = name;
+//this.age = age;
+//this.size = size;
+
+console.log(name);
+
+console.log(this.name);
+
+};
+
+
+update.call(person1,'Hello');
+
+//////////
+Hello
+
+Marvin-----------
+//(this) - takes the argument value from array.
+-------------------
+SELF INVOKING FUNCTION:
+
+(function() {
+     
+console.log('Hello World!');
+  
+})();
+
+!function(){}();  // => true
+~function(){}(); // => -1
++function(){}(); // => NaN
+-function(){}();  // => NaN
+-------------------
+var myObj = {
+    myVar : 1,
+    my1:2
+};
+
+
+for (var key in myObj) {
+    
+//console.log(key);
+    
+//console.log(myObj.key);
+    
+console.log(myObj[key]);
+
+}
+----------------------
+function test(){
+xx = "test";
+}
+test.prototype.test1=function(){
+console.log(xx);
+}
+var instance = new test();
+instance.test1();
+------------------
+var numbers = [1, 32, 33, 4];
+ 
+console.log(Math.max.apply(null, numbers) );
+------------------
+ function findmin(array){
+ var min = array[0];
+ debugger;
+ var a = array.length;
+ for (counter=0;counter<a;counter++){
+         if (array[counter] < min)
+         {
+           min = array[counter];
+         }
+      }
+   return min;
+   
+}
+var array = [1000,200,3];
+
+findmin(array);
+------------------
+try-catch-final: to handle run-time errors.
+
+try - block contain codes where error occur.
+catch - throw a error , related to try block.
+finally - next level of error handling
+throw - predefined error statement.
+
+try {
+    addalert("sss");
+    //console.log("Outer try running...<br/>");
+    //throw new Error(301, "an error");
+}
+catch (e) {
+    console.log (e.message);
+}
+finally {
+    console.log ("Outer finally running");
+}
+
+-----------------------------
+this & self:
+self - represent global window object.
+‘This’ keyword refers to the object from where it was called.
+________
+var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo);
+        console.log("outer func:  self.foo = " + self.foo);
+        (function() {
+            console.log("inner func:  this.foo = " + this.foo);
+            console.log("inner func:  self.foo = " + self.foo);
+        }());
+    }
+};
+myObject.func();
+==
+outer func:  this.foo = bar
+outer func:  self.foo = bar
+inner func:  this.foo = undefined
+
+inner func:  self.foo = bar
+________
+use strict:
+
+prevents certain actions from being taken and throws more exceptions.
+prevents, or throws errors, when relatively "unsafe" actions are taken
+------------------
+What are JavaScript Cookies?
+
+Cookies are the small test files stored in a computer and 
+it gets created when the user visits the websites to store information that they need. 
+Example could be User Name details and shopping cart information from the previous visits.
+==================
+(function outerFunction (outerArg) { 
+
+var outerFuncVar = 'x';    
+
+(function innerFunction (innerArg) { 
+
+        
+var innerFuncVar = "y"; 
+        
+console.log(          
+            "outerArg = " + outerArg + "\n" +
+           
+ "outerFuncVar = " + outerFuncVar + "\n" +
+            "innerArg = " + innerArg + "\n" 
++
+            "innerFuncVar = " + innerFuncVar + "\n" +
+            "globalVar = " + "globalVar");
+
+    
+}(5))
+
+}(7)) 
+----------
+function mul (x) {
+    return function (y) { 
+        return function (z) { 
+            return x * y * z; 
+        };
+    };
+}
+--------------------
+var arr = ["Goergie", "Johnson", "Agile", "Harrison", "Gaurav"];  
+  
+        $.each(arr, function(index, value) {  
+            alert('Position is : ' + index + ' And Value is : ' + value);  
+        }); 
+-----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

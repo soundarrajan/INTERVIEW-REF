@@ -1,0 +1,293 @@
+FILTER: filter() does not change the original array.
+
+array1.filter(callbackfn);  
+
+var array1 = [2,3,4,5]; 
+function callbackfn(value, index, array1){
+ return value > 3;
+}
+
+var ages = [32, 33, 16, 40];
+function checkAdult(age) {
+    return age >= 18;
+}
+function myFunction() {
+    document.getElementById("demo").innerHTML = ages.filter(checkAdult);   //32,33,40
+}
+
+-----------------
+FIND:
+method returns the value of the first element in an array that pass a test (provided as a function)
+
+var ages = [3, 10, 18, 20];
+
+function checkAdult(age) {
+    return age >= 18;
+}
+
+function myFunction() {
+    document.getElementById("demo").innerHTML = ages.find(checkAdult);  //18
+}
+----------------
+The indexOf() method returns the position of the first occurrence of a specified value 
+in a string or array.
+This method returns -1 if the value to search for never occurs.
+
+array.indexOf(item, start);
+start - optional
+
+var fruits = ["Banana", "Orange", "Apple", "Mango", "Banana", "Orange", "Apple"];
+var a = fruits.indexOf("Apple", 4);
+----------------
+SPREAD OPERATOR:(REPLACE OF APPLY)
+
+allows an expression to be expanded in places where multiple arguments are expected.
+
+
+allows an iterable such as an array expression or string to be expanded in places 
+where zero or more arguments (for function calls) or elements (for array literals) are expected, 
+or an object expression to be expanded in places where zero or more key-value pairs 
+(for object literals) are expected.
+
+var args = [0, 1, 2,3];
+
+function myFunction(x, y, z) { 
+
+console.log(z);
+
+}
+
+myFunction(...args);
+-----
+var args = [0, 1, 2];
+
+
+function myFunction(x, y, z) { 
+console.log(y);
+}
+
+myFunction.apply(null, args);
+------------
+function f(x, y, z) {  
+    return x + y + z;  
+}  
+
+var args = [1, 2, 3];  
+
+// Old method  
+f.apply(this, args);  
+// New method  
+f(...args);  
+-------------------------------------
+REST OPERATOR:
+
+function numbers(x, y, ...z){
+    console.log(x, y, z);
+}
+numbers(1, 2, 3, 4, 5, 6);
+
+
+function doMath(operator, ...numbers) {
+  console.log(operator);
+  console.log(numbers);
+}
+ 
+doMath('add', 1, 2, 3);
+--------------------------
+the spread operator can turn an array into a list of values or function parameters.
+rest operator can turn a variable number of parameters into an array.
+
+When ... is at the end of function parameters, it’s “rest parameters” and gathers the rest of the 
+list of arguments into an array.
+When ... occurs in a function call or alike, it’s called a “spread operator” and 
+expands an array into a list.
+----------------------------
+preventDefault():
+
+event.preventDefault();
+The preventDefault() method cancels the event if it is cancelable, 
+meaning that the default action that belongs to the event will not occur.
+----------------------------
+e.preventDefault() will prevent the default event from occuring, 
+e.stopPropagation() will prevent the event from bubbling up ,
+return false will do both.
+-------------------------------------------
+function() {
+  return false;
+}
+
+// IS EQUAL TO
+
+function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+-------------------------------------------------------------
+preventDefault vs. stopPropagation vs. stopImmediatePropagation
+
+preventDefault prevents the default action the browser makes on that event.
+
+stopPropagation stops the event from bubbling up the event chain and
+prevent any parent handlers from being executed.
+
+stopImmediatePropagation will prevent any parent handlers and 
+also any other handlers from executing
+--------------------------------------------------------------
+size and length: Find the length of array:
+
+var arr = [1,2,3,4];
+
+size: .size() is in Jquery and other many other lib:
+.size() simply calls .length (clearly shown this in the jQuery source code below) 
+so we are saving a function call
+$(arr).size();
+
+length: The length property sets or returns the number of elements in an array.
+arr.length;
+----------------------------------------------------------
+bind:
+
+1. set the value of "this" to an specific object.
+---
+window.color = "red"; 
+   var o = { color: "blue" }; 
+   function sayColor(){ 
+       alert(this.color); 
+   } 
+   var objectSayColor = sayColor.bind(o); 
+   objectSayColor(); //blue 
+---
+var Button = function(content) { 
+  this.content = content;
+};
+Button.prototype.click = function() {
+  console.log(this.content + ' clicked');
+};
+
+var myButton = new Button('OK');
+myButton.click();
+
+var looseClick = myButton.click;
+looseClick(); // not bound, 'this' is not myButton - it is the global object
+
+var boundClick = myButton.click.bind(myButton);
+boundClick(); // bound, 'this' is myButton
+---
+x = 9;
+var module = {
+    x: 81,
+    getX: function () {
+        return this.x;
+    }
+};
+
+module.getX(); // 81
+
+var getX = module.getX;
+getX(); // 9, because in this case, "this" refers to the global object
+
+// create a new function with 'this' bound to module
+var boundGetX = getX.bind(module);
+boundGetX(); // 81
+---
+function getMonthlyFee(fee){
+  var remaining = this.total - fee;
+  this.total = remaining;
+  return this.name +' remaining balance:'+remaining;
+}
+var rachel = {name:'Rachel Green', total:500};
+var getRachelFee = getMonthlyFee.bind(rachel, 90);
+//deduct
+getRachelFee();//Rachel Green remaining balance:410
+----
+2. Curry a Function: returns a new function with some of the arguments already set
+
+function greet (gender, age, name) {
+                // if a male, use Mr., else use Ms.?
+                var salutation = gender === "male" ? "Mr. " : "Ms. ";
+?
+                if (age > 25) {
+                    return "Hello, " + salutation + name + ".";
+                }
+                else {
+                    return "Hey, " + name + ".";
+                }
+            }
+var greetAnAdultMale = greet.bind (null, "male", 45);
+?greetAnAdultMale ("John Hartlove"); // "Hello, Mr. John Hartlove."?
+___________________________________________________________________________________
+bind vs call vs apply:
+
+Apply vs. Call vs. Bind Examples
+
+Call:
+
+var person1 = {firstName: 'Jon', lastName: 'Kuperman'};
+var person2 = {firstName: 'Kelly', lastName: 'King'};
+
+function say(greeting) {
+    console.log(greeting + ' ' + this.firstName + ' ' + this.lastName);
+}
+
+say.call(person1, 'Hello'); // Hello Jon Kuperman
+say.call(person2, 'Hello'); // Hello Kelly King
+
+Apply:
+
+var person1 = {firstName: 'Jon', lastName: 'Kuperman'};
+var person2 = {firstName: 'Kelly', lastName: 'King'};
+
+function say(greeting) {
+    console.log(greeting + ' ' + this.firstName + ' ' + this.lastName);
+}
+
+say.apply(person1, ['Hello']); // Hello Jon Kuperman
+say.apply(person2, ['Hello']); // Hello Kelly King
+
+Bind:
+
+var person1 = {firstName: 'Jon', lastName: 'Kuperman'};
+var person2 = {firstName: 'Kelly', lastName: 'King'};
+
+function say() {
+    console.log('Hello ' + this.firstName + ' ' + this.lastName);
+}
+
+var sayHelloJon = say.bind(person1);
+var sayHelloKelly = say.bind(person2);
+
+sayHelloJon(); // Hello Jon Kuperman
+sayHelloKelly(); // Hello Kelly King
+-------------------
+constructor:
+ function that is used with the new operator to produce a specialized type of object.
+
+function Color(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+}
+
+var red = new Color(255, 0, 0);
+
+Which means that the code above is roughly equivalent to:
+
+var red = {
+    r: 255,
+    g: 0,
+    b: 0
+};
+
+----------------------------------------------
+this;;;;;;;;;;;;
+____________________________________________________________________________________
+___________JQUERY___________________________________________________________________
+
+map vs each VS FILTER vs grep:
+attr() and prop()
+
+
+
+
+
+

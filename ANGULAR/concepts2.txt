@@ -1,0 +1,123 @@
+Decorators are functions that modify JavaScript classes.
+
+declarations - the view classes that belong to this module. 
+Angular has three kinds of view classes: components, directives, and pipes.
+
+exports - the subset of declarations that should be visible and usable in the component templates of other modules.
+
+imports - other modules whose exported classes are needed by component templates declared in this module.
+
+providers - creators of services that this module contributes to the global collection of services; they become accessible in all parts of the app.
+
+bootstrap - the main application view, called the root component, that hosts all other app views. Only the root module should set this bootstrap property.
+
+The template, metadata, and component together describe a view.
+-------
+
+Property binding or interpolation
+
+<p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
+<p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
+
+<app-hero-detail prefix="You are my" [hero]="currentHero"></app-hero-detail>
+
+Attribute binding:::::
+
+<tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
+
+class binding:::::
+
+<div [class.special]="isSpecial">The class binding is special</div>
+
+style binding:::
+<button [style.color]="isSpecial ? 'red': 'green'">Red</button>
+
+<button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
+<button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
+
+-----------------------------------------------
+event binding:
+
+<button (click)="onSave()">Save</button>
+-----------------------------------------------------------------------------------------------------------
+REFERENCE VARIABLE:::
+
+<input #phone placeholder="phone number">
+
+<!-- lots of other elements -->
+
+<!-- phone refers to the input element; pass its `value` to an event handler -->
+<button (click)="callPhone(phone.value)">Call</button>
+-----------------------------------------
+Declaring Input and Output properties:::: communication between components
+
+@Input is used to define an input property to achieve component property binding. 
+@Output is used to define output property to achieve custom event binding.
+
+Input properties usually receive data values. 
+Output properties expose event producers, such as EventEmitter objects.
+
+The terms input and output reflect the perspective of the target directive.
+
+__________________________________________________________________________________________________________________________________________________
+
+
+Event binding:
+
+<button (click)="onClickMe()">Click me!</button>
+
+
+>>>>GET USER INPUT>>>
+1. template: `
+  <input (keyup)="onKey($event)">
+  <p>{{values}}</p>
+`
+
+export class KeyUpComponent_v1 {
+  values = '';
+
+  onKey(event: any) { // without type info
+    this.values += event.target.value + ' | ';
+  }
+}
+
+2. Get user input from a template reference variable
+
+@Component({
+  selector: 'app-loop-back',
+  template: `
+    <input #box (keyup)="0">
+    <p>{{box.value}}</p>
+  `
+})
+export class LoopbackComponent { }
+
+______
+
+@Component({
+  selector: 'app-key-up2',
+  template: `
+    <input #box (keyup)="onKey(box.value)">
+    <p>{{values}}</p>
+  `
+})
+export class KeyUpComponent_v2 {
+  values = '';
+  onKey(value: string) {
+    this.values += value + ' | ';
+  }
+}
+__________________________________________________________________________________________________________________________________________________
+Using ngModel in a form gives you more than just two-way data binding. 
+It also tells you if the user touched the control, if the value changed, or if the value became invalid.
+
+The control has been visited.	ng-touched	ng-untouched
+The control's value has changed.	ng-dirty	ng-pristine
+The control's value is valid.	ng-valid	ng-invalid
+
+<input type="text" class="form-control" id="name"
+  required
+  [(ngModel)]="model.name" name="name"
+  #spy>
+<br>TODO: remove this: {{spy.className}}
+____________________________________________

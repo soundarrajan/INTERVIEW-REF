@@ -1,0 +1,299 @@
+JQUERY:::
+
+parents and closest()
+no conflict.
+bubbling
+delegate, bind
+bind and live and on
+trigger()
+method chaining
+inArray:Search for a specified value within an array and return its index (or -1 if not found).
+jQuery.inArray("test", myarray) !== -1
+-----
+Instance Methods
+
+BIND(),CALL(),APPLY()
+
+---------------------
+attr() and prop()
+
+<input id="demo" type="text" value="soundar" />
+VALUE CHANGED AS: <input id="demo" type="text" value="rajan" />
+
+$("#demo").attr("value");   // returns soundar
+$("#demo").prop("value");   // returns rajan
+
+for a checkbox (jquery 1.6+)
+<input id="check1" checked="checked" type="checkbox" />
+.attr('checked') //returns  checked
+.prop('checked') //returns  true
+.is(':checked') //returns true
+
+Attributes carry additional information about an HTML element and come in name=”value” pairs. 
+Property is a representation of an attribute in the HTML DOM tree.
+
+The Prop() method returns a Boolean value for checked, selected, disabled, readOnly and 
+so on while attr returns a defined string. 
+______________________
+disable a field:
+<input type="txt" id="xxx">
+$('#txt').prop('disabled',true)
+______________________
+
+remove() and empty()
+•	empty() will remove all the contents of the selection.
+•	remove() will remove the selection and its contents.
+Consider:
+<div>
+    <p><strong>foo</strong></p>
+</div>
+
+$('p').empty();  // --> "<div><p></p></div>"
+
+// whereas,
+$('p').remove(); // --> "<div></div>"
+-------------
+AJAX methods
+$.get()
+$.getJSON()
+$.ajax()
+-------------
+$.each,grep
+$.parseJSON,$.getJSON,JSON.parse,$.map
+json.stringify = convert object to string
+JSON.parse = convert string to object.
+------------
+DOM manipulation methods you have used in Jquery
+.addClass()
+.after()
+.append()
+.before()
+.remove()
+________________________________________________________________________________________________________________
+parents and closest();
+
+parent(); returns the direct parent element of the selected element.
+traverses to the immediate parent of each of these elements in the DOM tree
+similar to .parents(), except .parent() only travels a single level up the DOM tree
+
+closest(): 
+Begins with the current element
+Travels up the DOM tree until it finds a match for the supplied selector
+The returned jQuery object contains zero or one element.
+
+<ul>
+  <li><b>Click me!</b></li>
+  <li>You can also <b>Click me!</b></li>
+</ul>
+
+$( event.target ).closest( "li" ).toggleClass( "highlight" );// selects click me <li>
+$(this).closest('li');
+$(this).parents('div').eq(0);
+
+parents();
+Begins with the parent element
+Travels up the DOM tree to the document's root element
+The returned jQuery object contains zero, one, or multiple elements
+
+
+parentsUntil():
+$("span").parentsUntil("div"); 
+method returns all ancestor elements between the selector and stop.
+---------
+no conflict();
+
+noConflict() method releases the hold on the $ shortcut identifier, so that other scripts can use it.
+$.noConflict();
+jQuery(document).ready(function(){
+    jQuery("button").click(function(){
+        jQuery("p").text("jQuery is still working!");
+    });
+});
+
+var jq = $.noConflict();
+jq(document).ready(function(){
+    jq("button").click(function(){
+        jq("p").text("jQuery is still working!");
+    });
+});
+--------
+delegate(); - deprecated in version 3.0. Use the on() method instead.
+
+Events for child elements.
+$( "table" ).delegate( "td", "click", function() {
+  $( this ).toggleClass( "chosen" );
+});
+
+bind(); 
+The bind() method was deprecated in version 3.0. Use the on() method instead.
+$( "#foo" ).bind( "click", function() {
+  alert( message );
+});
+
+live():
+The live() method was deprecated in jQuery version 1.7, and removed in version 1.9. Use the on() method instead.
+live() method will work for both current and FUTURE elements matching the selector (like a new element created by a script).
+$("button").live("click", function(){
+    $("p").slideToggle();
+});
+
+on():
+ attaches one or more event handlers for the selected elements and child elements.
+ on() method will work for both current and FUTURE elements
+ 
+ $( "#dataTable tbody" ).on( "click", "tr", function() {
+  console.log( $( this ).text() );
+});
+--
+function greet( event ) {
+  alert( "Hello " + event.data.name );
+}
+$( "button" ).on( "click", {
+  name: "Karl"
+}, greet );
+--
+Use the the second argument of .trigger() to pass an array of data to the event handler
+
+$( "div" ).on( "click", function( event, salutation, name ) {
+  alert( salutation + ", " + name );
+});
+$( "div" ).trigger( "click", [ "Goodbye", "Jim" ] );
+---
+trigger(): events call automatically without manual event
+trigger() method triggers the specified event and the default behavior of an event 
+$("input").trigger("select");
+-------
+METHOD CHAINING:
+Chaining allows us to run multiple jQuery methods (on the same element) within a single statement.
+
+$("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+
+var obj = {   // every method returns obj---------v
+    first: function() { alert('first');   return obj; },
+    second: function() { alert('second'); return obj; },
+    third: function() { alert('third');   return obj; }
+}
+
+obj.first().second().third();
+----
+inArray();
+ returns the index of the object supplied as the first argument to the function in the array supplied as the second argument to the function.
+jQuery.inArray("test", myarray)
+---
+---
+---
+attr() and prop():
+
+.attr() changes attributes for that HTML tag.
+Attributes carry additional information about an HTML element and come in name=”value” pairs
+
+.prop() changes properties for that HTML tag as per the DOM tree.
+Property is a representation of an attribute in the HTML DOM tree. once the browser parse your HTML code ,
+corresponding DOM node will be created
+
+<input type="text" value="test" id="test"/>
+$('#test').attr('value');
+$('#test').prop('value');
+
+.attr() - default value set up for an HTML tag's attribute.
+.prop() - get the newest value, If that value can be changed by the user,
+
+.attr('checked'); //returns  checked (STRING)
+.prop('checked'); //returns  true (BOOLEAN)
+--------------
+$.get():
+$.get() method loads data from the server using a HTTP GET request.
+
+$.get("test.php", function(data){
+alert(data);
+});
+
+var jqxhr = $.get( "example.php", function() {
+  alert( "success" );
+})
+  .done(function() {
+    alert( "second success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "finished" );
+  });
+  
+--
+$.getJSON():
+used to get JSON data using an AJAX HTTP GET request.
+
+$.getJSON( "ajax/test.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val + "</li>" );
+  });
+ 
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+  }).appendTo( "body" );
+});
+---
+$.ajax():
+Perform an asynchronous HTTP (Ajax) request.
+
+$.ajax({
+  dataType: "json",
+  url: url,
+  data: data,
+  success: success
+});
+--
+$.ajax({
+  method: "POST",
+  url: "some.php",
+  data: { name: "John", location: "Boston" }
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });
+--
+ $.each: 
+  Iterate over a jQuery object, executing a function for each matched element.
+  
+  $.each( obj, function( key, value ) {
+  alert( key + ": " + value );
+});
+-----
+$.grep();
+Finds the elements of an array which satisfy a filter function. The original array is not affected.
+
+$.grep( [ 0, 1, 2 ], function( value, index ) {
+    return n > 0;
+}, true );
+
+var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+arr1 = jQuery.grep(arr, function( n, i ) {
+  return ( n !== 5 && i > 4 );
+});
+---
+$.map();
+$.map to apply a function to each item in the array and returns a new array.
+
+var items = ['A','B','C','A'];    
+var items = $.map(items, function(item) {
+  if (item == 'A') 
+    return 'A'+'B';
+  return item;
+});
+output will be ['AB', 'B', 'C', 'AB']
+
+$.grep is used for filtering
+var items = $.grep(items, function(item) {
+      return item != 'A';
+    });
+items is now ['B','C']
+______________________
+
+JSON.stringify turns a Javascript object into JSON text and stores that JSON text in a string.
+
+JSON.parse turns a string of JSON text into a Javascript object.
+______________________

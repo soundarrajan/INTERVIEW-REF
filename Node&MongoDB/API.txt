@@ -1,0 +1,30 @@
+API:
+REst API:
+It has some standard rules to transfer data.
+
+Uniform interface
+client-server
+stateless
+cacheable
+layered system
+code on demand(optional)
+---------------------------
+Request methods:
+
+app.get('/',(req,res)=>{
+console.log(req.query);
+})
+
+localhost:3000/?name=soundar&age=30
+
+2. req.body
+3.req.header
+4. req.params
+
+app.get('/:id',(req,res)=>{
+console.log(req.query);
+})
+
+localhost:3000/1234
+
+{id: 1234}

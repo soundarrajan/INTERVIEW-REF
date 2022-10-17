@@ -1,0 +1,61 @@
+Check checkbox is check or not
+Pass and Set a value in dropdown value.
+extract value from text box on button click
+extract value ‘data-id’ attribute
+--------
+checkbox check or not
+
+if($('#cc').is(":checked")){
+
+console.log('yes');
+
+}else{
+
+console.log('no');
+}
+__
+if($('#cc').prop("checked")){
+
+console.log('yes');
+
+}else{
+
+console.log('no');
+}
+
+-----------------------------
+Pass and Set dropdown value:
+
+function drop(x){
+
+$('#drop').val(x);
+
+}
+
+drop('c');
+_______________________
+extract value from text box on button click and pass to next page:
+
+<input type="text" id="xx">
+<button id="yy">submit</button>
+$('#yy').on('click',function(){
+//alert('sss');
+var thiss = $(this).prev();
+var value = thiss.val();
+//alert(value);
+localStorage.setItem("storageName",value);
+});
+_______________________
+page redirect:
+
+window.location.replace("http://stackoverflow.com");
+window.location.href = "http://stackoverflow.com";
+$(location).attr('href', 'http://www.sitefinity.com');
+______________________
+extrtact value from data-id attribute:
+
+<input id="demo" type="text" value="soundar" data-id="values" data-id-name="values"/>
+1. $('#demo').attr('data-id');
+2. $('#demo').data('id');
+3. $('#demo').data('idName');
+______________________

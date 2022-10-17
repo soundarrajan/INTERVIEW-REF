@@ -1,0 +1,420 @@
+cog - 4039179166
+renault - 8069400298
+vir
+mind
+tata
+tech
+htc
+-------------tcl
+semantic and non semantic elements
+block and inline elements
+display inline and block
+inline with display block
+undefined and null
+0.1+'abc'
+'0.1'+abc
+0.1+undefined
+0.1+null
+0.1+0.1
+constructor
+prduce obj as output in constructor.
+closure
+prototype
+observable in ang
+component and directive
+pipes
+external style sheet in ang
+json file in ang
+cli
+css3 properties
+promises and observable.
+bind
+properties in angular2(component,directive)
+lifecycle hooks
+____________________________________________________________________________________________________________
+--------olem
+authentication using js
+security in local storage
+get json value
+-----------------hc
+https://www.safaribooksonline.com/library/view/modern-javascript/9781491971420/ch05.html
+shadow dom:::
+Shadow DOM refers to the ability of the browser to include a subtree of DOM elements into the rendering of a document, 
+but not into the main document DOM tree.
+solve the encapsulation issue in the DOM tree.
+develop custom widgets and components that can be reused .
+allows you to create widgets without being concerned that of any of the assets will impact the parent page, or vice versa. 
+Previously this level of encapsulation was only achievable by using an <iframe>.
+
+var template = document.querySelector('#template')
+var root = document.querySelector('#host').createShadowRoot();
+root.appendChild(template.content);
+----
+at when we use closure::::
+at asynchronous actions
+Closures are used all the time with callback functions.
+
+Closures are frequently used in JavaScript for object data privacy, in event handlers and callback functions, 
+and in partial applications, currying, and other functional programming patterns.
+
+The inner function will have access to the variables in the outer function scope, even after the outer function has returned.
+----
+promise and observable:
+promise:
+	returns a single value
+	not cancellable
+	more readable code with try/catch and async/await
+observable
+	works with multiple values over time
+	cancellable
+	supports map, filter, reduce and similar operators
+----
+life cycle of angular2:::
+
+ngOnChanges - called when an input binding value changes
+ngOnInit - after the first ngOnChanges
+ngDoCheck - after every run of change detection
+ngAfterContentInit - after component content initialized
+ngAfterContentChecked - after every check of component content
+ngAfterViewInit - after component's view(s) are initialized
+ngAfterViewChecked - after every check of a component's view(s)
+ngOnDestroy - just before the component is destroyed
+-----
+why angular2 is better:::
+Angular1:
+	Controller based UI.
+	architecture of Angular v1 is based on MVC
+Angular2:
+	component based UI:helps a developer to divide the applications in terms of components
+	improve the flexibility and reusability.
+	architecture of Angular v2 is based on service/controller.
+	SEO Friendly
+-----
+how ngmodel and ngbind works internally:::
+interpolation - {{}}
+one way binding (unidirectional) - <h1 [innerText]="employee.name"></h1>
+two-way binding  - <input [(ngModel)]="employee.name"/>
+event binding
+
+ Angular Change Detection works by checking if the value of template expressions have changed. 
+ This is done for all components.
+ 
+ {{ expression }} - render the bound value from component's template and it converts this expression into a string.
+  converts the expression results to strings, and links them with neighboring literal strings.
+-----
+test http request and response.
+-----
+viewchild and contentchild
+Viewchild - Any component, directive, or element which is part of a template is ViewChild and 
+Contentchild - any component or element which is projected in the template is ContentChild.
+
+Any directive, component, and element which is part of component template is accessed as ViewChild.
+Whereas, any element or component which is projected inside <ng-content> is accessed as ContentChild.
+-----
+at when we create a component and module
+module - module is a mechanism to group components, directives, pipes and services.
+-----
+how we overwrite the existing default module(app.module)
+>>>in main.ts
+-----
+ngif and ngfor
+ngif - conditional rendering(conditionally adds or removes content from the DOM)
+ngfor - iterates over collection of data.
+-----
+achieve grid in angular2(custom filter and sorting)
+-----
+structure of component and module
+security issue in angular2
+forchild and forroot
+bootstraping
+____________________________________________________________________________________________________________
+freshworks:
+
+json = [{"category":"test1","type":"test1-type","price":"test1-price","title":"test1-title","description":"test1-description"},
+		{"category":"test2","type":"test2-type","price":"test2-price","title":"test2-title","description":"test2-description"},
+		{"category":"test3","type":"test3-type","price":"test3-price","title":"test3-title","description":"test3-description"},
+		{"category":"test4","type":"test4-type","price":"test4-price","title":"test4-title","description":"test4-description"},
+		{"category":"test5","type":"test5-type","price":"test5-price","title":"test5-title","description":"test5-description"}]
+		
+dropdown: create a dropdown filter by category,type,price from json
+results: show results(title,description) based on filter input.
+
+html:
+<select id= "category">
+<option>category</option>
+</select>
+<select id= "type">
+<option>type</option>
+</select>
+<select id= "price">
+<option>price</option>
+</select>
+<div class="title">
+</div>
+<div class="description"></div>
+</div>
+
+js;;;
+var json = [{"category":"test1","type":"test1-type","price":"test1-price","title":"test1-title","description":"test1-description"},
+		{"category":"test2","type":"test2-type","price":"test2-price","title":"test2-title","description":"test2-description"},
+		{"category":"test3","type":"test3-type","price":"test3-price","title":"test3-title","description":"test3-description"},
+		{"category":"test4","type":"test4-type","price":"test4-price","title":"test4-title","description":"test4-description"},
+		{"category":"test1","type":"test5-type","price":"test5-price","title":"test5-title","description":"test5-description"}];
+
+$(document).ready(function(){
+/*$.getJSON(json,function(data){
+console.log(data);
+})*/
+/*$.each(json,function(key,value){
+var option = $('<option/>').text(value.category).val(value.category);
+$('#category').append(option);
+});*/
+
+for(var i=0;i<json.length;i++){
+var option = $('<option/>').text(json[i].category).val(json[i].category);
+$('#category').append(option);
+
+
+var optiontype = $('<option/>').text(json[i].type).val(json[i].type);
+$('#type').append(optiontype);
+
+
+var optionprice = $('<option/>').text(json[i].price).val(json[i].price);
+$('#price').append(optionprice);
+}
+
+
+});
+
+$('#category').on('change',function(){
+
+var selectVal = $('#category option:selected').val();
+//alert(selectVal);
+//$.each(json,function(key,value){
+//if(value.category == selectVal){
+//$('.title , .description').empty();
+//$('.title').append(value.title);
+//$('.description').append(value.description);
+$('.title , .description').empty();
+$.map(json, function (el, i) {
+if(el.category == selectVal){
+
+        $('.title').append(el.title + '<br>' +el.description+'<br>');
+        //$('.description').append(el.description);
+        }
+});
+//}
+//});
+});
+
+
+/*for(var i=0;i<json.length;i++){
+var x = document.createElement("OPTION");
+    x.setAttribute("value", json[i].category);
+    //x.innerText(json[i].category);
+    var t = document.createTextNode(json[i].category);
+   x.appendChild(t);
+document.getElementById("category").appendChild(x);
+
+}*/
+------------
+var json = [{"category":"test1","type":"test1-type","price":"test1-price","title":"test1-title","description":"test1-description"},
+		{"category":"test2","type":"test2-type","price":"test2-price","title":"test2-title","description":"test2-description"},
+		{"category":"test1","type":"test3-type","price":"test3-price","title":"test3-title","description":"test3-description"},
+		{"category":"test4","type":"test4-type","price":"test4-price","title":"test4-title","description":"test4-description"},
+		{"category":"test1","type":"test5-type","price":"test5-price","title":"test5-title","description":"test5-description"}];
+
+$(document).ready(function(){
+/*$.getJSON(json,function(data){
+console.log(data);
+})*/
+/*$.each(json,function(key,value){
+var option = $('<option/>').text(value.category).val(value.category);
+$('#category').append(option);
+});*/
+
+var tmp = [];
+    for(var i = 0; i < json.length; i++){
+        if(tmp.indexOf(json[i].category) == -1){
+        tmp.push(json[i].category);
+        }
+    }
+    //return tmp;
+
+for(var i=0;i<json.length;i++){
+var option = $('<option/>').text(tmp[i]).val(tmp[i]);
+$('#category').append(option);
+
+
+var optiontype = $('<option/>').text(json[i].type).val(json[i].type);
+$('#type').append(optiontype);
+
+
+var optionprice = $('<option/>').text(json[i].price).val(json[i].price);
+$('#price').append(optionprice);
+}
+
+
+});
+
+$('#category').on('change',function(){
+selectVal = $('#category option:selected').val();
+
+//var selectType = $('#type option:selected').val();
+//alert(selectVal);
+//$.each(json,function(key,value){
+//if(value.category == selectVal){
+//$('.title , .description').empty();
+//$('.title').append(value.title);
+//$('.description').append(value.description);
+$('.title , .description').empty();
+$.map(json, function (el, i) {
+if(el.category == selectVal){
+
+        $('.title').append(el.title + '<br>' +el.description+'<br>');
+        //$('.description').append(el.description);
+        }
+});
+//}
+//});
+});
+
+$('#type').on('change',function(){
+var selectType = $('#type option:selected').val();
+
+$('.title , .description').empty();
+$.map(json, function (el, i) {
+if(el.category == selectVal && el.type == selectType){
+
+        $('.title').append(el.title + '<br>' +el.description+'<br>');
+        //$('.description').append(el.description);
+        }
+});
+});
+
+
+
+
+
+/*for(var i=0;i<json.length;i++){
+var x = document.createElement("OPTION");
+    x.setAttribute("value", json[i].category);
+    //x.innerText(json[i].category);
+    var t = document.createTextNode(json[i].category);
+   x.appendChild(t);
+document.getElementById("category").appendChild(x);
+
+}*/
+ 
+ -------------------------
+ ____________________________________________________________________________________________________________
+ ASPIRE:
+ 1. approaches in html reduce http request
+   combine files(css,js), async js, image spirites
+2. new input elements
+   tel,email,url,color,range
+3. new attributes
+   autocomplete,autofocus,min,max,formmethod,palceholder
+4. flex
+   used to create flexible responsive layout struture without using float and position.
+5. traverse in jquery
+   ancestor - parent,parents,parentsUntil
+   decedants - childen,find
+   sibling - sibling,prev prevAll preUntil,next nextAll nextUntil
+6. promises
+	http://exploringjs.com/es6/ch_promises.html
+	Executing asynchronous functions in parallel.
+7. position
+8. display
+9. boxmodel
+10. less
+11. preventdefault,stoppropagation
+12. BIND(),CALL(),APPLY()
+--------------------------
+6. promises
+	http://exploringjs.com/es6/ch_promises.html
+	Executing asynchronous functions in parallel.
+____________________________________________________________________________________________________________
+-----aspire--
+Ngmodel ngclass (when use both)
+Scope level variable - let,const{block scoped}
+-----
+Const and static level variable
+global variable: BY dependency injection - SERVICES(INJECTABLE)
+-----
+Directives
+-----
+Y typescript:::
+
+Class and Module Support
+Static Type-checking
+ES6 Feature Support
+Clear Library API Definition
+Build-in Support for JavaScript Packaging
+Syntax Similarity to Our Backend Languages (Java, Scala)
+Superset of JavaScript
+
+Js in ang
+Backend response and request
+Decorator
+@ in component without
+Js in ang1
+Like ngmodel
+Error handle
+Observable
+interface
+NgModule
+base href dynamically
+---------------------
+template drive and reactive forms
+----
+2.structural directive
+ngif - conditional rendering
+ngfor - repeater directive.
+----
+custom directive
+dynamically use one components to another
+url redirect to home
+lifecyclehooks - order
+observables and promise
+-----------------------------------------------
+
+call and bind
+__________
+1. use one prop and method in one object in another.
+var firstObject = {
+    says: "something",
+    saysToo: "other"
+}
+var secondObject = {
+    speak: function() {
+        console.log(this.saysToo);
+    },
+    saysToo: firstObject.says
+}
+secondObject.speak(); //shows: "something"
+secondObject.speak.call(firstObject); //shows: "other"
+__________
+var and let
+typescript and es6/
+-----------------------------------------------
+new form elements
+web storage
+appcache
+video tag in multiple videos
+
+css2 and css3
+primitive datatypes
+
+main.ts
+ngmodule
+basic modules
+ang 2 and 4.
+ngif and ngshow
+ngif with else
+@ in decorator
+decorator is to store metadata about a class, method or property as we’ve already explored
+why angular and 2
+
+
+
