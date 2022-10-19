@@ -114,7 +114,7 @@ app.get('/',(req,res) =>{
 });
 
 ---
-To include the relative files images, css:
+To include the relative files images, css::
 
 public/images
 public/css

@@ -14,7 +14,7 @@ path
 parameters
 auth
 ----------------
-Request methods:
+Request methods::
 
 app.get('/',(req,res)=>{
 console.log(req.query);
