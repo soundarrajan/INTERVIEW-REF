@@ -114,4 +114,10 @@ app.get('/',(req,res) =>{
 });
 
 ---
-app.use(express,static(__dirname + '/public'))
+To include the relative files images, css:
+
+public/images
+public/css
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'))

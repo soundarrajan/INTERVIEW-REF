@@ -9,6 +9,11 @@ cacheable
 layered system
 code on demand(optional)
 ---------------------------
+Endpoints,
+path
+parameters
+auth
+----------------
 Request methods:
 
 app.get('/',(req,res)=>{
@@ -22,7 +27,7 @@ localhost:3000/?name=soundar&age=30
 4. req.params
 
 app.get('/:id',(req,res)=>{
-console.log(req.query);
+console.log(req.params);
 })
 
 localhost:3000/1234
