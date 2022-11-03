@@ -1,0 +1,38 @@
+mongo db install:
+
+community server download and install.
+add path to env variables.
+add data/db folder in c.
+
+download and install mongodb shell to run mongo commands:
+extract and place near mongodb folder.
+add bin path in env variables.
+
+restart the system.
+
+mongod - to start server.
+type: mongosh - to start commands
+--------------------
+show dbs
+
+use newdbname - create new db.
+db - to find current db name
+--
+insert a value:
+db.collectionname.insertOne({name:"test"})
+db.collectionname.insertMany([{name:"test"}])
+
+to find value in collection:
+db.collection.find()
+
+update:
+db.restaurant.updateOne(
+      { "name" : "Central Perk Cafe" },
+      { $set: { "violations" : 3 } }
+
+
+------------------------
+
+NODE WITH MONGODB:
+
+npm i mongodb
