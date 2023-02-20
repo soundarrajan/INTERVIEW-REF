@@ -1,0 +1,19 @@
+DATA BINDING:
+Data binding automatically keeps your page up-to-date based on your application's state.
+Data binding in AngularJS is the synchronization between the model and the view. 
+When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated as well.
+
+attributes and properties:
+html attributes, dom properties:
+
+1. The HTML attribute value specifies the initial value; the DOM value property is the current value.
+
+<button disabled="false">Still Disabled</button>.
+<input [disabled]="condition ? true : false">
+
+------
+TYPES OF DATA BINDING:
+
+From source to view  - INTERPOLATION - {{expression}} [target]="expression"
+From view to source - EVENT - (target)="statement"
+In a two-way sequence of view to source to view - [(target)]="expression"
