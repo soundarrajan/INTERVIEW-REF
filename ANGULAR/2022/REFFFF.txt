@@ -1,4 +1,6 @@
 DATA BINDING:
+ to manipulate Web page elements using a Web browser.
+
 Data binding automatically keeps your page up-to-date based on your application's state.
 Data binding in AngularJS is the synchronization between the model and the view. 
 When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated as well.
@@ -17,3 +19,20 @@ TYPES OF DATA BINDING:
 From source to view  - INTERPOLATION - {{expression}} [target]="expression"
 From view to source - EVENT - (target)="statement"
 In a two-way sequence of view to source to view - [(target)]="expression"
+--------
+Typescript:
+Optional static typing::
+javascript: dynamically typed language which means that the types are checked, 
+and datatype errors are spotted only at the runtime.
+TS: TypeScript introduces optional strong static typing: Once declared, a variable doesn’t change 
+its type and can take only certain values. The compiler alerts developers to type-related mistakes, 
+so they have no opportunity to hit the production phase.
+Rich IDE support::
+Fast refactoring::
+TypeScript supports concepts from class-based object-oriented programming (OOP):
+----
+Directives:
+add new behavior to the elements in the template or modify existing behavior.
+Component Directive
+Structural Directive - *ngIf ngfor
+Attribute directive -  ngStyle( applying styles) or ngClass(applying CSS classes).
