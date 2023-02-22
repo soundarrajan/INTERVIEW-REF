@@ -3,7 +3,8 @@ DATA BINDING:
 
 Data binding automatically keeps your page up-to-date based on your application's state.
 Data binding in AngularJS is the synchronization between the model and the view. 
-When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated as well.
+When data in the model changes, the view reflects the change, and when data in the view changes, 
+the model is updated as well.
 
 attributes and properties:
 html attributes, dom properties:
@@ -36,3 +37,49 @@ add new behavior to the elements in the template or modify existing behavior.
 Component Directive
 Structural Directive - *ngIf ngfor
 Attribute directive -  ngStyle( applying styles) or ngClass(applying CSS classes).
+-------
+Decorator:
+
+Angular decorators is to store metadata about a class, method, or property. 
+When you configure a component, you are providing a metadata for that class that tells 
+Angular that you have a component, and that component has a specific configuration.
+
+Class Decorators - @component
+Property Decorators - @input, @output
+Method Decorators - @hostlistner
+Parameter Decorators - @inject
+-----------
+changedetectionstategy , https://web.dev/faster-angular-change-detection/
+https://angular-training-guide.rangle.io/change-detection/enforcing_immutability
+
+when make changes in parent, it traverse and update dom in child component level.
+so low performance.
+
+changedetectionstategy.onpush:
+it remove the changedetection event to all child level component.
+changedetectionstategy.push in child remove change detection when parent changed.
+but changes in child not worked.
+to activate , use changedetectionref and markforcheck
+
+and also changes in input property from parent not changed in child , if use changedetectionstategy.onpush
+for example pass an object as input and change a poperty on click in parent, not changed in child.
+bcoz, refrence not changed , only property changed.
+to solve:
+test ={name:'ss'}
+
+clich(){
+    const c = {...this.course};
+    c.name='sss';
+    this.test = c;
+}
+
+or use observable(with changedetectorref and markforcheck or async)
+
+https://github.com/ayyanarjayabalan/changedetectionstrategy
+------------------------------
+pure and impure pipes
+-----------
+push vs concat
+
+push change the array not refrence
+concat create new array with merge two array
