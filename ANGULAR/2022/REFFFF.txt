@@ -83,3 +83,15 @@ push vs concat
 
 push change the array not refrence
 concat create new array with merge two array
+--------------
+view encapsulation:
+View encapsulation defines whether the template and styles defined within the component 
+can affect the whole application or vice versa.
+-----------
+Modules:
+
+defines a workflow ,organize an application
+contains components, export, import , service providers.
+lazy load a module
+@NgModule takes a metadata object that describes how to compile a component's 
+template and how to create an injector at runtime.
