@@ -77,8 +77,137 @@ or use observable(with changedetectorref and markforcheck or async)
 
 https://github.com/ayyanarjayabalan/changedetectionstrategy
 ------------------------------
-pure and impure pipes
+Pipes:
+Pipes are simple functions designed to accept an input value, process, and return as an output,
+
+pure pipes:
+execute when it detects a pure change in the input value(change in primitive value or object reference)
+
+impure-pipe works for every change in the component
+pure-pipe works only when the component is loaded.
+
+------------------
+change detectiontechniques:
+
+1) impure pipe: chance to performance issues.
+in add and filter function in list:
+
+2) get:
+Getters are special functions that will update their values whenever they're called. It's very simple to use.
+
+get todos() { return this.todoService.getAll(); }
+*ngFor="let todo of todos"
+
+  get uncompletedTodos() { 
+    return this.todoService.GetUncompleted();
+  }
+
+  https://stackblitz.com/edit/angular-uttpfg?file=src%2Fapp%2Ffooter%2Ffooter.component.ts
+
+
+  3) RxJS.
+  This is an event solution : when your list is getting updated, you have to trigger an event. 
+
+service:::
+private rowSelected = new BehaviorSubject<any>(false);
+isRowSelected = this.rowSelected.asObservable();
+ updateRowSelected(c) {
+        this.rowSelected.next(c);
+    }
+
+    to update:::
+    this.localService.updateRowSelected(false);
+
+    to get value:::
+      this.localService.isRowSelected.subscribe(data => {
+        this.rowSelected = data;
+      });
+
+      ________________________________
+  // Create a subject : this will allow you to propagate an update event.
+  // Private because you will only use it in your service. 
+ .......       private todoListChange = new Subject();
+  // From the subject, create an observable that will be observed by your components. 
+  // When you write todoListChange.next(), the observable will emit a new event. 
+  // This new event can be catched with a subscription, as you can see in the components. 
+   ......     public todoListChanged$ = this.todoListChange.asObservable();
+.........
+
+        this.todoListChange.next(); // should call, at where the update events happens.this update subscription.
+..........
+constructor(private todoService: TodoService) {
+    //Get all todos
+    //this.setTodos();
+    // Everytime the list changes, update the list
+    this.todoService.todoListChanged$.subscribe(() => this.setTodos());
+  }
+
+   setTodos() {
+    this.todos = this.todoService.GetAll();
+  }
+
+..........................
+
+4)  set..........
+
+  @Input()
+  set size(val: number) {
+    this._size = val;
+    this.pages = this.calcPages();
+  }
+
+  get size(): number {
+    return this._size;
+  }
+------
+  private _a: any;
+
+    set a(value: any){
+        this._a = value;
+
+        // Let the world know, I have changed
+        this.someMethod();
+    }
+
+    someMethod() {
+        // Possibly a POST API call
+    }
+
+    ---------------------
+5) ng on changes:
+
+ngOnChanges(changes: SimpleChanges) {
+  for (const propName in changes) {
+    if (changes.hasOwnProperty(propName)) {
+      switch (propName) {
+        case 'myFirstInputParameter': {
+          this.doSomething(change.currentValue)
+        }
+      }
+    }
+  }
+}
+
+replace:::
+
+@Input()
+set myFirstInputParameter(val) {
+  this.doSomething(val)
+}
+----------
+private _currencyValue;
+private currencyConversion = 75.6
+
+@Input()
+set currencyValue(val) {
+  this._currencyValue = val * this.currencyConversion
+}
+get currencyValue(val) {
+  return this._currencyValue
+}
 -----------
+https://andrew-morozw.medium.com/using-getters-and-setters-in-typescript-and-angular-d478829461c8
+--------------------------------------------------------------------------------------------
 push vs concat
 
 push change the array not refrence
@@ -95,3 +224,4 @@ contains components, export, import , service providers.
 lazy load a module
 @NgModule takes a metadata object that describes how to compile a component's 
 template and how to create an injector at runtime.
+-----------
