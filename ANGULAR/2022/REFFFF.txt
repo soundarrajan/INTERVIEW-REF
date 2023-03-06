@@ -20,6 +20,11 @@ TYPES OF DATA BINDING:
 From source to view  - INTERPOLATION - {{expression}} [target]="expression"
 From view to source - EVENT - (target)="statement"
 In a two-way sequence of view to source to view - [(target)]="expression"
+
+two types of data binding:
+Event binding	Lets your application respond to user input in the target environment by updating your 
+application data.
+Property binding	Lets you interpolate values that are computed from your application data into the HTML.
 --------
 Typescript:
 Optional static typing::
@@ -43,6 +48,10 @@ Decorator:
 Angular decorators is to store metadata about a class, method, or property. 
 When you configure a component, you are providing a metadata for that class that tells 
 Angular that you have a component, and that component has a specific configuration.
+
+Decorators are functions that modify JavaScript classes. Angular defines a number of decorators that 
+attach specific kinds of metadata to classes, so that the system knows what those classes mean and 
+how they should work.
 
 Class Decorators - @component
 Property Decorators - @input, @output
@@ -230,3 +239,80 @@ lazy load a module
 @NgModule takes a metadata object that describes how to compile a component's 
 template and how to create an injector at runtime.
 -----------
+Life cycle hooks :
+
+every component has a lifecycle. 
+Angular creates and renders these components and also destroys them before removing them from the DOM. 
+This is achieved with the help of lifecycle hooks. 
+
+ngOnChanges: When an input/output binding value changes.
+ngOnInit: After the first ngOnChanges.
+ngDoCheck: Developer's custom change detection.
+ngAfterContentInit: After component content initialized.
+ngAfterContentChecked: After every check of component content.
+ngAfterViewInit: After a component's views are initialized.
+ngAfterViewChecked: After every check of a component's views.
+ngOnDestroy: Just before the component/directive is destroyed.
+-----------
+services:
+For data or logic that isn't associated with a specific view, and that you want to share across components, 
+you create a service class. A service class definition is immediately preceded by the @Injectable() decorator.
+
+Dependency injection (DI) lets you keep your component classes lean and efficient. 
+They don't fetch data from the server, validate user input, or log directly to the console; 
+they delegate such tasks to services.
+------------
+content projection:
+-----------
+forms
+reactive forms
+-----------
+compiler:
+Ahead of Time (AOT) compilation converts your code during the build time before the browser downloads 
+and runs that code. This ensures faster rendering to the browser
+
+The Just-in-Time (JIT) compilation process is a way of compiling computer code to machine code 
+during execution or run time. It is also known as dynamic compilation. 
+JIT compilation is the default when you run the ng build or ng serve CLI commands. 
+-------------
+Rendering engine:
+View Engine is responsible for compiling the components so that they can be consumed by the browser. 
+In Angular, we write our components using TypeScript and it cannot be run directly in browsers and 
+for this purpose we require View Engines 
+
+Tree Shaking
+Tree Shaking is a process to remove dead code from the bundle. 
+
+
+View Engine and Ivy
+
+IVY:
+reduce bundle size
+faster compilation
+treeshaking
+incremental DOM
+----------------
+Virtual DOM and Incremental DOM
+https://blog.nrwl.io/understanding-angular-ivy-incremental-dom-and-virtual-dom-243be844bf36
+
+How Virtual DOM Works
+Every component creates a new virtual DOM tree every time it gets rerendered. 
+React compares the new virtual DOM tree with the old one and then applies a series of 
+transformations to the browser DOM to match the new virtual DOM tree.
+
+Incremental DOM
+Every component gets compiled into a series of instructions. 
+These instructions create DOM trees and update them in-place when the data changes.
+
+-----------
+Promises and Observables
+
+While both the concepts deal with Asynchronous events in Angular, 
+Promises handle one such event at a time while observables handle a sequence of events over some time. 
+
+Promises - They emit a single value at a time. They execute immediately after creation and are not cancellable. 
+They are Push errors to the child promises. 
+
+Observables - They are only executed when subscribed to them using the subscribe() method. 
+They emit multiple values over a period of time. They help perform operations like forEach, filter, 
+and retry, among others.
