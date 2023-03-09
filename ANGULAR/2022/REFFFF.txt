@@ -316,3 +316,9 @@ They are Push errors to the child promises.
 Observables - They are only executed when subscribed to them using the subscribe() method. 
 They emit multiple values over a period of time. They help perform operations like forEach, filter, 
 and retry, among others.
+------
+ async pipe : the async pipe transforms an Observable into data. 
+ -------
+ template driven form and reactive forms:
+
+ 
