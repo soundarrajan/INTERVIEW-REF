@@ -318,7 +318,85 @@ They emit multiple values over a period of time. They help perform operations li
 and retry, among others.
 ------
  async pipe : the async pipe transforms an Observable into data. 
+
+ it other option to:
+
+ changedetectorref and markforcheck when changedetectionstrategy.onpush used.
+ -------
+ create a observables:
+
+create
+defer
+empty
+from
+fromEvent
+interval
+of
+range
+throw
+timer
+
+of:
+The Of creates the observable from the arguments that you pass into it. 
+
+const array=[1,2,3,4,5,6,7]
+  const obsof1=of(array);
+  obsof1.subscribe(val => console.log(val),
+           error=> console.log("error"),
+          () => console.log("complete"))
+ 
+}
+**** Output ***
+[1, 2, 3, 4, 5, 6, 7
+
+from:
+From Operator takes only one argument that can be iterated and converts it into an observable.
+
+ngOnInit() {
+ 
+    const array3 = [1, 2, 3, 4, 5, 6, 7]
+    const obsfrom1 = from(array3);
+    obsfrom1.subscribe(val => console.log(val),
+      error => console.log("error"),
+      () => console.log("complete"))
+ 
+}
+ 
+*** Output ****
+1
+2
+3
+4
+5
+6
+7
  -------
  template driven form and reactive forms:
 
- 
+ ---------------------------------------------------------------
+ Angular work flow:
+
+ 1. angular.json: 
+ This file will contain all the configurations of the app. 
+ While building the app, 
+ the builder looks at this file to find the entry point of the application.
+
+ the main property of the options object defines 
+ the entry point of the application which in this case is main.ts.
+
+ 2.main.ts:
+ creates a browser environment for the application to run, and, along with this, 
+ it also calls a function called bootstrapModule, which bootstraps the application.
+
+ AppModule is getting bootstrapped.
+
+ 3. app.module.ts
+ This module contains declarations of all the components.
+
+ AppComponent is getting bootstrapped.
+
+ 4, index.html
+ After this, Angular calls the index.html file. 
+ This file consequently calls the root component that is app-root.
+
+ ---------------------------------------------------------------
