@@ -1,0 +1,33 @@
+NgRx store for reactive state management for Angular Apps is a plus.
+
+1. What is the difference between AngularJS and Angular?
+2. How would you explain the concept of a module in Angular?
+3. How do you implement routing in an Angular application?
+4. Can you explain the difference between ngFor and ngIf directives?
+5. What is the role of the NgModule decorator in Angular?
+6. How do you handle asynchronous calls in Angular? Can you provide an example?
+7. How do you implement lazy loading in an Angular application?
+8. Can you explain the role of the ngZone service in Angular?
+9. How do you test an Angular component?
+10. How do you optimize an Angular application for performance?
+
+1. What is Angular and what are its features?
+2. What is the difference between AngularJS and Angular?
+3. What is Dependency Injection in Angular?
+4. How do you make an HTTP request in Angular?
+5. What is Angular Material and how is it used?
+6. What are pipes in Angular?
+7. What is the difference between ngOnChanges() and ngOnInit()?
+8. What is a directive in Angular?
+9. What is ng-content in Angular?
+10. What is NgZone in Angular and why is it used?
+11. What are the different types of forms in Angular?
+12. How do you create a custom validator in Angular?
+13. What is AOT compilation in Angular and how is it used?
+14. How do you lazy load modules in Angular?
+15. What is ChangeDetectionStrategy in Angular?
+16. What is the difference between @ViewChild and @ContentChild?
+17. What is angular compiler and how it works?
+18. What are the different types of observables in Angular?
+19. How do you handle errors in Angular?
+20. What is Angular routing and how is it implemented?

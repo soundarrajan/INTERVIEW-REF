@@ -400,3 +400,65 @@ ngOnInit() {
  This file consequently calls the root component that is app-root.
 
  ---------------------------------------------------------------
+ difference between AngularJS and Angular?
+ architecture:
+ angularjs - mvc
+ angular - components and directives modules
+
+ language:
+ angularjs - javascript
+ angular - typescript
+
+ support:
+ angularjs - desktop
+ angular - mobile and desktop browser
+
+ angular - support dependency injection
+ angularjs - not
+ ----------------------------------------------------------
+ routing:
+
+ create a module - AppRoutingModule
+ ng new routing-app --routing --defaults
+
+ Import the AppRoutingModule into AppModule and add it to the imports array.
+
+ Import RouterModule and Routes into your routing module.
+
+ Define your routes in your Routes array.
+
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router'; // CLI imports router
+
+const routes: Routes = [
+  { path: 'first-component', component: FirstComponent },
+  { path: 'second-component', component: SecondComponent },
+];
+
+// configures NgModule imports and exports
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+---
+<nav>
+  <ul>
+    <li><a routerLink="/first-component" routerLinkActive="active" ariaCurrentWhenActive="page">First Component</a></li>
+    <li><a routerLink="/second-component" routerLinkActive="active" ariaCurrentWhenActive="page">Second Component</a></li>
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
+-----
+performance optimization:
+
+Using AoT Compilation. ...
+Using OnPush Change Detection Strategy. ...
+Using Pure Pipes. ...
+Unsubscribe from Observables. ...
+Lazy Loading. ...
+Use trackBy option for For Loop. ...
+Avoid computation in template files. ...
+Usage of Web Workers.
