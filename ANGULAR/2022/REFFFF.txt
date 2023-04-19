@@ -240,14 +240,14 @@ lazy load a module
 template and how to create an injector at runtime.
 -----------
 Life cycle hooks :
-
+https://www.stackchief.com/blog/ngDoCheck%20Example%20%7C%20Angular
 every component has a lifecycle. 
 Angular creates and renders these components and also destroys them before removing them from the DOM. 
 This is achieved with the help of lifecycle hooks. 
 
 ngOnChanges: When an input/output binding value changes.
 ngOnInit: After the first ngOnChanges.
-ngDoCheck: Developer's custom change detection.
+ngDoCheck: Developer's custom change detection...whenever change detection is run(obejct or array property value changes, not reference)
 ngAfterContentInit: After component content initialized.
 ngAfterContentChecked: After every check of component content.
 ngAfterViewInit: After a component's views are initialized.
@@ -462,3 +462,11 @@ Lazy Loading. ...
 Use trackBy option for For Loop. ...
 Avoid computation in template files. ...
 Usage of Web Workers.
+--------------------
+features of angular:
+
+typescript
+data binding
+mvc architecture
+dependency injection
+------
