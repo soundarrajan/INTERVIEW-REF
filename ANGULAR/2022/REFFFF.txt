@@ -8,6 +8,8 @@ the model is updated as well.
 
 attributes and properties:
 html attributes, dom properties:
+attributes are defined by HTML. Properties are defined by the DOM.
+The value of an attribute is constant.	The value of a property is variable.
 
 1. The HTML attribute value specifies the initial value; the DOM value property is the current value.
 
@@ -30,17 +32,32 @@ Typescript:
 Optional static typing::
 javascript: dynamically typed language which means that the types are checked, 
 and datatype errors are spotted only at the runtime.
+
+Detecting errors in code without running it is referred to as static checking. 
+
+TypeScript uses compile time type checking
+
 TS: TypeScript introduces optional strong static typing: Once declared, a variable doesn’t change 
 its type and can take only certain values. The compiler alerts developers to type-related mistakes, 
 so they have no opportunity to hit the production phase.
 Rich IDE support::
 Fast refactoring::
 TypeScript supports concepts from class-based object-oriented programming (OOP):
+
+@ts-check:
+Add above in your JS code, to show errors like TS.
+
+Casting is the process of overriding a type.
+Casting with "as"
+let x: unknown = 'hello';
+console.log((x as string).length);
+
+
 ----
 Directives:
 add new behavior to the elements in the template or modify existing behavior.
 Component Directive
-Structural Directive - *ngIf ngfor
+Structural Directive - *ngIf ngfor ngSwitch
 Attribute directive -  ngStyle( applying styles) or ngClass(applying CSS classes).
 -------
 Decorator:
@@ -53,7 +70,7 @@ Decorators are functions that modify JavaScript classes. Angular defines a numbe
 attach specific kinds of metadata to classes, so that the system knows what those classes mean and 
 how they should work.
 
-Class Decorators - @component
+Class Decorators - @component, @NgModule.
 Property Decorators - @input, @output
 Method Decorators - @hostlistner
 Parameter Decorators - @inject
@@ -469,4 +486,4 @@ typescript
 data binding
 mvc architecture
 dependency injection
-------
+-------
