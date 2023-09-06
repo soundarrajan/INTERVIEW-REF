@@ -1,0 +1,31 @@
+ng update @angular/core @angular/cli
+ng update
+
+ng update @angular/cli@^10 @angular/core@^10
+ng update @angular/material
+----------------------------------
+npm uninstall -g @angular/cli
+Clear Cache:
+
+npm cache clean --force
+  
+npm cache verify
+Install Angular CLI:
+
+npm install -g @angular/cli
+----------------------------------
+To update dependencies packages:
+
+npm-check-updates
+npm-check-updates -u
+npm install
+----------------
+// npm update
+npm upgrade
+----------------
+npm outdated
+ng version
+------------------------------------------------------
+9-11
+
+ng update @angular/core@10 @angular/cli@10

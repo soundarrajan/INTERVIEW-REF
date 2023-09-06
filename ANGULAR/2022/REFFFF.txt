@@ -101,7 +101,7 @@ change detectiontechniques:
 1) impure pipe: chance to performance issues.
 in add and filter function in list:
 
-2) get:
+2) get::
 Getters are special functions that will update their values whenever they're called. It's very simple to use.
 
 get todos() { return this.todoService.getAll(); }
