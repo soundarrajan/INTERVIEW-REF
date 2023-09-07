@@ -173,6 +173,9 @@ constructor(private todoService: TodoService) {
   }
 
 ..........................
+to find changes in input property:(ngonchanges , set-get)
+In Angular, components often receive input data through input properties. Traditionally, 
+developers have relied on the ngOnChanges lifecycle hook to detect changes in these input properties.
 
 4)  set..........
 
@@ -232,7 +235,15 @@ get currencyValue(val) {
   return this._currencyValue
 }
 -----------
+<app-trade-notes [tradeNotes]="tradeNotes">
+ public tradeNotes:any;
+  @Input('tradeNotes') set _tradeNotes(val) {
+    this.tradeNotes = val;
+  }
+
+-------------------
 https://andrew-morozw.medium.com/using-getters-and-setters-in-typescript-and-angular-d478829461c8
+https://blog.bitsrc.io/simplify-input-property-handling-in-angular-with-setters-and-getters-256ddca84ac1
 --------------------------------------------------------------------------------------------
 push vs concat
 
