@@ -498,3 +498,14 @@ data binding
 mvc architecture
 dependency injection
 -------
+rxjs:
+Reactive Extensions for JavaScript
+RxJS is a library for reactive programming using observables that makes it easier to compose 
+asynchronous or callback-based code. 
+
+user to:
+Converting existing code for async operations into observables
+Iterating through the values in a stream
+Mapping values to different types
+Filtering streams
+Composing multiple streams

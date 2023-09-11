@@ -308,3 +308,8 @@ FORM VALIDATION:
 HTML5:  email, url, number, tel, date ,color,
 --------------
 ARIA - SCREEN READER.
+---------------
+Table with responsive td.cell based on width
+https://jsfiddle.net/victor_007/ywevz8ra/
+
+https://jsfiddle.net/5ht73hpc/
