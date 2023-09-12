@@ -302,8 +302,15 @@ and runs that code. This ensures faster rendering to the browser
 The Just-in-Time (JIT) compilation process is a way of compiling computer code to machine code 
 during execution or run time. It is also known as dynamic compilation. 
 JIT compilation is the default when you run the ng build or ng serve CLI commands. 
+
+process:
+code analysis
+code generation
+template type checking
 -------------
 Rendering engine:
+transforming Angular component templates into JavaScript 
+
 View Engine is responsible for compiling the components so that they can be consumed by the browser. 
 In Angular, we write our components using TypeScript and it cannot be run directly in browsers and 
 for this purpose we require View Engines 
