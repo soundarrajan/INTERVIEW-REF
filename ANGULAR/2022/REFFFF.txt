@@ -52,7 +52,8 @@ Casting with "as"
 let x: unknown = 'hello';
 console.log((x as string).length);
 
-
+null coalescing ?? used to check null
+null assertion !
 ----
 Directives:
 add new behavior to the elements in the template or modify existing behavior.
@@ -351,6 +352,25 @@ They are Push errors to the child promises.
 Observables - They are only executed when subscribed to them using the subscribe() method. 
 They emit multiple values over a period of time. They help perform operations like forEach, filter, 
 and retry, among others.
+_____________________
+async await
+async fetchData() {
+    this.message = "Fetching..";
+    this.response = "";
+    this.response = await this.httpClient
+      .get<any>(this.apiURL)
+      .pipe(delay(1000))
+      .toPromise();
+    this.message = "Fetched";
+  }
+--
+ async ngOnInit(): Promise<void> {
+  await this.getAuthorization();
+ }
+ --
+this.activatedRoute.params.subscribe(async (params: Params) => {
+  await this.userRoleAcces(); 
+})
 ------
  async pipe : the async pipe transforms an Observable into data. 
 
@@ -516,3 +536,35 @@ Iterating through the values in a stream
 Mapping values to different types
 Filtering streams
 Composing multiple streams
+-------------------------------------------
+Deep copying objects in JavaScript :
+
+1.
+var newObj = JSON.parse(JSON.stringify(obj));
+
+2.
+Using Lo-Dash's _.cloneDeep 
+var newObj = _.cloneDeep(obj);
+
+3.
+this.user = Object.assign({}, currentObject);
+--------------
+var / let / const:
+
+var:
+globally scoped or function/locally scoped.
+var variables can be re-declared and updated
+
+let:
+block scoped
+can be updated but not re-declared.
+
+const:
+block scoped
+cannot be updated or re-declared
+------------
+core concepts:
+
+https://medium.com/techmonks/angular-core-concepts-list-c337e3e84f5f
+
+--------------
