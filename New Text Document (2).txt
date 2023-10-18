@@ -1,0 +1,41 @@
+Hi Team,
+
+Set upstream on your fork design system. (One time)
+
+Use the following three commends.
+
+ 
+
+1.       git remote –v
+
+(console-output)
+
+origin  https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System-Gokul (fetch)
+
+origin  https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System-Gokul (push)
+
+ 
+
+2.       git remote add upstream https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System
+
+ 
+
+3.       git remote –v
+
+(console-output)
+
+origin  https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System-Gokul (fetch)
+
+origin  https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System-Gokul (push)
+
+upstream        https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System (fetch)
+
+upstream        https://inatech.visualstudio.com/DefaultCollection/Inatech-UI-Development/_git/Design-System (push)
+
+ 
+
+1.       Daily do git pull and start work
+
+2.       After commit make pull request in VSTS and make sure got code review done and merged with Main master branch and Angular 9+
+
+ 

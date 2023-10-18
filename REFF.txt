@@ -1,0 +1,206 @@
+:::::::service:::
+
+page1:::
+changeTheme() {
+    this.themeDark = !this.themeDark;
+    this.service.setTheme(this.themeDark);
+  }
+-----------------------------
+service.ts:
+
+setTheme(flag: boolean) {
+        this.isDarkTheme.next(flag);
+}
+
+private isDarkTheme = new BehaviorSubject<boolean>(true);
+themeChange = this.isDarkTheme.asObservable();
+
+-------------------------------------
+page2:::
+ ngOnInit(): void {
+    this.localService.themeChange.subscribe(data => {
+      this.theme  = data;
+    })
+  }
+-----------------------------------------------------method2 service------------------
+
+page1:::
+this.service.setSmartFilterStatus(false);
+
+service:
+private smart_filter_status = new Subject<boolean>();
+setSmartFilterStatus(status: boolean) {
+         this.smart_filter_status.next(status);
+    }
+
+getSmartFilterStatus(): Observable<any> {
+        return this.smart_filter_status.asObservable();
+    }
+
+--
+
+page2:::
+this.service.getSmartFilterStatus().subscribe((status) => {
+      this.smartFilterStatus = status;
+
+});
+----------------------------------------------------------------------------
+
+MAP array destructuring:
+
+var data = [{ CreatedDate: "2022-02-17T10:30:07.0442288Z", 
+DeletedDate: null, 
+ProjectId: "05b76d03-8c4b-47f4-7c20-08d9e2990812",
+StartGeotag: {Type: 'Point', Latitude: '33.6607231', 
+CreatedDate: '2022-02- :34:46.5389961Z'},
+StartTime: "2022-02-17T10:30:05.828Z"}]
+
+const res= data.map(({StartGeotag, ...rest}) => ({...rest})); 
+
+console.log(res);
+
+------
+If you want to take only the StartGeoTag object than you can do it in this way:
+
+ [{ CreatedDate: "2022-02-17T10:30:07.0442288Z" , DeletedDate: null, ProjectId: "05b76d03-8c4b-47f4-7c20-08d9e2990812",
+    StartGeotag: {Type: 'Point', Latitude: '33.6607231', CreatedDate: '2022-02- :34:46.5389961Z'},
+    StartTime: "2022-02-17T10:30:05.828Z"}].map(({StartGeotag}) => StartGeotag)
+	------------------
+	
+	
+	get specific key value from object in javascript?
+	
+	var processed = objArray.map(({ id }) => ({ id }));
+console.log(processed);
+
+var objArray = [{"firstname":"bbb","userName":"bbb1","title":"","created_by_user_id":"-1","enabled":"true","lastname":"AC","last_connection":"","password":"","manager_id":"0","id":"14","job_title":"job1","last_update_date":"2018-08-08 13:35:56.996"},{"firstname":"aaa","icon":"icons/default/icon_user.png","creation_date":"2018-08-08 13:35:56.876","userName":"aaa1","title":"","created_by_user_id":"-1","enabled":"true","lastname":"AH","last_connection":"","password":"","manager_id":"0","id":"9","job_title":"job2","last_update_date":"2018-08-08 13:35:56.876"}];
+
+let result = objArray.map(o => ({id: o.id}));
+console.log(result);
+
+----------------
+Add key value pair to all objects in array
+https://stackoverflow.com/questions/39827087/add-key-value-pair-to-all-objects-in-array#:~:text=We%20tell%20to%20the%20.,and%20then%20return%20the%20result.
+
+const newArr = [
+  {name: 'eve'},
+  {name: 'john'},
+  {name: 'jane'}
+].map(v => ({...v, isActive: true}))
+
+const arr = [{value: 1}, {value: 1}, {value: 2}]   
+const newArr = arr.map(v => {
+  return v.value > 1 ? {...v, isActive: true} : v 
+})
+-------------------------------------------------------
+select specific value in object
+this.selectedTradeid = rowSelect_purchase.map(({tradeid}) => tradeid) //[111,222]
+
+filter object by value:
+var ss  = this.rowData_purchase.filter(t=>t.tradeid === this.selectedTradeid);
+    // console.log(ss);
+
+filter object by arry:
+//var filtered = this.rowData_purchase.filter(a => this.selectedTradeid.some(b => b === a.tradeid));
+    //console.log(filtered);
+
+
+/this.selectedTradeid =[{tradeid:'PB2200-1'},{tradeid:'PB2200-2'}];
+    //for(let i=0 ; i<this.selectedTradeid.length; i++){
+      // this.rowData_purchase.map((data)=>{
+      //     if(data.tradeid === this.selectedTradeid[i]){
+      //         console.log(data);
+      //         this.rowData_purchase = [];
+      //         this.rowData_purchase.push(data);
+              
+      //         //this.selectedRow.push(data);
+      //     }
+      // })
+
+
+filter object by value not in array arry
+  const myArrayFiltered = this.rowData_purchase.filter((el) => {
+      return this.selectedTradeid.every((f) => {
+        return f !== el.tradeid ;
+      });
+    });
+_______
+
+// const result = this.rowData_purchase.filter(ad => 
+  //   this.selectedTradeid.every(fd => fd.tradeid !== ad.tradeid));
+  //   console.log(result);
+    //}
+-------------------------------------------------------
+some vs every:
+
+some: iterate and return value till condition satisfy, if not stisfy iterate till satisy.if satisyf stops iteration
+every: stops if condition satisfy,
+if satisy, continue iteration
+if not satisfy stops there.
+
+
+let productArray =[
+{productName:"Netflix",isSubscriptionValid:false, isPaymentApproved:true}, 
+{productName:"Amazon Video",isSubscriptionValid:false, isPaymentApproved:true},
+{productName:"Some Subscriber",isSubscriptionValid:true, isPaymentApproved:true}, 
+]
+
+let someresult = productArray.some(x=>{
+console.log(`some ${x.isSubscriptionValid}. ${x.isPaymentApproved}`);
+ return x.isSubscriptionValid==true 
+ || x.isPaymentApproved==true
+});
+
+let everyresult = productArray.every(x=>{
+  console.log(`every ${x.isSubscriptionValid}. ${x.isPaymentApproved}`);
+  return x.isSubscriptionValid==true || x.isPaymentApproved==true});
+____________________________________________________________________________________
+
+get elements by class name and add style
+
+constructor(private localService: LocalService,private ElByClassName: ElementRef) {
+//const btnElement = (<HTMLElement>this.ElByClassName.nativeElement).querySelector('.ag-group-expanded');
+        
+        let agGroupExpanded = this.ElByClassName.nativeElement.querySelectorAll('.ag-group-expanded');
+        agGroupExpanded.forEach((element, index) => {
+          element.style.left = window.innerWidth - (this.counterpartyHeaderWidth+45)+'px';
+        });
+	------------------
+
+  @ViewChild('titleSection') titleSection: ElementRef;
+
+setTimeout(()=>{ 
+      this.titleSection.nativeElement.focus();
+    },0); 
+
+---------------------
+var hovericon = Array.from(document.querySelectorAll<HTMLElement>('.hoverdisable'));
+            hovericon.forEach((element) => {
+                element.style.pointerEvents = "none";
+
+            });
+------------------------
+//(<HTMLElement>document.querySelector(".light-blue-button")).style.display = "block";
+-------------------
+_______________________________________________________________________________________________
+Router:
+
+To check value in router:
+
+if (this.router.url.includes("buyer")){
+      alert("buyer");
+           }else{
+            alert("app");
+           }
+---------------------
+  {
+    path: ':companyName',
+    component: ShiptechSpotNegotiationComponent,
+    data: { breadCrumb1: 'Spot Negotiation' }
+  },
+
+this.Activatedroute.paramMap
+          .subscribe(params => {this.companyName =  params.get('companyName')||0;     
+    });
+------------------
+let entityAccess = userAcess.filter((x)=>{ return x.moduleName == 'Contract'})[0].entityModule;
