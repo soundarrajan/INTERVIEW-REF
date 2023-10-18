@@ -1,0 +1,10 @@
+Embedded js:
+
+Tags:
+
+<%= variable %>   - 		JS Output
+<% console.log('he') %>  - 	JS Execute
+<%- <h1>Hello</h1> %> - 	Render HTML
+<%% %%>     show <% or %>
+<%# this is comment  %> 
+<%- include('header.ejs') %>

@@ -122,3 +122,4 @@ public/css
 app.use(express.static(__dirname + '/public'));
 app.use(express.static('public'))
 ---------------------------------------------------------------
+res.render - to send value to html using embed

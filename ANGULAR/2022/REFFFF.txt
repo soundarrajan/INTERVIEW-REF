@@ -77,6 +77,9 @@ Parameter Decorators - @inject
 -----------
 changedetectionstategy , https://web.dev/faster-angular-change-detection/
 https://angular-training-guide.rangle.io/change-detection/enforcing_immutability
+https://www.digitalocean.com/community/tutorials/angular-change-detection-strategy
+
+Change Detection means updating the view (DOM) when the data has changed
 
 when make changes in parent, it traverse and update dom in child component level.
 so low performance.
@@ -479,6 +482,7 @@ Lazy Loading. ...
 Use trackBy option for For Loop. ...
 Avoid computation in template files. ...
 Usage of Web Workers.
+ngzone
 --------------------
 features of angular:
 
