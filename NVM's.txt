@@ -1,0 +1,22 @@
+NVM install:
+
+default: 14.15.4
+
+nvm ls
+
+nvm use ----
+
+nvm install -----
+
+nvm alias default 10.0.0
+----------------
+to change global install.
+
+npm ls -g --depth=0  ---to see
+
+to change global install package.
+
+nvm install node --reinstall-packages-from=12.14.0
+-----------------
+npm install depends - global angular cli
+ng serve depeneds - local angular version

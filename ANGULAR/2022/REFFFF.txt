@@ -44,6 +44,8 @@ Rich IDE support::
 Fast refactoring::
 TypeScript supports concepts from class-based object-oriented programming (OOP):
 
+
+
 @ts-check:
 Add above in your JS code, to show errors like TS.
 
@@ -52,7 +54,30 @@ Casting with "as"
 let x: unknown = 'hello';
 console.log((x as string).length);
 
+null coalescing ?? used to check null
+non-null assertion operator
+null assertion !
 
+Type Inference in TypeScript
+TypeScript is a typed language. However, it is not mandatory to specify the type of a variable
+
+Type Assertion
+Type assertion tells the compiler about the type of the variable
+
+<Typename>expression;
+
+let name:any="Scaler";
+let companyname=<string>name;
+console.log(typeof(comapanyname));
+
+TypeScript Generics is a tool which provides a way to create reusable components. 
+It creates a component that can work with a variety of data types rather than a single data type.
+
+function identity<T>(arg: T): T {    
+    return arg;    
+}    
+let output1 = identity<string>("myString");    
+let output2 = identity<number>( 100 );  
 ----
 Directives:
 add new behavior to the elements in the template or modify existing behavior.
@@ -121,7 +146,7 @@ change detectiontechniques:
 1) impure pipe: chance to performance issues.
 in add and filter function in list:
 
-2) get:
+2) get::
 Getters are special functions that will update their values whenever they're called. It's very simple to use.
 
 get todos() { return this.todoService.getAll(); }
@@ -176,6 +201,9 @@ constructor(private todoService: TodoService) {
   }
 
 ..........................
+to find changes in input property:(ngonchanges , set-get)
+In Angular, components often receive input data through input properties. Traditionally, 
+developers have relied on the ngOnChanges lifecycle hook to detect changes in these input properties.
 
 4)  set..........
 
@@ -235,7 +263,15 @@ get currencyValue(val) {
   return this._currencyValue
 }
 -----------
+<app-trade-notes [tradeNotes]="tradeNotes">
+ public tradeNotes:any;
+  @Input('tradeNotes') set _tradeNotes(val) {
+    this.tradeNotes = val;
+  }
+
+-------------------
 https://andrew-morozw.medium.com/using-getters-and-setters-in-typescript-and-angular-d478829461c8
+https://blog.bitsrc.io/simplify-input-property-handling-in-angular-with-setters-and-getters-256ddca84ac1
 --------------------------------------------------------------------------------------------
 push vs concat
 
@@ -294,8 +330,15 @@ and runs that code. This ensures faster rendering to the browser
 The Just-in-Time (JIT) compilation process is a way of compiling computer code to machine code 
 during execution or run time. It is also known as dynamic compilation. 
 JIT compilation is the default when you run the ng build or ng serve CLI commands. 
+
+process:
+code analysis
+code generation
+template type checking
 -------------
 Rendering engine:
+transforming Angular component templates into JavaScript 
+
 View Engine is responsible for compiling the components so that they can be consumed by the browser. 
 In Angular, we write our components using TypeScript and it cannot be run directly in browsers and 
 for this purpose we require View Engines 
@@ -336,6 +379,25 @@ They are Push errors to the child promises.
 Observables - They are only executed when subscribed to them using the subscribe() method. 
 They emit multiple values over a period of time. They help perform operations like forEach, filter, 
 and retry, among others.
+_____________________
+async await
+async fetchData() {
+    this.message = "Fetching..";
+    this.response = "";
+    this.response = await this.httpClient
+      .get<any>(this.apiURL)
+      .pipe(delay(1000))
+      .toPromise();
+    this.message = "Fetched";
+  }
+--
+ async ngOnInit(): Promise<void> {
+  await this.getAuthorization();
+ }
+ --
+this.activatedRoute.params.subscribe(async (params: Params) => {
+  await this.userRoleAcces(); 
+})
 ------
  async pipe : the async pipe transforms an Observable into data. 
 
@@ -491,3 +553,46 @@ data binding
 mvc architecture
 dependency injection
 -------
+rxjs:
+Reactive Extensions for JavaScript
+RxJS is a library for reactive programming using observables that makes it easier to compose 
+asynchronous or callback-based code. 
+
+user to:
+Converting existing code for async operations into observables
+Iterating through the values in a stream
+Mapping values to different types
+Filtering streams
+Composing multiple streams
+-------------------------------------------
+Deep copying objects in JavaScript :
+
+1.
+var newObj = JSON.parse(JSON.stringify(obj));
+
+2.
+Using Lo-Dash's _.cloneDeep 
+var newObj = _.cloneDeep(obj);
+
+3.
+this.user = Object.assign({}, currentObject);
+--------------
+var / let / const:
+
+var:
+globally scoped or function/locally scoped.
+var variables can be re-declared and updated
+
+let:
+block scoped
+can be updated but not re-declared.
+
+const:
+block scoped
+cannot be updated or re-declared
+------------
+core concepts:
+
+https://medium.com/techmonks/angular-core-concepts-list-c337e3e84f5f
+
+--------------
