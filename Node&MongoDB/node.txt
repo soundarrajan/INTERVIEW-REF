@@ -2,6 +2,14 @@ why node?
 
 liberate js from browser, programmers use computers hardware like filesystem
 
+NODE:
+Backend serverside runtime environment
+express: node framework
+
+node modules:
+1. common js - supports node version less than 12
+2. ES6 - greater than 12
+
 -----
 REPL - read evaluation print loops
 -------
@@ -123,3 +131,37 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static('public'))
 ---------------------------------------------------------------
 res.render - to send value to html using embed
+---------------------------
+globalThis vs window
+
+window object is part of browser.
+so its not in node.
+
+chrome latest window - accepts both window and globalTHis
+
+instead we can use globalThis
+-----------------------------------------------------
+Module type in node:
+
+:::File 1-
+import largeNumber from 'exportFile.js';     
+const a = largeNumber;
+const b= 5;
+console.log(a+b);
+
+:::File 2:exportFile.js
+const largeNumber = 55;
+export default largeNumber;
+--
+::File 1:
+const largeNumber = require('./exportFile.js');
+const a = largeNumber.largeNo;
+const b= 5;
+console.log(a+b);
+
+::File 2-
+const largeNumber = 55;
+module.exports = {
+    largeNo: largeNumber
+}
+--------------------------
