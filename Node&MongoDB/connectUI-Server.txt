@@ -1,0 +1,20 @@
+Front end: https://github.com/aneagoie/face-recognition-brain
+
+Back end: https://github.com/aneagoie/face-recognition-brain-api
+
+---------------------------------------------
+React:
+
+componentDidMount(){
+    fetch('https://localhost/3000')
+    .then(response => response.json())
+    .then(console.log)
+}
+
+express:
+
+install cors:
+
+const cors = require('cors');
+app.use(cors());
+---------
