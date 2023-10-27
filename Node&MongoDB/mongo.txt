@@ -36,3 +36,61 @@ db.restaurant.updateOne(
 NODE WITH MONGODB:
 
 npm i mongodb
+--------------------------------------------------------------------
+net ninja
+Installation:
+
+1. download and install mongodb community server in off. site.(enable mongodb compass - gui simulator)
+2. download and install mongoshell 
+3. type mongosh in command
+
+collections and documents:
+
+collections  - like table in sql
+documents - json - like row record in sql
+
+(we can work both in compass and command prompt).
+---
+
+show dbs - view databases
+use db_name - switch to db
+db - find current db name
+show collections - view collenctions in db
+
+insert a value:
+db.collectionname.insertOne({name:"test"})
+db.collectionname.insertMany([{name:"test"}])
+
+to find all data in collection:
+db.collection.find()
+
+to filter:
+db.collection.find({name:"name1"})
+
+filter with specific data property:
+db.collection.find({name:"name1"},{title:1,name:1})
+----it show name and title val in filter collections
+
+count:
+db.collection.find().count();
+
+sort::
+db.collection.find().sort({title:1})
+1 - asc
+2 - desc
+
+-------------------------
+operators:
+
+db.collection.find({review:{$gt:7}})
+$gt
+$lt - less than
+
+$gte
+$lte - less than equatl to
+
+or - $or ====
+db.collection.find({$or:[{rating:7},{name:"name1"}]})
+
+
+---
