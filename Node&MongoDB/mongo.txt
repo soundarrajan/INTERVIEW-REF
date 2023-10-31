@@ -92,5 +92,39 @@ $lte - less than equatl to
 or - $or ====
 db.collection.find({$or:[{rating:7},{name:"name1"}]})
 
+in - nin (another way of or)
+ db.collection.find({rating:{$in:[7,8,9]}}) similar to
+ d.collection.find({$or:[{rating:7},{rating:8},{rating:9s}]})
 
----
+not in:
+db.collection.find({rating:{$nin:[7,8,9]}})
+
+all:
+db.books.find({generes:{$all:['fantacy','romance']}})
+
+nested obj:
+db.books.find({'review.name':'ss'})
+-----------------
+delete a document:
+
+db.books.deleteOne({_id:ObjectId("653b79c4e07b078dc76dbed3"),'})
+db.books.deleteMany({author:"test"})
+--------------
+update a document:
+
+ db.books.updateOne({ _id: ObjectId("653b79dde07b078dc76dbed5")},{$set:{title:'book-update'}})
+
+ increment:$inc
+ db.books.updateOne({_id OnjetID("dddddd")},{$inc:{pages:2}})
+
+ decrement: 
+db.books.updateOne({_id OnjetID("dddddd")},{$inc:{pages:--2}})
+
+pull: remove a element in array.
+db.books.updateOne({_id OnjetID("dddddd")},{$pull:{generes:'romance'}})
+
+push: add a element in array.
+db.books.updateOne({_id OnjetID("dddddd")},{$push:{generes:'romance'}})
+
+each : add a many element in array
+db.books.updateOne({_id OnjetID("dddddd")},{$push:{generes:$each:['1','2']}})

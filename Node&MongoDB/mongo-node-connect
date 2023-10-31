@@ -1,0 +1,5 @@
+install mongodb
+
+npm i mongodb
+
+create a js : db.js
