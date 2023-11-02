@@ -128,3 +128,22 @@ db.books.updateOne({_id OnjetID("dddddd")},{$push:{generes:'romance'}})
 
 each : add a many element in array
 db.books.updateOne({_id OnjetID("dddddd")},{$push:{generes:$each:['1','2']}})
+
+---
+db.collection.find({name:"name1"}).explain('executionStats')
+
+give details report about the collection and datas.
+
+docsExamined - retuns the search count of documents in the collection.
+how many docs was examined to fetch the executed query.
+----
+Indexes:
+
+reduce the number of documents search in a collection.
+instead of search all documents in collection.
+
+db.books.createIndex({rating:8})
+
+dn.books.getIndexes();
+
+db.books.dropIndex({rating:8})
