@@ -6,6 +6,8 @@ Data binding in AngularJS is the synchronization between the model and the view.
 When data in the model changes, the view reflects the change, and when data in the view changes, 
 the model is updated as well.
 
+It defines the communication between a component and its views.
+
 attributes and properties:
 html attributes, dom properties:
 attributes are defined by HTML. Properties are defined by the DOM.
@@ -19,15 +21,27 @@ The value of an attribute is constant.	The value of a property is variable.
 ------
 TYPES OF DATA BINDING:
 
-From source to view  - INTERPOLATION - {{expression}} [target]="expression"
+From source to view  - INTERPOLATION,property,attribute,class,style - {{expression}} [target]="expression"
 From view to source - EVENT - (target)="statement"
 In a two-way sequence of view to source to view - [(target)]="expression"
 
 two types of data binding:
 Event binding	Lets your application respond to user input in the target environment by updating your 
 application data.
+when information flows from the view to the component when an event is triggered
+
 Property binding	Lets you interpolate values that are computed from your application data into the HTML.
---------
+allows you to set the properties for HTML elements.
+
+public image = "/assets/Logo.png"
+<img [src] = "image" alt="" style="height: 100px; width: 250px" class="center">
+-----------
+The binding punctuation of [], (), [()], and the prefix specify the direction of data flow.
+
+Use [] to bind from source to view == <img [alt]="hero.name" [src]="heroImageUrl">
+Use () to bind from view to source == <button type="button" (click)="onSave()">Save</button>
+Use [()] to bind in a two-way sequence of view to source to view == <input [(ngModel)]="name">
+-----------------------------------------------------------------------------------------------------
 Typescript:
 Optional static typing::
 javascript: dynamically typed language which means that the types are checked, 
