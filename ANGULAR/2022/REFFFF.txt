@@ -63,12 +63,47 @@ TypeScript supports concepts from class-based object-oriented programming (OOP):
 @ts-check:
 Add above in your JS code, to show errors like TS.
 
-Casting is the process of overriding a type.
+Casting is the process of overriding a type. perform run time check not compile time.
+
+structural incompatiblity:
+TypeScript’s static type checking relies heavily on the structural compatibility of types. 
+When you try to cast a value with the as operation, the compiler assesses the structural compatibility 
+between the original type and the desired type.
+If the structural properties of the two types are incompatible, 
+TypeScript will raise an error, signaling that the casting operation is unsafe.
+
 Casting with "as"
 let x: unknown = 'hello';
 console.log((x as string).length);
+--------------------------------------------------------------
+null coalescing ?? used to check null or undefined
+The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand 
+when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
 
-null coalescing ?? used to check null
+const foo = null ?? 'default string';
+console.log(foo);
+// Expected output: "default string"
+----------
+|| operator:::
+
+to check any falsy value (including 0, '', NaN, false, etc.) 
+const count = 0;
+const text = "";
+
+const qty = count || 42;
+const message = text || "hi!";
+console.log(qty); // 42 and not 0
+console.log(message); // "hi!" and not ""
+
+--------------
+const myText = ""; // An empty string (which is also a falsy value)
+
+const notFalsyText = myText || "Hello world";
+console.log(notFalsyText); // Hello world
+
+const preservingFalsy = myText ?? "Hi neighborhood";
+console.log(preservingFalsy); // '' (as myText is neither undefined nor null)
+--------------------------------------------------------------
 non-null assertion operator
 null assertion !
 
@@ -92,13 +127,13 @@ function identity<T>(arg: T): T {
 }    
 let output1 = identity<string>("myString");    
 let output2 = identity<number>( 100 );  
-----
+----------------------------------------
 Directives:
 add new behavior to the elements in the template or modify existing behavior.
 Component Directive
 Structural Directive - *ngIf ngfor ngSwitch
 Attribute directive -  ngStyle( applying styles) or ngClass(applying CSS classes).
--------
+-------------------------------------------------
 Decorator:
 
 Angular decorators is to store metadata about a class, method, or property. 
@@ -292,12 +327,13 @@ push vs concat
 push change the array not refrence
 concat create new array with merge two array
 --------------
+https://angular.io/guide/view-encapsulation
 view encapsulation:
 View encapsulation defines whether the template and styles defined within the component 
 can affect the whole application or vice versa.
 
 Emulated - styles from the main HTML propagate to the component.
-Native - styles from the main HTML do not propagate to the component. 
+Native, Shadow DOM - styles from the main HTML do not propagate to the component. 
 None - styles from the component propagate back to the main HTML and therefore are visible 
 to all components on the page.
 -----------
@@ -610,3 +646,7 @@ core concepts:
 https://medium.com/techmonks/angular-core-concepts-list-c337e3e84f5f
 
 --------------
+
+@viewChild
+
+@ViewChild('inputRef') inputRef: ElementRef<HTMLElement>;
