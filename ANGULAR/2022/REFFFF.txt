@@ -385,6 +385,15 @@ process:
 code analysis
 code generation
 template type checking
+
+Advantages of AOT:
+Performance
+Template Error Detection
+Smaller Bundle Sizes
+Optimized Production Builds
+Dependency Injection and Tree Shaking:
+
+AOT and IVY default from V9
 -------------
 Rendering engine:
 transforming Angular component templates into JavaScript 
@@ -441,6 +450,16 @@ async fetchData() {
     this.message = "Fetched";
   }
 --
+async fetchData() {
+    try {
+        const data = await this.someService.getData();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+---
  async ngOnInit(): Promise<void> {
   await this.getAuthorization();
  }
@@ -633,14 +652,48 @@ var:
 globally scoped or function/locally scoped.
 var variables can be re-declared and updated
 
+var x = 10;
+console.log(x); // output : 10
+
+// redeclare the variable
+var x;
+console.log(x); // output : 10
+
+// variable reassignment
+x = 20;
+console.log(x); // output : 20
+-------------------------
+
 let:
 block scoped
 can be updated but not re-declared.
 
+let myvar = 10;
+console.log(myvar); // output : 10
+
+// reassignment
+myvar = 20;
+console.log(myvar); // output : 20
+
+// redeclaration
+let myvar = 5;
+console.log(myvar); // output : syntax error
+-----------------------------
 const:
 block scoped
 cannot be updated or re-declared
-------------
+---
+const myvar = "first value";
+console.log(myvar); // first value
+
+// reassignment
+myvar = "second value";
+console.log(myvar); // TypeError
+
+// redeclaration
+const myvar = "third value";
+console.log(myvar); // Syntax Error
+--------------------------------
 core concepts:
 
 https://medium.com/techmonks/angular-core-concepts-list-c337e3e84f5f
@@ -650,3 +703,15 @@ https://medium.com/techmonks/angular-core-concepts-list-c337e3e84f5f
 @viewChild
 
 @ViewChild('inputRef') inputRef: ElementRef<HTMLElement>;
+---------
+zone.js
+
+In Angular, Zone.js is used to create a new zone for each component and 
+to track changes within that component’s zone.
+
+Each time a component is created, Angular creates a new zone for that component. 
+The zone tracks any changes that occur within the component and triggers 
+the change detection mechanism when necessary.
+
+https://javascript.plainenglish.io/angular-zone-js-change-detection-understanding-the-core-concepts-7c78b8aa8818
+----------
