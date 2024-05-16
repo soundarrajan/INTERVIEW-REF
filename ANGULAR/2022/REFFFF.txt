@@ -344,6 +344,12 @@ contains components, export, import , service providers.
 lazy load a module
 @NgModule takes a metadata object that describes how to compile a component's 
 template and how to create an injector at runtime.
+
+declarations: It declares that the MyComponent belongs to this module.
+imports: It imports CommonModule and FormsModule to use their functionalities within this module.
+providers: It declares that MyService is provided at the module level, making it available for 
+injection throughout this module.
+exports: It exports MyComponent, making it available for use in other modules that import MyModule.
 -----------
 Life cycle hooks :
 https://www.stackchief.com/blog/ngDoCheck%20Example%20%7C%20Angular
@@ -715,3 +721,4 @@ the change detection mechanism when necessary.
 
 https://javascript.plainenglish.io/angular-zone-js-change-detection-understanding-the-core-concepts-7c78b8aa8818
 ----------
+NGRX

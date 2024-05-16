@@ -1,0 +1,55 @@
+setTimeout(() => {
+            //var button = this.elementRef.nativeElement.querySelector('.p-confirm-dialog-accept');
+            var yButton = document.querySelector('.p-confirm-dialog-accept') as HTMLElement;
+            var nButton = document.querySelector('.p-confirm-dialog-reject') as HTMLElement;
+            var cButton = document.querySelector('.p-dialog-header-close') as HTMLElement;
+            //console.log(ybutton);
+            //console.log(nbutton);
+            //console.log(cbutton);
+            yButton.focus();
+            if (yButton && nButton && cButton) {
+            yButton.setAttribute('tabindex', '1');
+            nButton.setAttribute('tabindex', '2');
+            cButton.setAttribute('tabindex', '-1');
+            //cbutton.setAttribute('tabindex', '3');
+            
+            var tabIndex =1;
+document.addEventListener('keydown',function(e){
+if(e.key === 'Tab' && !e.shiftKey){
+if (tabIndex === 1){
+  nButton.focus();
+  tabIndex =2;
+  e.preventDefault();
+}else if (tabIndex === 2){
+  cButton.focus();
+  tabIndex =3;
+  e.preventDefault();
+}else if (tabIndex === 3){
+  yButton.focus();
+  tabIndex =1;
+  e.preventDefault();
+}
+
+}
+if(e.key === 'Tab' && e.shiftKey){
+if (tabIndex === 1){
+  cButton.focus();
+  tabIndex =2;
+  e.preventDefault();
+}else if (tabIndex === 2){
+  yButton.focus();
+  tabIndex =3;
+  e.preventDefault();
+}else if (tabIndex === 3){
+  nButton.focus();
+  tabIndex =1;
+  e.preventDefault();
+}
+
+}
+
+})
+
+
+            }
+          },100);

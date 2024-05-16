@@ -1,0 +1,345 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "shiptech": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/shiptech",
+      "sourceRoot": "apps/shiptech/src",
+      "prefix": "shiptech",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/shiptech/src/test.ts",
+            "polyfills": "apps/shiptech/src/polyfills.ts",
+            "tsConfig": "apps/shiptech/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "apps/shiptech/src/app/shared/styles"
+              ]
+            },
+            "styles": [
+              "apps/shiptech/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/shiptech/src/favicon.ico",
+              "apps/shiptech/src/assets"
+            ]
+          }
+        },
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./tools/custom-build.options.js",
+              "mergeStrategies": {
+                "externals": "replace"
+              },
+              "allowedCommonJsDependencies": [
+                "lodash",
+                "chance",
+                "highcharts"
+              ]
+            },
+            "outputPath": "dist/apps/shiptech",
+            "index": "apps/shiptech/src/index.html",
+            "main": "apps/shiptech/src/main.ts",
+            "polyfills": "apps/shiptech/src/polyfills.ts",
+            "tsConfig": "apps/shiptech/tsconfig.app.json",
+            "assets": [
+              "apps/shiptech/src/favicon.ico",
+              "apps/shiptech/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./assets/",
+                "output": "./assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./v1/config",
+                "output": "./config"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets",
+                "output": "./assets/ngx-extended-pdf-viewer"
+              },
+              "apps/shiptech/src/web.config"
+            ],
+            "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/bootstrap/dist/css/bootstrap-grid.css",
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-balham.css",
+              "node_modules/ag-grid-community/styles/ag-theme-material.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "assets/sass/skinning/base-skinning.scss",
+              "assets/sass/themes/common/base.scss",
+              "assets/sass/themes/defaultweb/_shiptech-mixins.scss",
+              "assets/sass/themes/defaultweb/_shiptech-variables.scss",
+              "assets/sass/themes/defaultweb/_shiptech-utils.scss",
+              "assets/sass/themes/defaultweb/_smart-operator-mixins.scss",
+              "assets/sass/themes/defaultweb/_smart-operator-variables.scss",
+              "assets/sass/themes/defaultweb/_smart-operator-utils.scss",
+              "assets/sass/themes/defaultweb/smart-operator.scss",
+              "assets/sass/themes/defaultweb/_aggrid-smart-operator.scss",
+              "assets/sass/themes/defaultweb/_dark_theme.scss",
+              "assets/sass/themes/defaultweb/_light_theme.scss",
+              "assets/theme/common/designsystem-v2-theme/_aggrid.scss",
+              "assets/sass/themes/defaultweb/_aggrid.scss",
+              "apps/shiptech/src/styles.scss",
+              "node_modules/ng-pick-datetime-ex/assets/style/picker.min.css"
+            ],
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": []
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "12mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/shiptech/src/environments/environment.ts",
+                  "with": "apps/shiptech/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": { "scripts": true, "fonts": { "inline": true }, "styles": { "minify": true, "inlineCritical": false } },
+              "outputHashing": "all",
+              "sourceMap": false,              
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "12mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/shiptech/src/environments/environment.ts",
+                  "with": "apps/shiptech/src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": { "scripts": true, "fonts": { "inline": true }, "styles": { "minify": true, "inlineCritical": false } },
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+            ,
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "shiptech:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "shiptech:build:production"
+            }
+            ,
+            "development": {
+              "browserTarget": "shiptech:build:development"
+            }
+          }
+          ,
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "shiptech:build"
+          }
+        }
+      }
+    },
+    "quantity-control": {
+      "projectType": "library",
+      "root": "libs/feature/quantity-control",
+      "sourceRoot": "libs/feature/quantity-control/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-delivery": {
+      "projectType": "library",
+      "root": "libs/feature/delivery",
+      "sourceRoot": "libs/feature/delivery/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-contract": {
+      "projectType": "library",
+      "root": "libs/feature/contract",
+      "sourceRoot": "libs/feature/contract/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-spot-negotiation": {
+      "projectType": "library",
+      "root": "libs/feature/spot-negotiation",
+      "sourceRoot": "libs/feature/spot-negotitation/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-control-tower": {
+      "projectType": "library",
+      "root": "libs/feature/control-tower",
+      "sourceRoot": "libs/feature/control-tower/src",
+      "prefix": "shiptech",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature/control-tower/jest.config.js",
+            "tsConfig": "libs/feature/control-tower/tsconfig.spec.json",
+            "setupFile": "libs/feature/control-tower/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "core": {
+      "projectType": "library",
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lazy-load-poc": {
+      "projectType": "library",
+      "root": "libs/feature/lazy-load-poc",
+      "sourceRoot": "libs/feature/lazy-load-poc/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-invoice": {
+      "projectType": "library",
+      "root": "libs/feature/invoice",
+      "sourceRoot": "libs/feature/invoice/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-ete": {
+      "projectType": "library",
+      "root": "libs/feature/ete",
+      "sourceRoot": "libs/feature/ete/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-smart": {
+      "projectType": "library",
+      "root": "libs/feature/smart",
+      "sourceRoot": "libs/feature/smart/src",
+      "prefix": "shiptech",
+      "architect": {},
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "versionMismatch": false
+    },
+    "analytics": false,
+    "schematicCollections": [
+      "@nrwl/angular"
+    ]
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
+}
