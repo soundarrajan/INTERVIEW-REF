@@ -435,3 +435,21 @@ grid-template-rows: 50px 200px;
 
 first row: height 50px.
 second row:  height 200px;
+----------------
+6.
+grid-area:
+shorthand property for
+grid-row-start , grid-column-start, grid-row-end, grid-column-end
+
+.item8 {
+  grid-area: 1 / 2 / 5 / 6;
+}
+
+Also used to  - assign names to grid items.
+-----------
+7.
+grid: 
+
+short hand property for:
+grid-template-rows, grid-template-columns, grid-template-areas, 
+grid-auto-rows, grid-auto-columns, and the grid-auto-flow properties
