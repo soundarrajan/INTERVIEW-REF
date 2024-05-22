@@ -1635,9 +1635,4 @@ var values = [];
 sum array values:
 var grandTotal = values.reduce(function(acc, val) { return parseInt(acc) + parseInt(val); }, 0);
 -------------------------
-lexical env
-When a function is defined, it captures its surrounding environment,
- which includes any variables and functions that are in scope at the time of the function's definition. 
- This captured environment is known as the lexical environment.
-  When the function is later invoked, it still has access to this environment,
-   even if it is called outside its original scope.
+

@@ -6,6 +6,9 @@ multimedia elements - video and audio support.
 graphics interaction like canvas and svg.
 storage
 create new elements.
+new form elements: input types: email,date,range,number
+new attributes: placeholder,required,autofocus,form.
+new lements: datalist,output, progress, meter.
 
 html5 features::::
 simple doctype
@@ -97,9 +100,11 @@ A liquid page layout (sometimes called “fluid” or “fluid width”) uses
 relative units instead of fixed units. Typically a liquid layout will use 
 percentages instead of pixels, 
 
-An adaptive page layout uses CSS media queries to detect the width of the browser and alter the layout accordingly
+An adaptive page layout uses CSS media queries to detect the width of the browser 
+and alter the layout accordingly
 
-A responsive page layout uses both relative units and media queries, ostensibly combining the ideas of a liquid layout and an adaptive layout.
+A responsive page layout uses both relative units and media queries, 
+ostensibly combining the ideas of a liquid layout and an adaptive layout.
 -------------------------
 HTML5 API::
 
@@ -313,3 +318,6 @@ Table with responsive td.cell based on width
 https://jsfiddle.net/victor_007/ywevz8ra/
 
 https://jsfiddle.net/5ht73hpc/
+
+--------------------------------------------------------
+ACCessbility - ARIA

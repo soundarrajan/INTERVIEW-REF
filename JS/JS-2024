@@ -1,0 +1,136 @@
+lexical env:
+
+When a function is defined, it captures its surrounding environment,
+ which includes any variables and functions that are in scope at the time of the function's definition. 
+ This captured environment is known as the lexical environment.
+  When the function is later invoked, it still has access to this environment,
+   even if it is called outside its original scope.
+------------------
+JS is single thread. how to make multi:
+
+This means it has one call stack and one memory heap, 
+and it executes code in a sequential, synchronous manner.
+
+MULTI THREADING:
+1. CALLBACKS - SETTIMEOUT, setInterval
+2. promises
+
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+3. async/await.
+
+async function fetchData() {
+    try {
+        let response = await fetch('https://api.example.com/data');
+        let data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+fetchData();
+------------
+Event loop mechanism:
+
+1. call stack. - Where the synchronous code is executed.
+When a function is called, it's added to the top of the stack, and when it completes, 
+    it's removed from the stack.
+
+2. web api - Provided by the browser (or Node.js), these handle asynchronous operations like setTimeout, 
+fetch, etc.
+
+3. call back queue - Where callbacks of completed asynchronous operations are queued.
+
+4. Microtask Queue: This queue holds microtasks like promises. 
+Microtasks are processed immediately after the currently executing script and 
+before the event loop continues with the next task in the callback queue.
+
+5. event loop. - Continuously checks the call stack and the callback queue. 
+If the call stack is empty, it pushes the first callback from the queue to the call stack for execution.
+
+order of execution:
+
+1, synchronus code
+2. micro task - promise, fetch
+3. macrotask - setTimeout, setInterval
+
+Microtasks have higher priority compared to macro tasks
+-----------------
+stack:
+function first() {
+    console.log("First function starts");
+    second();
+    console.log("First function ends");
+}
+
+function second() {
+    console.log("Second function starts");
+    third();
+    console.log("Second function ends");
+}
+
+function third() {
+    console.log("Third function starts and ends");
+}
+
+first();
+------
+Call Stack Execution
+
+Global Execution Context:
+
+first() is called.
+first function execution context is created and pushed onto the stack.
+Stack:
+first()
+
+Inside first Function:
+console.log("First function starts") executes.
+second() is called.
+
+second function execution context is created and pushed onto the stack.
+Stack:
+second()
+first()
+
+Inside second Function:
+console.log("Second function starts") executes.
+third() is called.
+third function execution context is created and pushed onto the stack.
+
+Stack:
+third()
+second()
+first()
+Inside third Function:
+console.log("Third function starts and ends") executes.
+third function execution context is popped off the stack.
+
+Stack:
+second()
+first()
+
+Back to second Function:
+console.log("Second function ends") executes.
+second function execution context is popped off the stack.
+
+Stack:
+first()
+
+Back to first Function:
+console.log("First function ends") executes.
+first function execution context is popped off the stack.
+Stack:
+empty
+_________
+First function starts
+Second function starts
+Third function starts and ends
+Second function ends
+First function ends
+-----------------
+why promise is micro task
+web workers

@@ -18,6 +18,11 @@ ABSOLUTE: relative to the nearest positioned ancestor
 FIXED: An element with position: fixed; is positioned relative to the viewport.
 STICKY: positioned based on the user's scroll position.
 -------------------
+-webkit- for Chrome and Safari,
+ -moz- for Firefox, 
+ -ms- for Internet Explorer (now Edge), 
+ and -o- for Opera.
+------------------
 The z-index property specifies the stack order of an element.
 z-index only works on positioned elements
 -------------------
