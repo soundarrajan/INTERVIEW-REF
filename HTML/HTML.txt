@@ -321,3 +321,64 @@ https://jsfiddle.net/5ht73hpc/
 
 --------------------------------------------------------
 ACCessbility - ARIA
+--------------------------------------
+How html page parse and render in browser:
+
+1. HTML parsing: 
+converts html document into DOM tree.
+Tokenization: the html is broken down into tokens(tags, attributes, text)
+Tree construction: These tokens are  used to create DOM tree structure.
+
+2. CSS parsing:
+browser retrives and parse css files and styles, to create CSSOM tree.
+
+DOM and CSSOM combined together to determine computed style of each node.
+
+3. JS parsing:
+If the HTML document contains <script> tage, broser parse and executes the js.
+
+Blocking behaviour: 
+script can block the html parsing depending on synchoronoua or async.
+DOM manipulation:
+js can modify DOM, CSSOM leading to changes in rendering process.
+
+4. constructing the Render Tree:
+Browser constructs the render tree by combining DOM and CSSOM tree.
+
+5. Layout(Reflow):
+The browser calculates the exact position and size of each element in the render tree. 
+This process is also known as reflow.
+
+6. Painting
+The browser paints the content to the screen based on the render tree
+
+7. Compositing
+The layers are composited together to form the final visual output
+
+Critical Rendering Path: The sequence of steps that the browser follows to 
+convert HTML, CSS, and JavaScript into pixels on the screen. Optimizing the 
+critical rendering path can significantly improve page load performance.
+--------------------
+improve the performance of html page.
+
+1. use sprite images.
+2. efficient resource loading.
+   a. Place CSS <link> tags in the <head> to ensure styles are loaded and applied before rendering.
+   b. Use async or defer attributes on script tags to prevent blocking the HTML parsing.
+      <script scr="script,js" defer|async > </script>
+  c. Use <link rel="preload"> to preload important resources like fonts, CSS, or critical scripts.
+
+3. Optimize Images.
+    a. use responsive images.
+    b. lazy loading - loading="lazy"
+
+4. avoid inline styles.
+5. Optimize JavaScript Execution
+    Code Splitting: Split JavaScript into smaller chunks and load them on demand.
+    Tree Shaking: Remove unused JavaScript code during the build process.
+6. 9. Optimize Fonts
+   Use font-display: swap to display fallback fonts until the custom fonts are loaded.
+   Subset Fonts: Use only the necessary font subsets to reduce font file sizes.
+--------------------------------------
+
+

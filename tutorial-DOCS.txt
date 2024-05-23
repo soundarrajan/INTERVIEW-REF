@@ -1,0 +1,10 @@
+udemy.
+codevolution
+namaste javascript
+--------------
+ACCESSibility
+[11/8/2022, 4:18 PM] soundar: https://www.youtube.com/watch?v=x18vEEfpK3g&t=728s
+[11/8/2022, 4:18 PM] soundar: https://www.a11yproject.com/posts/getting-started-aria/
+[11/8/2022, 4:18 PM] soundar: https://medium.com/@mariusc23/making-bootstrap-dropdowns-more-accessible-27b2566abdda
+[11/8/2022, 4:18 PM] soundar: https://www.a11yproject.com/posts/getting-started-with-nvda/
+[11/8/2022, 4:18 PM] soundar: https://css-tricks.com/tag/accessibility/

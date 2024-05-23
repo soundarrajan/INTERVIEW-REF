@@ -722,3 +722,7 @@ the change detection mechanism when necessary.
 https://javascript.plainenglish.io/angular-zone-js-change-detection-understanding-the-core-concepts-7c78b8aa8818
 ----------
 NGRX
+NFINX
+---------------
+architecture of angular - MVVM
+change detection mech

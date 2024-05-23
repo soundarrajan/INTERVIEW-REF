@@ -134,3 +134,25 @@ First function ends
 -----------------
 why promise is micro task
 web workers
+-----------
+[9/28/2021, 5:12 PM]  Start with react official docs..its a best way 
+ Is JS single threaded? 
+ What is a callback ? 
+ Callback vs Promise 
+ Prototype chain  
+ var vs let vs const  
+ ES 6 features  
+ Hoisting  
+ Synchronous vs asynchronous  
+ Scoping  
+ Event loop  
+ SetTimeout behaviour  
+ this keyword  
+ use strict  
+ bind, call, apply function 
+ async ... await...  
+ Babel  
+ Transpiling. 
+ Webpack.  
+ Javascript concepts
+ ---------------

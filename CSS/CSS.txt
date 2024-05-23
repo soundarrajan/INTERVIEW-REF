@@ -458,3 +458,6 @@ grid:
 short hand property for:
 grid-template-rows, grid-template-columns, grid-template-areas, 
 grid-auto-rows, grid-auto-columns, and the grid-auto-flow properties
+
+------------
+ng-deep
