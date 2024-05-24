@@ -460,4 +460,26 @@ grid-template-rows, grid-template-columns, grid-template-areas,
 grid-auto-rows, grid-auto-columns, and the grid-auto-flow properties
 
 ------------
+FLEX: design flexible responsive layout structure without using float or positioning.
+
+1. display: flex
+2. flex-direction: row | column | row-reverse | column-reverse
+3. flex-wrap: wrap , nowrap, wrap-reverse.
+
+4. flex flow: short hand property - flex-direction and flex-wrap.
+flex-flow: row wrap;
+
+5. align-item:
+6.justify-content:
+7.align-content:
+8. order
+9. flex grow: how much a flex item will grow relative to the rest of the flex items.
+flex-grow: 8
+flex-basis: specifies the initial length of a flex item.
+
+10:
+flex: shorthand property for the flex-grow, flex-shrink, and flex-basis
+flex: 0 0 200px
+
+-----------
 ng-deep

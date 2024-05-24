@@ -726,3 +726,35 @@ NFINX
 ---------------
 architecture of angular - MVVM
 change detection mech
+-------------------
+new features in angular 16:
+
+1. standalone components
+2. ngcc removed
+3. MDC based material components
+4. Esbuild and Vite Integration
+es build - improves build performance
+Vite - development server
+4. introduce angular signals - state management
+-----------------
+ngcc
+
+1. angular compatibility compiler:
+
+Backward Compatibility: ngcc ensures that libraries built with the older View Engine can be used 
+seamlessly with Ivy applications. This allows developers to adopt Ivy without waiting for 
+all third-party libraries to be updated.
+
+Automatic Conversion: When you install dependencies using npm or yarn, 
+ngcc automatically converts View Engine code in node_modules to Ivy-compatible code. 
+This process is known as "postinstall" and ensures that all Angular libraries can work with Ivy.
+
+rremoval of ngcc in angular 16:
+
+1. reduced bundle size
+2. better performance
+----------------
+zone, ngzone
+-----
+angular cli
+How do you debug Angular applications? What tools do you use?
