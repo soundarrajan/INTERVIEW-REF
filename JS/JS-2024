@@ -156,3 +156,8 @@ web workers
  Webpack.  
  Javascript concepts
  ---------------
+ isnan
+ number.isnan
+ isfixed - returns string
+ parseInt
+ parseFloat

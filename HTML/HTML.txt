@@ -380,5 +380,74 @@ improve the performance of html page.
    Use font-display: swap to display fallback fonts until the custom fonts are loaded.
    Subset Fonts: Use only the necessary font subsets to reduce font file sizes.
 --------------------------------------
+How to make HTML page more secure??
+
+1. content security policy.
+Implement a Content Security Policy to control which resources the browser is allowed to 
+load for your site. This helps prevent cross-site scripting (XSS) attacks.
+
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src https://*; child-src 'none';" />
+
+---
+
+prevent XSS: cross site scripting
+
+Cross-site scripting (XSS) is an attack in which an attacker injects malicious executable scripts 
+into the code of a trusted application or website.
+
+Stored XSS:  takes place when the malicious payload is stored in a database. 
+It renders to other users when data is requested if there is no output encoding or sanitization.
+
+Reflected XSS : through link or hyperlink actions
+
+DOM-based XSS:  takes place when an attacker injects a script into a response. 
+The attacker can read and manipulate the document object model (DOM) data to craft a malicious URL.
+ The attacker uses this URL to trick a user into clicking it. If the user clicks the link, 
+ the attacker can steal the user’s active session information, keystrokes, and so on.
 
 
+ STEPS TO PRREVENT:
+1, Never trust user input. Always perform input validation and sanitization on input.
+2, Implement output encoding. This step is performed prior to writing user-controllable data. Output encoding escapes user input and ensures that the browser 
+interprets it as benign data and not as code.
+3. Use a Content Security Policy
+4. set the HttpOnly flag for cookies. 
+If you do, such cookies will not be accessible via client-side JavaScript.
+ --------
+ X-Content-Type-Options Header:
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+ Prevent the browser from interpreting files as a different MIME type than what is specified by the server.
+---------
+X-Frame-Options Header
+Protect your site from clickjacking by controlling whether your site can be embedded in an iframe.
+
+<meta http-equiv="X-Frame-Options" content="DENY">
+-----------
+Secure Cookies
+Set the Secure and HttpOnly flags on cookies to ensure they are only sent over HTTPS and 
+are inaccessible to JavaScript.
+
+Set-Cookie: sessionId=abc123; Secure; HttpOnly
+--
+SameSite Cookies
+Use the SameSite attribute for cookies to prevent CSRF attacks by restricting 
+cookies to same-site requests.
+
+Set-Cookie: sessionId=abc123; SameSite=Strict
+---------------
+Cross-Site Request Forgery (CSRF) Protection
+Implement CSRF tokens in forms and AJAX requests to ensure requests are made intentionally 
+by authenticated users.
+----
+7. Sanitize User Input
+Always sanitize and validate user input to prevent XSS, SQL injection, and other injection attacks.
+-----------
+Input Validation and Output Encoding
+------
+HTTP Strict Transport Security (HSTS);
+Enforce the use of HTTPS for your site, instructing browsers to always use HTTPS.
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+n
