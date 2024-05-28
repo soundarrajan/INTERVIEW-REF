@@ -450,4 +450,6 @@ Input Validation and Output Encoding
 HTTP Strict Transport Security (HSTS);
 Enforce the use of HTTPS for your site, instructing browsers to always use HTTPS.
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
-n
+--
+CSP
+XSS

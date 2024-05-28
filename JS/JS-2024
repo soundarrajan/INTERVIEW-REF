@@ -133,6 +133,83 @@ Second function ends
 First function ends
 -----------------
 why promise is micro task
+
+1. execute their callbacks asynchronously and immediately.
+2. non - blocking code
+
+Promises are microtasks in JavaScript because they are designed to execute their callbacks asynchronously 
+but as soon as possible, immediately after the current task and any microtasks that preceded them. 
+This ensures a non-blocking, efficient handling of asynchronous operations, 
+fitting perfectly within the event loop's microtask queue mechanism.
+
+promise:
+1. asyn operation.
+2. it has 3 states: pending, fulfilled, rejected
+
+Definition: Promises represent the eventual completion or failure of an asynchronous operation and 
+allow you to handle its result asynchronously.
+Usage: Promises provide a cleaner and more structured way to handle asynchronous code compared to callbacks. 
+They allow you to chain multiple asynchronous operations and handle success and error cases separately.
+
+
+starts with pending state, then transition moved to fulfiiled (success) or
+rejected(fails)
+
+.then, .catch methods used to  handle resolved value or reason for pending.
+   ----------------
+    let myPromise = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            let success = true;
+            if(success){
+                resolve('success');
+            }else{
+                reject('fail')
+            }
+        },2000)
+    });
+    
+    myPromise.then((msg) => {
+        console.log(msg);
+    }) .catch((error) => {
+       console.log(error); 
+    });
+----------------------------------------------
+ASYNC/AWAIT
+
+    // Simulate multiple asynchronous functions
+async function fetchData1() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Data 1 fetched"), 1000);
+  });
+}
+
+async function fetchData2() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Data 2 fetched"), 2000);
+  });
+}
+
+// Function that processes multiple data fetches
+async function processMultiple() {
+  try {
+    const data1 = await fetchData1();
+    console.log(data1);
+
+    const data2 = await fetchData2();
+    console.log(data2);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+processMultiple();
+
+Using async/await with try/catch makes it easier to handle errors and manage asynchronous operations 
+in a clean and readable manner, which is particularly beneficial for complex applications with 
+multiple asynchronous tasks.
+------------------------
+
+----------
 web workers
 -----------
 [9/28/2021, 5:12 PM]  Start with react official docs..its a best way 
@@ -156,8 +233,9 @@ web workers
  Webpack.  
  Javascript concepts
  ---------------
- isnan
- number.isnan
- isfixed - returns string
+ isnan - converts the type to number and checks the value.
+ number.isnan - checks both the value and datatype is number
+ toFixed - returns string, round values.
  parseInt
  parseFloat
+ 

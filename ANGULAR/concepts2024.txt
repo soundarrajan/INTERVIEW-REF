@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-search',
+  template: `
+    <input [formControl]="searchControl" placeholder="Search" />
+    <ul>
+      <li *ngFor="let item of results$ | async">{{ item.name }}</li>
+    </ul>
+  `,
+})
+export class SearchComponent implements OnInit {
+  searchControl = new FormControl();
+  results$: Observable<any[]>;
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.results$ = this.searchControl.valueChanges.pipe(
+      debounceTime(300), // Wait 300ms after the last event before emitting
+      switchMap(value => this.dataService.search(value)) // Cancel previous request if a new value is emitted
+    );
+  }
+}
+
+--
+search(query: string): Observable<any[]> {
+  const apiUrl = `https://api.example.com/search?q=${query}`;
+  return this.http.get<any[]>(apiUrl);
+}
+-----------------

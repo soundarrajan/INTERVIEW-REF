@@ -1469,12 +1469,24 @@ let hoist = 'The variable has been hoisted.';
 let antiHero = "Captain Cold";
 let antiHero = "Captain Coldv";  //has already been declared
 
+---
+let hero;
+hero = 'test';   // success
 
+const hero;
+hero = 'tests';  // error
+
+const hero = 'test'; //success
+
+----------------------
 
 const:
 1. not hoisted
 2. unable to reassingn
 3. a constant variable must be both declared and initialised before use.
+
+However, note that const does not make objects immutable. 
+The properties of an object assigned to a const variable can still be modified.
 
 const PI;
 console.log(PI); // Ouput: SyntaxError: Missing initializer in const declaration
