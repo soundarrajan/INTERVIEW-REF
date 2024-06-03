@@ -207,7 +207,41 @@ processMultiple();
 Using async/await with try/catch makes it easier to handle errors and manage asynchronous operations 
 in a clean and readable manner, which is particularly beneficial for complex applications with 
 multiple asynchronous tasks.
-------------------------
+----------------------------------------------------------------------
+// Define the API endpoint
+const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+// Define the data to be sent
+const postData = {
+  title: 'foo',
+  body: 'bar',
+  userId: 1,
+};
+
+// Make the API call using fetch
+fetch(apiUrl, {
+  method: 'POST', // Specify the request method
+  headers: {
+    'Content-Type': 'application/json', // Set the content type to JSON
+  },
+  body: JSON.stringify(postData), // Convert the data to JSON string
+})
+  .then(response => {
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    // Parse the JSON from the response
+    return response.json();
+  })
+  .then(data => {
+    // Handle the data from the API
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the fetch
+    console.error('There was a problem with the fetch operation:', error);
+  });
 
 ----------
 web workers
@@ -230,7 +264,7 @@ web workers
  async ... await...  
  Babel  
  Transpiling. 
- Webpack.  
+ Webpack..
  Javascript concepts
  ---------------
  isnan - converts the type to number and checks the value.
@@ -238,4 +272,6 @@ web workers
  toFixed - returns string, round values.
  parseInt
  parseFloat
- 
+ ----------
+ Authorization: `Bearer ${token}`,
+ --------------------

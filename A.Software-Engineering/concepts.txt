@@ -1,0 +1,24 @@
+Software entities (classes, modules, functions, etc.)
+---------------
+1.    SOLID Principle.
+
+In the realm of object-oriented software design, 
+SOLID is an acronym for five design principles intended to make software more 
+understandable, flexible, and maintainable. 
+
+A. S - Single Resposibility : A class should have only one reason to change,
+ meaning it should have only one job or responsibility.
+
+    A class should be responsible for one, and only one, aspect of a program's functionality.
+    This responsibility should be encapsulated entirely within that class.
+    If a class has more than one reason to change, it has more than one responsibility.
+
+B. O - Opened/Closed: open for extension but closed for modification.
+Angular’s features such as components, services, dependency injection, and directives, 
+you can design your application in a way that adheres to the Open/Closed Principle.
+
+Liskov Substitution Principle (LSP): Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+Interface Segregation Principle (ISP): A client should not be forced to depend on interfaces it does not use. This means creating specific interfaces rather than a general-purpose one.
+Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details; details should depend on abstractions.
+
+----------------------

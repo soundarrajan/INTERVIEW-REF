@@ -33,3 +33,83 @@ search(query: string): Observable<any[]> {
   return this.http.get<any[]>(apiUrl);
 }
 -----------------
+CALL, BIND APPLY:
+
+1. CALL - FUNCTION Borrowing:
+
+var name ={
+    first:'soundar',
+    second:'rajan',
+    fullname:function(){
+        console.log(this.first+this.second);
+    }
+}
+
+name.fullname();
+
+var newname = {
+    first:'ss',
+    second:'oo'
+}
+
+name.fullname.call(newname);
+------
+    let fullname = function(){
+        console.log(this.first+this.second);
+    }
+
+var newname = {
+    first:'ss',
+    second:'oo'
+}
+
+fullname.call(newname); // first parameter denotes reference, here newname.
+-----
+With more arguments:
+
+    let fullname = function(city, state){
+        console.log(this.first+this.second+city+state);
+    }
+
+var newname = {
+    first:'ss',
+    second:'oo'
+}
+
+fullname.call(newname,'chennai','tamilnadu');
+--------------------------------------
+2. APPLY - similar to Call , but pass arguments as array:
+var name ={
+    first:'soundar',
+    second:'rajan',
+}
+    let fullname = function(city, state){
+        console.log(this.first+this.second+city+state);
+    }
+//name.fullname();
+
+var newname = {
+    first:'ss',
+    second:'oo'
+}
+
+fullname.apply(newname,['chennai','tamilnadu']);
+---------------------------------------
+3. BIND: similar to call, but it gives a copy of function and we can invoke later.
+
+var bindFunc = fullname.bind(newname,'chennai','tamilnadu');
+bindFunc;
+---------------------------------------
+POLYFILL of BIND (custom replacement of bind method)
+
+Function.prototype.myBind = function(...args){
+    var obj = this;
+    var params = args.slice(1);
+    return function(...args2){
+        obj.apply(args[0],[...params,...args2]);
+    }
+}
+var myBindMethod = fullname.myBind(newname,'fff');
+myBindMethod('tamil');
+
+-----------------------

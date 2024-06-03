@@ -1,0 +1,4 @@
+oops
+array methods
+extends, implements
+multi: true
