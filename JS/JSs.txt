@@ -1636,6 +1636,8 @@ JavaScript default parameter values
 Array.find()
 Array.findIndex()
 Arrow Functions
+promise
+import, export in module pattern
 -------------------------------------
 get values of multiple input text::::
 

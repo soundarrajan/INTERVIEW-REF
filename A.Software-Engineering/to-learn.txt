@@ -2,3 +2,6 @@ oops
 array methods
 extends, implements
 multi: true
+memoise
+functions like once
+module design pattern
