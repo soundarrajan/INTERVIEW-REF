@@ -197,6 +197,7 @@ export class AuthService {
 - **Set `X-Frame-Options` header:** This header helps prevent clickjacking attacks.
 - **Set `Strict-Transport-Security` header:** This header ensures the browser only communicates with the server over HTTPS.
 
+https://javascript.plainenglish.io/angular-ways-to-prevent-clickjacking-from-the-web-server-and-the-front-end-application-8298d0507012 
 ### 5. **Input Validation and Sanitization**
 
 **Description:** Ensure that all user inputs are validated and sanitized to prevent malicious input.

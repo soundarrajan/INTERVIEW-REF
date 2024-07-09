@@ -382,6 +382,8 @@ improve the performance of html page.
 --------------------------------------
 How to make HTML page more secure??
 
+https://javascript.plainenglish.io/angular-ways-to-prevent-clickjacking-from-the-web-server-and-the-front-end-application-8298d0507012
+
 1. content security policy.
 Implement a Content Security Policy to control which resources the browser is allowed to 
 load for your site. This helps prevent cross-site scripting (XSS) attacks.

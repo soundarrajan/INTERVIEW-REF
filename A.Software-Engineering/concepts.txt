@@ -1,4 +1,7 @@
 Software entities (classes, modules, functions, etc.)
+
+UI System Design
+module federation
 ---------------
 1.    SOLID Principle.
 
@@ -21,4 +24,11 @@ Liskov Substitution Principle (LSP): Objects of a superclass should be replaceab
 Interface Segregation Principle (ISP): A client should not be forced to depend on interfaces it does not use. This means creating specific interfaces rather than a general-purpose one.
 Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details; details should depend on abstractions.
 
-----------------------
+----------------------medium
+https://javascript.plainenglish.io/how-angular-v17-accidentally-solved-a-previously-unsolvable-problem-14777e78916d
+
+https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/
+
+https://medium.com/@hmidihamdi7/you-should-migrate-to-angular-signals-now-c6a74a924017
+
+https://javascript.plainenglish.io/angular-ways-to-prevent-clickjacking-from-the-web-server-and-the-front-end-application-8298d0507012
