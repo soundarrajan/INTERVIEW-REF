@@ -18,6 +18,8 @@ ABSOLUTE: relative to the nearest positioned ancestor
 FIXED: An element with position: fixed; is positioned relative to the viewport.
 STICKY: positioned based on the user's scroll position.
 -------------------
+vendor-prefix:
+
 -webkit- for Chrome and Safari,
  -moz- for Firefox, 
  -ms- for Internet Explorer (now Edge), 
@@ -89,7 +91,8 @@ The CSS box model is essentially a box that wraps around every HTML element
 It consists of: margins, borders, padding, and the actual content.
 ----------
 box-sizing	,  box-sizing: border-box;
-Defines how the width and height of an element are calculated: should they include padding and borders, or not
+Defines how the width and height of an element are calculated: 
+should they include padding and borders, or not
 ----------
 The background-origin property 
 specifies the origin position (the background positioning area) of a background image.
@@ -268,7 +271,8 @@ matrix()
 --------------------------------------------------
 TRANSISTION:
 
-CSS transitions allows you to change property values smoothly (from one value to another), over a given duration.
+CSS transitions allows you to change property values smoothly 
+(from one value to another), over a given duration.
 
 div {
     width: 100px;
@@ -459,6 +463,9 @@ short hand property for:
 grid-template-rows, grid-template-columns, grid-template-areas, 
 grid-auto-rows, grid-auto-columns, and the grid-auto-flow properties
 
+grid-auto-rows, grid-auto-columns - default size of row and column
+
+grid-auto-flow: column|row; - insert item by row or column
 ------------
 FLEX: design flexible responsive layout structure without using float or positioning.
 

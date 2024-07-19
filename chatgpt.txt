@@ -94,16 +94,22 @@ How do you handle large data sets and ensure smooth performance in Angular appli
 
 These questions should help in evaluating both the technical proficiency and the leadership capabilities of a senior Angular developer.
 -----------------
-Security is a crucial aspect of web application development, and Angular provides several built-in mechanisms to help developers secure their applications. Below are some key security approaches and principles that should be followed when developing Angular applications:
+Security is a crucial aspect of web application development, and Angular 
+provides several built-in mechanisms to help developers secure their applications. 
+Below are some key security approaches and principles that should be followed when developing Angular applications:
 
 ### 1. **Cross-Site Scripting (XSS) Prevention**
 
-**Description:** XSS attacks involve injecting malicious scripts into web pages viewed by other users. Angular's built-in mechanisms help prevent XSS attacks.
+**Description:** XSS attacks involve injecting malicious scripts into web pages viewed by other users. 
+Angular's built-in mechanisms help prevent XSS attacks.
 
 **Best Practices:**
-- **Use Angular’s built-in sanitization:** Angular automatically sanitizes untrusted values in templates. For example, it sanitizes URLs, HTML, and styles to prevent XSS attacks.
-- **Avoid using `innerHTML` and other direct DOM manipulation methods:** Instead, use Angular’s property binding and interpolation.
-- **Use Angular’s `DomSanitizer` service:** When you need to inject HTML, URLs, or styles dynamically, use Angular’s `DomSanitizer` service to mark content as trusted.
+- **Use Angular’s built-in sanitization:** Angular automatically sanitizes untrusted values in templates. 
+For example, it sanitizes URLs, HTML, and styles to prevent XSS attacks.
+- **Avoid using `innerHTML` and other direct DOM manipulation methods:** Instead, use Angular’s property 
+binding and interpolation.
+- **Use Angular’s `DomSanitizer` service:** When you need to inject HTML, URLs, or styles dynamically, 
+use Angular’s `DomSanitizer` service to mark content as trusted.
 
 **Example:**
 ```typescript
@@ -126,14 +132,18 @@ export class SafeHtmlComponent {
 
 ### 2. **Cross-Site Request Forgery (CSRF) Protection**
 
-**Description:** CSRF attacks involve tricking a user into performing actions on a web application where they are authenticated.
+**Description:** CSRF attacks involve tricking a user into performing actions on a web application 
+where they are authenticated.
 
 **Best Practices:**
-- **Use Angular’s `HttpClient` for HTTP requests:** Angular’s `HttpClient` automatically adds CSRF tokens to outgoing requests.
-- **Implement server-side CSRF protection:** Ensure your backend server generates and validates CSRF tokens for each request.
+- **Use Angular’s `HttpClient` for HTTP requests:** Angular’s `HttpClient` automatically adds CSRF tokens to 
+outgoing requests.
+- **Implement server-side CSRF protection:** Ensure your backend server generates and validates CSRF 
+tokens for each request.
 
 **Example:**
-Ensure your backend includes CSRF tokens in responses and expects them in subsequent requests. Angular’s `HttpClient` will include the CSRF token automatically if configured correctly on the server.
+Ensure your backend includes CSRF tokens in responses and expects them in subsequent requests. 
+Angular’s `HttpClient` will include the CSRF token automatically if configured correctly on the server.
 
 ### 3. **Authentication and Authorization**
 

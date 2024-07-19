@@ -12,3 +12,6 @@ js engine architecture
 compilation algoriths - inling,copy elision,inline caching.
 
 signals in angular
+
+system design
+design patterns

@@ -378,6 +378,11 @@ you create a service class. A service class definition is immediately preceded b
 Dependency injection (DI) lets you keep your component classes lean and efficient. 
 They don't fetch data from the server, validate user input, or log directly to the console; 
 they delegate such tasks to services.
+
+Dependency Injection (DI) in Angular is a design pattern used to implement Inversion of Control (IoC) 
+for resolving dependencies. It allows for the injection of dependencies (services or objects) into a class, 
+rather than the class creating the dependencies itself. This makes the code more modular, 
+easier to test, and more maintainable.
 ------------
 content projection:
 -----------
