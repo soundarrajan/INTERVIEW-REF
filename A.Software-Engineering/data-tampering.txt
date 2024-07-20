@@ -1,0 +1,121 @@
+npm install express body-parser crypto
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+const app = express();
+const SECRET_KEY = 'your_secret_key';
+
+app.use(bodyParser.json());
+
+const createHMAC = (data) => {
+  const hmac = crypto.createHmac('sha256', SECRET_KEY);
+  hmac.update(JSON.stringify(data));
+  return hmac.digest('hex');
+};
+
+app.post('/api/data', (req, res) => {
+  const data = req.body;
+  const hmac = createHMAC(data);
+  res.json({ data, hmac });
+});
+
+app.post('/api/verify', (req, res) => {
+  const { data, hmac } = req.body;
+  const calculatedHMAC = createHMAC(data);
+  if (hmac === calculatedHMAC) {
+    res.json({ message: 'Data is valid' });
+  } else {
+    res.status(400).json({ message: 'Data tampering detected' });
+  }
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+
+
+-----------
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private baseUrl = 'http://localhost:3000/api';
+
+  constructor(private http: HttpClient) {}
+
+  sendData(data: any): Observable<{ data: any, hmac: string }> {
+    return this.http.post<{ data: any, hmac: string }>(`${this.baseUrl}/data`, data);
+  }
+
+  verifyData(data: any, hmac: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/verify`, { data, hmac });
+  }
+}
+----------
+import { Component } from '@angular/core';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <button (click)="sendData()">Send Data</button>
+    <p>{{ verificationMessage }}</p>
+  `
+})
+export class AppComponent {
+  verificationMessage = '';
+
+  constructor(private dataService: DataService) {}
+
+  sendData() {
+    const data = { username: 'user1', age: 25 };
+
+    this.dataService.sendData(data).subscribe(response => {
+      const { data, hmac } = response;
+      console.log('Data sent:', data);
+      console.log('HMAC:', hmac);
+
+      this.dataService.verifyData(data, hmac).subscribe(
+        res => {
+          this.verificationMessage = res.message;
+        },
+        err => {
+          this.verificationMessage = err.error.message;
+        }
+      );
+    });
+  }
+}
+-----------
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+import { DataService } from './data.service';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [DataService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+-----------
+In this example:
+
+Backend:
+The server creates an HMAC for the data it sends to the client.
+The server verifies the HMAC received from the client to detect any tampering.
+Angular Client:
+The client sends data to the server and receives the data along with an HMAC.
+The client can then send the data and HMAC back to the server to verify data integrity.
