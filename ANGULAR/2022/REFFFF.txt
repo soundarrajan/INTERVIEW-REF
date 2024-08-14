@@ -130,7 +130,7 @@ let output2 = identity<number>( 100 );
 ----------------------------------------
 Directives:
 add new behavior to the elements in the template or modify existing behavior.
-Component Directive
+Component Directive - template and are associated with a view. i.e template: `<h1>Hello, Angular!</h1>`,
 Structural Directive - *ngIf ngfor ngSwitch
 Attribute directive -  ngStyle( applying styles) or ngClass(applying CSS classes).
 -------------------------------------------------
@@ -144,8 +144,8 @@ Decorators are functions that modify JavaScript classes. Angular defines a numbe
 attach specific kinds of metadata to classes, so that the system knows what those classes mean and 
 how they should work.
 
-Class Decorators - @component, @NgModule.
-Property Decorators - @input, @output
+Class Decorators - @component, @NgModule,@pipe,@directive,@injectable
+Property Decorators - @input, @output,viewchild,contentchild
 Method Decorators - @hostlistner
 Parameter Decorators - @inject
 -----------
@@ -769,3 +769,5 @@ zone, ngzone
 angular cli
 How do you debug Angular applications? What tools do you use?
 eslintS
+
+

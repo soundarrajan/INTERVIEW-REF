@@ -1,0 +1,74 @@
+PIPE:
+@Pipe({
+  name: 'reverse'
+})
+export class ReversePipe implements PipeTransform {
+
+  transform(value: string): string {
+    return value.split('').reverse().join('');
+  }
+
+}
+
+-----------
+interceptor
+
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+
+  constructor(private authService: AuthService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken();
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', token)
+      });
+      return next.handle(cloned);
+    } else {
+      return next.handle(req);
+    }
+  }
+}
+------------
+canActivate
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(): boolean {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+}
+--------------
+directive
+
+import {Directive, ElementRef,HostListener,Renderer} from '@angular/core';
+@Directive({
+  selector: '[boldHover]',
+  /*host:{
+    '(mouseenter)':'onMouseEnter()',
+    '(mouseleave)':'onMouseLeave()'
+  }*/
+
+})
+
+constructor(private appservice:AppServiceService,private element:ElementRef,private renderer:Renderer) { 
+    //this.element = element.nativeElement;
+  }
+
+@HostListener('mouseenter') onMouseEnter() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'bold';
+  //this.renderer.setElementStyle(this.element.nativeElement, 'font-weight', 'normal');
+}
+@HostListener('mouseleave') onMouseLeave() {
+  this.element.nativeElement.querySelector('.highlight').style.fontWeight = 'normal';
+}
