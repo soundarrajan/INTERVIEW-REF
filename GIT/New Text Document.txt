@@ -5,3 +5,14 @@ create a repository.
 git remote add origin https://github.com/soundarrajan/REPONAME.git
 git remote -v
 push to
+
+//////////
+
+right click in folder
+select git bash
+git init
+git remote add origin https://github.com/soundarrajan/INT-WORKOUTS.git
+git status
+git add .
+git commit -m 'commited'
+git push
