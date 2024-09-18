@@ -138,7 +138,8 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 }
 --------------
-JWT (JSON Web Token) authentication is a common method for securing Angular applications. It involves the following steps:
+JWT (JSON Web Token) authentication is a common method for securing Angular applications. 
+It involves the following steps:
 
 User Login: The user logs in by providing credentials (e.g., username and password).
 Server Authentication: The server authenticates the user and issues a JWT if the credentials are valid.

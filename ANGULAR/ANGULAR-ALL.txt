@@ -368,8 +368,10 @@ checking if a user is authenticated
 checking if a user has permission
 -----
 forchild and forroot:
-forRoot creates a module that contains all the directives, the given routes, and the router service itself.
-forChild creates a module that contains all the directives and the given routes, but does not include the router service.
+forRoot creates a module that contains all the directives, 
+the given routes, and the router service itself.
+forChild creates a module that contains all the directives and the given routes, 
+but does not include the router service.
 ----
 bootstraping
 ------
@@ -405,7 +407,8 @@ The pakage.json file contains the project or application dependencies in "depend
 
 tsconfig.json:
  browser is only capable of executing JavaScript, 
- so the TypeScript needs to be transpiled into JavaScript with the tsc compiler and this requires some configurations.
+ so the TypeScript needs to be transpiled into JavaScript with the tsc compiler and 
+ this requires some configurations.
 
 main.ts file:::
 entry point of your application 

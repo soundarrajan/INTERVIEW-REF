@@ -131,15 +131,18 @@ that.parse();
 
 myObj.render();
 ---------------------------------https://codeburst.io/javascript-the-keyword-this-for-beginners-fb5238d99f85
-1. The value of this is usually determined by a functions execution context. Execution context simply means how a function is called.
-2. It’s important to know that this may be different (refer to something different) each time the function is called.
+1. The value of this is usually determined by a functions execution context. 
+Execution context simply means how a function is called.
+2. It’s important to know that this may be different 
+(refer to something different) each time the function is called.
 
 ##global object:
 this = global object;
 console.log(this);   //window;
 
 ##2 Declared Object
-When the keyword this is used inside of a declared object, the value of this is set to the closest parent object the method is called on.
+When the keyword this is used inside of a declared object, 
+the value of this is set to the closest parent object the method is called on.
 var person = {
   first: 'John',
   last: 'Smith',  
@@ -258,7 +261,8 @@ Person.prototype.name = function() {
 var myFather = new Person("John", "Doe", 50, "blue");
 myFather.name();
 -----
-When an object is created in JavaScript, JavaScript engine adds a __proto__ property to the newly created object which is called as dunder proto. 
+When an object is created in JavaScript, JavaScript engine adds a __proto__ property
+ to the newly created object which is called as dunder proto. 
 dunder proto or __proto__ points to the prototype object of the constructor function.
 ------
 https://hackernoon.com/prototypes-in-javascript-5bba2990e04b
@@ -1411,10 +1415,13 @@ overloading and over riding:
 
 JavaScript does not support overloading!
 
-f overloading worked correctly the value of sum would be 6. However, as JavaScript doesn’t support overloading, the value of sum is something else.
+f overloading worked correctly the value of sum would be 6. However, as JavaScript doesn’t support overloading, 
+the value of sum is something else.
 
-JavaScript supports overriding not overloading, meaning, that if you define two functions with the same name, the last one defined will 
-override the previously defined version and every time a call will be made to the function, the last defined one will get executed
+JavaScript supports overriding not overloading, meaning, that if you define two functions with the same name, 
+the last one defined will 
+override the previously defined version and every time a call will be made to the function, 
+the last defined one will get executed
 
 function addNumbers(n1, n2, n3) {
     return n1 + n2 + n3;

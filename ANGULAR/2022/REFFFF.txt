@@ -336,7 +336,8 @@ Emulated - styles from the main HTML propagate to the component.
 styles defined in a component will apply only to that component and its children, but not globally.
 
 Native, Shadow DOM - styles from the main HTML do not propagate to the component.
-Styles defined in the component will only apply within the shadow DOM and not affect the rest of the application 
+Styles defined in the component will only apply within the shadow DOM and
+ not affect the rest of the application 
 
 None - styles from the component propagate back to the main HTML and therefore are visible 
 to all components on the page.
