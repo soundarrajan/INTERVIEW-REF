@@ -1,0 +1,29 @@
+export class YourComponent {
+  data$: Observable<any>; // Observable for the async pipe
+
+  constructor(private apiService: YourApiService) {
+    this.data$ = this.apiService.getData(); // Fetch the data as an observable
+  }
+}
+----------
+<ng-container *ngIf="data$ | async as data; else loading">
+  <div>
+    <!-- Display your API data here -->
+    <pre>{{ data | json }}</pre>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>
+----------------
+export class YourApiService {
+  constructor(private http: HttpClient) {}
+
+  getData(): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
+      delay(2000) // Simulating delay for spinner demo
+    );
+  }
+}
+----------------------
