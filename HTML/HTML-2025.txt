@@ -1,1 +1,179 @@
 HTML 5 features:
+new semantic elements, 
+multimedia support, (<audio>, <video>)
+supports graphical content canvas , svg.
+APIs (e.g., Geolocation API, Web Storage, Canvas, Web Workers,WebSocket)
+Form enhancements (e.g., email, date, placeholder).
+better cross-platform compatibility.
+
+SEMANTIC ELEMENTS:
+describe their meaning in a human- and machine-readable way.
+help structure a web page and make it more accessible,
+especially for screen readers and search engines.
+
+Examples: <nav>, <section>, <article>, <aside>, <header>, <footer>
+
+MULTIMEDIA SUPPORT:
+to embed audio and video content directly into web pages
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<video width="640" height="360" controls>
+  <source src="video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<object width="100%" height="500px" data="snippet.html"></object>
+<embed src="audi.jpeg">
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+API'S:
+1.Geolocation AP
+used to get the user's current location.
+<script>
+const x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function success(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+function error() {
+  alert("Sorry, no position available.");
+}
+</script>
+
+2. WEB Storage:
+applications can store data locally within the user's browser.
+the storage limit is far larger (at least 5MB)
+Web storage is per origin (per domain and protocol).
+
+window.localStorage - stores data with no expiration date (data is not lost when the browser tab is closed)
+window.sessionStorage - stores data for one session (data is lost when the browser tab is closed)
+
+3. Web Workers
+allow you to run JavaScript in the background, without blocking the main UI thread.
+
+A Web Worker is a separate JavaScript thread running in the background. 
+It doesn't have access to the DOM but can communicate with the main thread via message passing.
+
+<script>
+  const worker = new Worker('worker.js');
+  
+  // Send message to worker
+  worker.postMessage(10);
+
+  // Receive message from worker
+  worker.onmessage = function(e) {
+    console.log('Result from worker:', e.data); // Output: 20
+  };
+</script>
+
+
+// worker.js
+self.onmessage = function(e) {
+  console.log('Message from main script:', e.data);
+  let result = e.data * 2;  // Simple computation
+  self.postMessage(result);
+};
+
+
+4. WEBSOCKET APIallows you to open a persistent, full-duplex communication channel 
+between a client (browser) and a server over a single TCP connection — 
+ideal for real-time applications like chat apps, live notifications, or multiplayer games.
+
+<script>
+  const socket = new WebSocket("ws://localhost:3000");
+
+  socket.onopen = () => socket.send("Client: Hello!");
+  socket.onmessage = e => console.log("Server:", e.data);
+</script>
+
+// Install: npm install ws
+const WebSocket = require('ws');
+const server = new WebSocket.Server({ port: 3000 });
+
+server.on('connection', socket => {
+  console.log("Client connected");
+  socket.on('message', message => {
+    console.log("Received:", message);
+    socket.send("Hello from server");
+  });
+});
+
+How WebSockets Work (Simplified)
+Handshake: Starts as an HTTP request, upgraded to WebSocket protocol.
+
+Open Connection: Server and client maintain a single connection.
+
+Real-time Communication: Either side can send data at any time.
+
+Close Connection: Either side can close it when done.
+
+------------
+FORM ENHANCEMENTS
+new input types:
+email, date , time, number, tel,range
+
+new attributes and control:
+required, placeholder, min,max, maxlength,autofocus, autocomplete,pattern
+
+new form lements:
+datalist,progress,meter
+----
+What are some HTML5 performance optimizations?
+Use lazy loading (loading="lazy") on images and iframes
+Use semantic markup for better SEO and rendering
+Preload critical assets (<link rel="preload">)
+Minimize DOM size for faster rendering
+----
+defer Attribute:
+Script is downloaded in parallel with HTML parsing.
+Script executes after the document is fully parsed, in the order they appear in the HTML.
+Safe for DOM-dependent scripts
+
+async:
+Script is downloaded in parallel, and executes immediately after it's downloaded.
+HTML parsing is paused during execution.
+
+lazy load:
+Starts loading only when the image is about to enter the viewport.
+For above-the-fold (initially visible) content — can cause noticeable delays.
+For images that are used as background or interactive icons — may hurt UX.
+
+preload :
+Use this to tell the browser to fetch and cache critical resources before they are needed.
+
+prefetch:
+the browser will fetch them when idle to be used on next page navigation.
+-----
+SSE
+allows a server to push updates to a web page over a single HTTP connection
+where the browser receives automatic updates from the server.
+
+Unidirectional: Data flows from server to client only (not vice versa).
+Persistent connection: The client opens a long-lived connection to the server.
+Text-based: Data is sent in UTF-8 plain text with a specific format.
+
+| Feature         | SSE                    | WebSockets                 |
+| --------------- | ---------------------- | -------------------------- |
+| Direction       | Server → Client        | Bidirectional              |
+| Protocol        | HTTP                   | Custom (ws\:// or wss\://) |
+| Simplicity      | Easier to implement    | More complex               |
+| Use case        | Notifications, updates | Chat, games, etc.          |
+| Browser support | Most modern browsers   | All modern browsers        |
+
+
+const eventSource = new EventSource("/events");
+
+    eventSource.onmessage = function(event) {
+      document.getElementById("time").innerHTML = "Server time: " + event.data;
+    };
