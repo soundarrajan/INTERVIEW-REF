@@ -70,7 +70,8 @@ Inline-block elements:::
 allow other elements to sit to their left and right
 respect top & bottom margins and padding
 respect height and width
-
+Use it when you want elements to sit side-by-side (like inline elements) 
+but also have control over their box model (like block elements).
 
 --------------------------
 6. Meta Tag- 
@@ -79,10 +80,42 @@ not displayed in page. it will machine parsable.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 •	UTF-8 - Character encoding for Unicode
 <meta http-equiv="refresh" content="30">
+SEO
+<meta name="description" content="Learn about the CSS box model and how it affects layout.">
+responsiveness:
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+Social sharing meta tags like Open Graph (OG) and Twitter Cards make your web pages 
+look good when shared on platforms like Facebook, LinkedIn, Twitter, etc.
+
+<meta property="og:title" content="Box Model Explained">
+<meta property="og:description" content="A clear and visual guide to the CSS box model for beginners.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.example.com/box-model">
+<meta property="og:image" content="https://www.example.com/images/box-model-preview.png">
+
+When someone shares your webpage on Facebook, LinkedIn, WhatsApp, etc., OG tags control:
+
+The title
+
+The description
+
+The image
+
+The URL
+
+And how it's displayed
 -------------------------
 7. DOM
 When a web page is loaded, the browser creates a Document Object Model of the page.
 The DOM defines a standard for accessing documents.
+
+It’s a programmatic representation of an HTML (or XML) document — basically, 
+a tree-like structure that browsers create when they load a web page.
+
+The browser parses the HTML code.
+It turns the HTML elements (<div>, <p>, <img>, etc.) into nodes in a tree structure.
+Each node is an object that you can interact with using JavaScript.
 
 ------------------------
 8.
@@ -98,13 +131,26 @@ layout) uses a preset page size and does not change based on the browser
 
 A liquid page layout (sometimes called “fluid” or “fluid width”) uses 
 relative units instead of fixed units. Typically a liquid layout will use 
-percentages instead of pixels, 
+percentages instead of pixels, % vw , vh
 
 An adaptive page layout uses CSS media queries to detect the width of the browser 
 and alter the layout accordingly
 
 A responsive page layout uses both relative units and media queries, 
 ostensibly combining the ideas of a liquid layout and an adaptive layout.
+-------------
+RELATIVE UNITS:
+| Unit   | Stands For       | Relative To                   | Common Use Cases                   | Example             |
+| ------ | ---------------- | ----------------------------- | ---------------------------------- | ------------------- |
+| `em`   | Element’s em     | **Parent’s font-size**        | Font sizing, spacing, padding      | `font-size: 1.2em;` |
+| `rem`  | Root em          | **Root (`<html>`) font-size** | Typography, consistent scaling     | `padding: 2rem;`    |
+| `%`    | Percent          | **Parent element**            | Width, height, margins, padding    | `width: 80%;`       |
+| `vw`   | Viewport Width   | **1% of viewport width**      | Layout widths, font sizes, banners | `width: 100vw;`     |
+| `vh`   | Viewport Height  | **1% of viewport height**     | Full-screen sections, hero areas   | `height: 100vh;`    |
+| `vmin` | Viewport Minimum | **Smaller of vw or vh**       | Responsive typography/layout       | `font-size: 3vmin;` |
+| `vmax` | Viewport Maximum | **Larger of vw or vh**        | Fullscreen elements, large padding | `padding: 2vmax;`   |
+
+
 -------------------------
 HTML5 API::
 
@@ -126,6 +172,25 @@ Size must be less than 4KB.
 
 document.cookie = "username=John Doe";
 
+| Attribute  | Purpose                                                    |
+| ---------- | ---------------------------------------------------------- |
+| `Secure`   | Cookie is sent **only** over HTTPS                         |
+| `HttpOnly` | JS **cannot access** the cookie (security against XSS)     |
+| `SameSite` | Prevents **CSRF** by restricting cross-site cookie sending |
+| `Path=/`   | Cookie is valid across the entire domain                   |
+
+
+| Feature                             | **Cookies**                               | **Web Storage** (`localStorage` / `sessionStorage`)              |
+| ----------------------------------- | ----------------------------------------- | ---------------------------------------------------------------- |
+| 📦 **Size limit**                   | \~4KB per cookie                          | \~5–10MB (depending on browser)                                  |
+| 🔁 **Sent with every HTTP request** | ✅ Yes (automatically via `Cookie` header) | ❌ No                                                             |
+| 🕒 **Expiration**                   | Can set expiry (or session cookie)        | `localStorage`: Persistent<br>`sessionStorage`: Until tab closes |
+| 🔒 **HttpOnly support**             | ✅ Yes (can't be accessed by JS)           | ❌ No — always accessible by JavaScript                           |
+| 🔐 **Secure flag**                  | ✅ Yes — can set `Secure` & `SameSite`     | ❌ No built-in transport security                                 |
+| 🌐 **Access scope**                 | Shared across tabs for the same domain    | `localStorage`: shared across tabs<br>`sessionStorage`: tab-only |
+| 🛠️ **Use case examples**           | Authentication tokens, sessions           | UI state, preferences, caching                                   |
+
+
 -----------------------------------------------------------
 APPLICATION CACHE:::
 
@@ -143,7 +208,8 @@ FALLBACK: An optional section specifying fallback pages if a resource is inacces
 ---
 SERVICE WORKERS:::
 Caching Files with Service Worker::
-The Service Worker can be used as a proxy for network events, allowing us to cache resources for offline use.
+The Service Worker can be used as a proxy for network events, 
+allowing us to cache resources for offline use.
 
 this.addEventListener('install', event => {
   event.waitUntil(
@@ -162,7 +228,8 @@ this.addEventListener('fetch', event => {
 });
 
 So Web Workers are handy to run expensive scripts without causing the user interface to freeze, 
-while Service Workers are useful to modify the response from network requests (for example, when building an offline app).
+while Service Workers are useful to modify the response from network requests 
+(for example, when building an offline app).
 -----------------------------
 benefits of semantics elements
 
@@ -194,15 +261,129 @@ this.onmessage = function(e){
 this.postMessage({result:e.data.addthis.num1 + e.data.addthis.num2})
 }
 ---------------------------------
+What is a PWA?
+A Progressive Web App is a web application that behaves like a native mobile or desktop app — 
+but is built using standard web technologies like HTML, CSS, and JavaScript.
+
+| Feature                | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| **Offline Support**    | Works without an internet connection using a **Service Worker**    |
+| **Installable**        | Can be added to the **home screen** or **desktop** like a real app |
+| **Responsive**         | Looks good on all screen sizes: phones, tablets, desktops          |
+| **Fast Loading**       | Loads instantly after the first visit using **caching**            |
+| **Secure**             | Runs over HTTPS, ensuring secure data exchange                     |
+| **Push Notifications** | Can send updates to the user (optional)                            |
+
+The Service Worker installs and caches files.
+The Manifest allows the site to be installed as an app.
+
+🛠️ Technologies Involved
+HTML/CSS/JavaScript
+Manifest file (manifest.json)
+Service Workers (sw.js)
+Cache API
+Push API (optional)
+---------
+What Makes a PWA Installable?
+
+A site can be installed as a PWA if all of the following are true:
+1. Served over HTTPS (secure origin)
+2. Includes a valid Web App Manifest with:
+
+name or short_name
+start_url
+display (standalone, fullscreen, or minimal-ui)
+icons (at least 192×192 and 512×512)
+
+3. Registers a working Service Worker (with fetch handling) 
+
+When this is met, browsers like Chrome and Edge detect it and may auto-launch an install prompt 
+(or show an install icon in the address bar). 
+
+MANIFEST:
+{
+  "name": "My PWA App",
+  "short_name": "MyApp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+REGISTER SERVICE WORKER: This enables offline caching and is required for installability.
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('✅ Service Worker registered'));
+}
+
+
+----------------------------------
 Attributes provide additional information about HTML elements.
 
 src,alt,title,href,style,width,height.
 
 Properties belong to DOM, the nature of DOM is an object in JavaScript.
 document.getElementById('test').className = 'red';
+
+| Aspect         | Attribute                                                    | Property                                                        |
+| -------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| Where it lives | In the **HTML markup** (in the element tag)                  | In the **DOM object** (JavaScript representation)               |
+| Type           | Always a **string**                                          | Can be any JS type (string, number, boolean, object, etc.)      |
+| When set       | When the page **loads** (initial state)                      | Changes dynamically when the page runs (reflects current state) |
+| Access method  | `element.getAttribute('attr')`                               | `element.property` (e.g., `element.checked`)                    |
+| Examples       | `<input type="checkbox" checked>` (attribute is `"checked"`) | `input.checked` is a boolean `true` or `false`                  |
+  
+
+const box = document.getElementById('box');
+
+// Attribute value (string)
+console.log(box.getAttribute('checked')); // ""
+
+// Property value (boolean)
+console.log(box.checked); // true
+
+| Attributes                                 | Properties                                    |
+| ------------------------------------------ | --------------------------------------------- |
+| Part of HTML markup                        | Part of DOM objects in JavaScript             |
+| Static initial values                      | Dynamic current state                         |
+| Strings only                               | Various JS types                              |
+| Accessed via `getAttribute`/`setAttribute` | Accessed via direct property (`elem.checked`) |
+
+<input id="myInput" value="Hello">
+<button id="changeValueBtn">Change Value Property</button>
+
+const input = document.getElementById('myInput');
+const btn = document.getElementById('changeValueBtn');
+
+console.log('Initial attribute value:', input.getAttribute('value')); // "Hello"
+console.log('Initial property value:', input.value); // "Hello"
+
+btn.addEventListener('click', () => {
+  input.value = "New value"; // changes property only
+
+  console.log('Attribute value after change:', input.getAttribute('value')); // Still "Hello"
+  console.log('Property value after change:', input.value); // "New value"
+});
+
+Changes Attribute	- setAttribute()
+Changes Property - element.property
+
 --------------------
 Adaptive web design is different from responsive design
-there are several distinct layouts for multiple screen sizes. And the layout used depends on the screen size used.
+there are several distinct layouts for multiple screen sizes. 
+And the layout used depends on the screen size used.
 --------------------
 modernizer and polyfill:
 

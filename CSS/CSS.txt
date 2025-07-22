@@ -489,4 +489,19 @@ flex: shorthand property for the flex-grow, flex-shrink, and flex-basis
 flex: 0 0 200px
 
 -----------
+
+RELATIVE UNITS 
+
+| Unit   | Stands For       | Relative To                   | Common Use Cases                   | Example             |
+| ------ | ---------------- | ----------------------------- | ---------------------------------- | ------------------- |
+| `em`   | Element’s em     | **Parent’s font-size**        | Font sizing, spacing, padding      | `font-size: 1.2em;` |
+| `rem`  | Root em          | **Root (`<html>`) font-size** | Typography, consistent scaling     | `padding: 2rem;`    |
+| `%`    | Percent          | **Parent element**            | Width, height, margins, padding    | `width: 80%;`       |
+| `vw`   | Viewport Width   | **1% of viewport width**      | Layout widths, font sizes, banners | `width: 100vw;`     |
+| `vh`   | Viewport Height  | **1% of viewport height**     | Full-screen sections, hero areas   | `height: 100vh;`    |
+| `vmin` | Viewport Minimum | **Smaller of vw or vh**       | Responsive typography/layout       | `font-size: 3vmin;` |
+| `vmax` | Viewport Maximum | **Larger of vw or vh**        | Fullscreen elements, large padding | `padding: 2vmax;`   |
+
+
+---------------
 ng-deep
