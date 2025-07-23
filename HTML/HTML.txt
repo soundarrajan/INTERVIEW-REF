@@ -422,6 +422,44 @@ forward from current page or another page. There are three methods of history ob
 history.back()
 history.forward()
 history.go(number): number may be positive for forward, negative for backward.
+
+The Browser Object Model (BOM) is a part of the JavaScript environment that allows interaction 
+with the browser outside of the HTML document. Unlike the Document Object Model (DOM), 
+which focuses on the structure and content of web pages, the BOM is concerned with the browser itself.
+
+components of BOM:
+1. window
+The global object in the browser.
+All BOM (and many DOM) objects are children of window.
+alert("Hello"); // same as window.alert("Hello")
+
+2.navigator Object
+Provides information about the browser.
+console.log(navigator.userAgent);
+
+3.location Object
+Represents the current URL and allows redirection.
+console.log(location.href);
+
+4.history Object
+Allows navigation through the browser's history.
+history.back();   // Go to the previous page
+history.forward();
+
+5.screen Object
+Provides information about the user's screen.
+console.log(screen.width, screen.height);
+
+6. setTimeout() / setInterval()
+Methods of window used to execute code after a delay or at intervals.
+setTimeout(() => alert("Hi!"), 1000);
+
+| Feature     | BOM                         | DOM                        |
+| ----------- | --------------------------- | -------------------------- |
+| Scope       | Browser window and features | Web page structure/content |
+| Root Object | `window`                    | `document`                 |
+| Use Case    | Browser-level control       | Page content manipulation  |
+
 --------------------------------
 validation tag:
 
@@ -447,14 +485,15 @@ PIE stands for Progressive Internet Explorer.
 It is an IE attached behavior which, when applied to an element, 
 allows IE to recognize and display a number of CSS3 properties.
 -----------------------------
-CDN is short for content delivery network. A content delivery network (CDN) is a system of distributed servers (network) 
-that deliver pages and other Web content to a user
+CDN is short for content delivery network. A content delivery network (CDN) is a system of 
+distributed servers (network) that deliver pages and other Web content to a user
 --------------------------------
 SVG is a language for describing 2D graphics in XML.
 
 Canvas draws 2D graphics, on the fly (with a JavaScript).
 
-SVG is XML based, which means that every element is available within the SVG DOM. You can attach JavaScript event handlers for an element.
+SVG is XML based, which means that every element is available within the SVG DOM. 
+You can attach JavaScript event handlers for an element.
 
 SVG                                                Canvas
 XML based    										javascript based
@@ -489,6 +528,15 @@ var source = new EventSource("demo_sse.php");
 source.onmessage = function(event) {
     document.getElementById("result").innerHTML += event.data + "<br>";
 };
+
+| Feature      | SSE                       | WebSocket                        |
+| ------------ | ------------------------- | -------------------------------- |
+| Direction    | One-way (server → client) | Two-way (server ↔ client)        |
+| Protocol     | HTTP                      | Custom protocol over TCP         |
+| Simplicity   | Very simple               | More complex setup               |
+| Reconnection | Automatic built-in        | Needs manual handling            |
+| Use Case     | Live feeds, notifications | Chat apps, games, real-time apps |
+
 --------------------------------
 FORM VALIDATION:
 HTML5:  email, url, number, tel, date ,color,
@@ -539,6 +587,12 @@ The layers are composited together to form the final visual output
 Critical Rendering Path: The sequence of steps that the browser follows to 
 convert HTML, CSS, and JavaScript into pixels on the screen. Optimizing the 
 critical rendering path can significantly improve page load performance.
+
+HTML → DOM
+CSS  → CSSOM
+DOM + CSSOM → Render Tree
+Render Tree → Layout → Paint → Composite → Screen
+
 --------------------
 improve the performance of html page.
 
@@ -602,7 +656,8 @@ If you do, such cookies will not be accessible via client-side JavaScript.
  X-Content-Type-Options Header:
 
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
- Prevent the browser from interpreting files as a different MIME type than what is specified by the server.
+ Prevent the browser from interpreting files as a different MIME type than 
+ what is specified by the server.
 ---------
 X-Frame-Options Header
 Protect your site from clickjacking by controlling whether your site can be embedded in an iframe.
@@ -633,6 +688,33 @@ Input Validation and Output Encoding
 HTTP Strict Transport Security (HSTS);
 Enforce the use of HTTPS for your site, instructing browsers to always use HTTPS.
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
---
-CSP
-XSS
+-----------------------
+1. CSP
+<!-- Restrict what can be loaded and executed -->
+  <meta http-equiv="Content-Security-Policy"
+content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self';">
+2. XSS
+allows attackers to inject malicious scripts (usually JavaScript) into web pages 
+that are viewed by other users. 
+
+Sanitize user inputs,
+Apply Content Security Policy (CSP),
+Escape data properly, and
+Avoid inline JavaScript.
+
+3. x-frame options to avoid clickjacking
+<!-- Prevent clickjacking -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+4. secure cookie
+httponly,samesite, secure domain expiry
+Set-Cookie: sessionid=abc123; HttpOnly; Secure; SameSite=Strict; Path=/; Domain=example.com; Max-Age=3600;
+
+HttpOnly: Makes the cookie inaccessible via JavaScript.
+Secure: Ensures the cookie is only sent over HTTPS connections.
+SameSite=Strict: The cookie is not sent with cross-site requests.
+Path=/: The cookie is available for the entire domain.
+Domain=example.com: Restricts the cookie to example.com and its subdomains.
+Max-Age=3600: The cookie expires in 1 hour (3600 seconds).
+
+csrf tokens for form submit
+sanitize input and output encoding

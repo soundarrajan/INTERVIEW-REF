@@ -134,6 +134,20 @@ Use lazy loading (loading="lazy") on images and iframes
 Use semantic markup for better SEO and rendering
 Preload critical assets (<link rel="preload">)
 Minimize DOM size for faster rendering
+
+1. Use defer or async for Scripts
+**defer** → Loads script in background, executes after parsing.
+**async** → Loads script in background, executes as soon as possible.
+2. Minimize Inline & Render-Blocking CSS
+3.Avoid Large and Deep DOM Trees
+4.Preload Critical Resources
+5.Use HTML5 Semantics Properly
+6.Lazy-Load Non-Essential Content
+7.Set Meta Charset Early
+8.
+link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+The browser downloads the CSS but doesn’t block rendering because it thinks it’s for print only.
+When the file finishes loading, the onload event fires and changes media to all, applying the styles.
 ----
 defer Attribute:
 Script is downloaded in parallel with HTML parsing.
