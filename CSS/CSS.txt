@@ -17,6 +17,8 @@ RELATIVE: An element with position: relative; is positioned relative to its norm
 ABSOLUTE: relative to the nearest positioned ancestor
 FIXED: An element with position: fixed; is positioned relative to the viewport.
 STICKY: positioned based on the user's scroll position.
+combination of relative and fixed
+             Element scrolls with the page until a threshold is met, then sticks in place.
 -------------------
 vendor-prefix:
 

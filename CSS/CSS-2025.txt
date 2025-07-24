@@ -1,0 +1,210 @@
+1. css3 new features
+  media query”
+  flex and grid concepts
+  animation and Transitions
+  Web Fonts - @font-face
+  2D/3D Transformations
+  box-model
+  Multi-column Layout - column-count, column-gap, column-rule
+2. selectors in css
+ basic selector - * , class , id , type
+ Combinator selectors (select elements based on a specific relationship between them)
+  Descendant combinator (space)
+  Child combinator (>)
+  Next sibling combinator (+)
+  Subsequent-sibling combinator (~)
+ Pseudo-class selectors (select elements based on a certain state)
+        define a special state of an element.
+        :activw, :hover, first-child,first-of-type,last-child,last-of-type,
+        nth-child(),nth-last-child(),nth-of-type(),nth-last-of-type:has()
+ Pseudo-elements selectors (select and style a part of an element)
+        before, after, first-line, first-letter, placeholder
+ Attribute selectors 
+        input[type="text"]
+3. types of position
+    static - default - normal position - not affected by the top, bottom, left, and right properties
+                Z-index: Ignored.
+    relative - relative to its normal position.
+    absolute - Positioned relative to: The nearest positioned ancestor
+    fixed - Fixed relative to the viewport - Stays in place even when the page is scrolled.
+    sticky - combination of relative and fixed
+             Element scrolls with the page until a threshold is met, then sticks in place.
+
+4. css ruleset
+  tells the browser what elements to style and how to style them.
+  selector {
+  property: value;
+  }
+5. specificity
+    determines which rules "win" when multiple selectors target the same element
+    inline styles > IDs > classes/attributes/pseudo-classes > element/pseudo-elements
+6. mediatypes
+   define what kind of device or output medium a stylesheet is intended for
+   all, screen, print.
+   @media screen {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    color: black;
+  }
+}
+
+7. show 3 rows a paragraph
+   .three-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;      /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+8. cross browser styles
+-webkit- (Chrome, Safari, newer versions of Opera and Edge, almost all iOS browsers including Firefox for iOS; basically, any WebKit or Chromium-based browser)
+-moz- (Firefox)
+-o- (old pre-WebKit versions of Opera)
+-ms- (Internet Explorer and Microsoft Edge, before Chromium)
+9. html entities
+   special codes used to represent reserved characters, symbols
+   < - &lt    > - &gt  &nbsp; - space
+10. z-index property specifies the stack order of an element.
+11. animation
+
+      @keyframes animationName{
+        from{}
+        to{}
+      }
+      .element{
+        animation-name: animationName;
+        animation-duration: 2s;
+      }
+      | Property                    | Description                                           |
+| --------------------------- | ----------------------------------------------------- |
+| `animation-name`            | Name of the keyframe                                  |
+| `animation-duration`        | Length of time (e.g. `2s`, `500ms`)                   |
+| `animation-delay`           | Wait time before animation starts                     |
+| `animation-iteration-count` | How many times (`1`, `infinite`, `3`, etc.)           |
+| `animation-direction`       | `normal`, `reverse`, `alternate`, `alternate-reverse` |
+| `animation-timing-function` | Speed curve (`ease`, `linear`, `ease-in-out`, etc.)   |
+| `animation-fill-mode`       | `none`, `forwards`, `backwards`, `both`               |
+
+-----------
+center a text
+   .center-text {
+  display: flex;
+  justify-content: center; /* Horizontal */
+  align-items: center;     /* Vertical */
+  height: 200px;           /* Required for vertical centering */
+  border: 1px solid #ccc;
+}
+
+.center-text {
+  display: grid;
+  place-items: center;
+  height: 200px;
+}
+----------
+png vs svg
+| Feature             | **PNG**                             | **SVG**                               |
+| ------------------- | ----------------------------------- | ------------------------------------- |
+| **Type**            | Raster (pixel-based)                | Vector (path-based)                   |
+| **Best for**        | Photos, icons with details          | Logos, icons, illustrations           |
+| **Scalability**     | ❌ Becomes blurry when scaled        | ✅ Infinitely scalable                 |
+| **File size**       | Larger (esp. at high resolution)    | Usually smaller (for simple graphics) |
+| **Editability**     | Needs image editor (e.g. Photoshop) | Editable in code or vector editors    |
+| **Transparency**    | ✅ Supports alpha transparency       | ✅ Supports full transparency          |
+| **Animation**       | ❌ Not supported                     | ✅ Can be animated with CSS or JS      |
+| **Performance**     | Good for detailed images            | Better for simple graphics/icons      |
+| **Browser support** | ✅ Widely supported                  | ✅ Widely supported (modern browsers)  |
+
+------
+mixin
+   A mixin is a reusable block of CSS code that can be included (or “mixed in”) wherever needed. 
+   It helps you avoid repeating the same styles in multiple places.
+   @mixin button-style {
+  padding: 10px 20px;
+  }
+  .button {
+  @include button-style;
+  font-weight: bold;
+}
+Mixins with Parameters
+@mixin box($size, $color) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+}
+
+.square {
+  @include box(100px, red);
+}
+----
+partial mixin
+  “partial mixin” typically refers to a mixin that is stored in a partial file
+  File: _mixins.scss (The underscore _mixins.scss tells Sass not to compile this file into its own CSS file. 
+                       It’s meant to be imported.)
+        @mixin center-flex {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+styles.scss...........
+@use 'mixins';
+.container {
+  @include mixins.center-flex;
+  height: 100vh;
+}
+---
+display flex and inline-flex
+flex and grid
+---------------
+What is the difference between em, rem, %, vw, and vh units? When would you use each?
+Explain how the CSS Box Model works. How does box-sizing: border-box affect layout?
+How do Flexbox and Grid differ? When should one be used over the other?
+What are some limitations of Flexbox that CSS Grid solves?
+Explain stacking context. How do z-index, positioning, and transform properties influence it?
+How does min-content, max-content, and fit-content work in layout sizing?
+What is the default display value for common HTML elements like div, span, input, etc.?
+
+Performance & Optimization
+How can CSS impact page load performance?
+What are Critical CSS and how would you extract and inline it?
+Explain the concept of “paint” and “reflow” in the rendering pipeline. Which CSS properties are most expensive?
+What is “contain” in CSS, and how can it be used to optimize rendering performance?
+
+Animations & Transitions
+What is the difference between transition and animation? When would you use one over the other?
+What CSS properties are GPU-accelerated?
+How would you make a performant infinite scroll animation using only CSS?
+Explain @keyframes and how timing functions (ease, cubic-bezier) influence animation flow.
+
+Architecture & Maintainability
+What is BEM methodology? What problems does it solve in CSS architecture?
+How do CSS Modules, SCSS, and PostCSS differ in terms of component styling?
+How do you prevent or manage style leakage in large applications?
+What are Shadow DOM and scoped styles? How does that change how we write CSS?
+
+Advanced Selectors & Features
+Explain how the :is(), :where(), and :has() pseudo-classes work. What are their use cases?
+What’s the difference between ::before and :before?
+How does :not() differ from :where() in terms of specificity?
+What is specificity and how do you calculate it?
+Can you explain how CSS cascade works and how it relates to specificity and source order?
+
+Real-World Scenarios / Problem-Solving
+How would you vertically center an element inside a container with unknown height and width using only CSS?
+How do you handle responsive typography without using media queries?
+How can you create a responsive multi-column layout that degrades gracefully on smaller screens?
+What is the “container query” in CSS and how does it differ from media queries?
+What are some accessibility considerations when using :focus-visible and custom focus styles?
+
+Tools & Modern CSS
+How does Tailwind CSS differ from traditional CSS authoring?
+What are logical properties (like margin-inline-start) and why are they important for internationalization?
+What are some real-world use cases of clamp(), calc(), or env() functions?
+How do layers (@layer) and cascade layers work in modern CSS?
