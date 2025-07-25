@@ -160,9 +160,83 @@ styles.scss...........
   height: 100vh;
 }
 ---
-display flex and inline-flex
-flex and grid
----------------
+FLEX:
+design flexible responsive layout structure without using float or positioning.
+1-dimensional
+
+1. display: flex;
+define a container as a flex container.
+it makes all direct children of container as flex items.
+
+2. flex: flex-grow|flex-shrink|flex basis
+flex-grow: how much a flex item will grow relative to other
+flex-shrink: how much a flex item will shrink when space is tight
+flex-basis: initial size of item before grow and shrink is applied.
+
+flex: 1  // /* shorthand for: flex-grow: 1; flex-shrink: 1; flex-basis: 0%; */
+flex: 2 1 100px; /* Grow 2x, shrink if needed, starts at 100px */
+flex: 0 0 auto; /* No grow or shrink, use the content size */
+
+| Property          | Description                              |
+| ----------------- | ---------------------------------------- |
+| `flex-direction`  | Row, row-reverse, column, column-reverse |
+| `justify-content` | Aligns items on the main axis            |
+| `align-items`     | Aligns items on the cross axis           |
+| `flex-wrap`       | Allows items to wrap onto multiple lines |
+| `align-content`   | Aligns a multi-line flex container       |
+
+| Property        | Affects                    | Used When                           |
+| --------------- | -------------------------- | ----------------------------------- |
+| `align-items`   | Each **item**              | Single or multiple lines            |
+| `align-content` | The **whole set of lines** | Only when **multiple lines** (wrap) |
+
+| Property               | Acts Like | Lays Out Children Using Flexbox? | Breaks Line?        |
+| ---------------------- | --------- | -------------------------------- | ------------------- |
+| `display: flex`        | Block     | ✅ Yes                            | ✅ Yes               |
+| `display: inline-flex` | Inline    | ✅ Yes                            | ❌ No (stays inline) |
+
+
+---------
+GRID:
+2-dimensional layout system in CSS
+allows layout in both rows and columns
+
+1. display: grid;
+
+2. grid-template-columns: 
+defines the number of columns in the grid layout and
+defines the width of each column.
+grid-template-columns: auto auto auto auto;
+  4 columns with auto width.
+
+3. grid-template-rows:  property defines the height of each row.
+grid-template-rows: 50px 200px;
+first row: height 50px.
+second row:  height 200px;
+
+gap	Adds space between rows and columns
+
+| Property                | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `display: grid`         | Turns element into a grid container                       |
+| `grid-template-columns` | Defines the number and size of columns (`1fr`, `px`, `%`) |
+| `grid-template-rows`    | Defines the number and size of rows                       |
+| `gap`                   | Adds space between rows and columns                       |
+| `justify-items`         | Aligns items horizontally inside their cells              |
+| `align-items`           | Aligns items vertically inside their cells                |
+| `grid-template-areas`   | Names areas of the grid (for layout clarity)              |
+
+| Property       | Description                                  |
+| -------------- | -------------------------------------------- |
+| `grid-column`  | Position item in columns (`start / end`)     |
+| `grid-row`     | Position item in rows (`start / end`)        |
+| `grid-area`    | Assign item to a named grid area             |
+| `justify-self` | Aligns the item horizontally within its cell |
+| `align-self`   | Aligns the item vertically within its cell   |
+
+
+
+----------------------------------------------------
 What is the difference between em, rem, %, vw, and vh units? When would you use each?
 Explain how the CSS Box Model works. How does box-sizing: border-box affect layout?
 How do Flexbox and Grid differ? When should one be used over the other?
